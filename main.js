@@ -25,9 +25,9 @@ const projects = [
     description: 'Built with HTML, Tailwind CSS, and JavaScript to showcase UI/UX projects and interactive prototypes.',
     tags: ['HTML', 'Tailwind CSS', 'JavaScript'],
     image: 'dist/assets/images/portfolio_v2_raw.png',
-    github: 'https://github.com/farajnaser',
+    github: 'https://github.com/farajnaser/myWebSite',
     behance: '#',
-    link: '#'
+    link: 'https://farajnaser.github.io/myWebSite'
   },
   {
     title: 'تعلم – Learning Platform',
@@ -36,9 +36,9 @@ const projects = [
     description: 'Developed a responsive educational platform using HTML, CSS, and JavaScript, focusing on user-centered design and intuitive navigation.',
     tags: ['HTML', 'CSS', 'JavaScript'],
     image: 'dist/assets/images/learning_v2_raw.png',
-    github: 'https://farajnaser.github.io/EduWebProject/',
+    github: 'https://github.com/farajnaser/EduWebProject',
     behance: '#',
-    link: '#'
+    link: 'https://farajnaser.github.io/EduWebProject/'
   },
   {
     title: 'Library System',
@@ -49,7 +49,7 @@ const projects = [
     image: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     github: 'https://github.com/farajnaser/phpProject0',
     behance: '#',
-    link: '#'
+    link: 'https://github.com/farajnaser/phpProject0'
   }
 ];
 
