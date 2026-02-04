@@ -261,8 +261,12 @@ document.addEventListener('DOMContentLoaded', () => {
   revealOnScroll();
 });
 
-// --- Contact Form Handling (EmailJS) ---
-// Note: Logic is now handled by Formspree, but listener remains for status updates.
+// --- Contact Form Handling (Formspree) ---
+const contactForm = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
+const submitBtn = document.getElementById('submit-btn');
+const btnText = document.getElementById('btn-text');
+
 if (contactForm) {
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
