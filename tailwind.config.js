@@ -4,16 +4,18 @@ export default {
     "./index.html",
     "./**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
         'sans': ['Inter', 'sans-serif'],
       },
       colors: {
-        'glass': 'rgba(255, 255, 255, 0.05)',
-        'glass-border': 'rgba(255, 255, 255, 0.1)',
-        'amber-glow': '#fbbf24',
-        'slate-dark': '#0f172a',
+        'charcoal-bg': '#121212',
+        'charcoal-section': '#1a1a1a',
+        'forest-green': '#16a34a',
+        'forest-dark': '#15803d',
+        'glass-white': 'rgba(255, 255, 255, 0.03)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
