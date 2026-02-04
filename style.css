@@ -3,8 +3,8 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: dark light;
-  color: rgba(255, 255, 255, 0.87);
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.9);
   background-color: #0f172a;
 
   font-synthesis: none;
@@ -16,8 +16,8 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #0B0B2E;
-  background-image: radial-gradient(circle at top left, #1e1b4b 0%, #0B0B2E 100%);
+  background-color: #0f172a;
+  background-image: radial-gradient(circle at top left, #1e293b 0%, #0f172a 100%);
   background-attachment: fixed;
   overflow-x: hidden;
 }
@@ -32,7 +32,7 @@ body {
 }
 
 .glass-nav {
-  background: rgba(11, 11, 46, 0.8);
+  background: rgba(15, 23, 42, 0.8);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -48,12 +48,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #475569;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #fbbf24;
 }
 
 /* Utility classes for reveal animations */

@@ -10,10 +10,10 @@
   <link rel="stylesheet" href="style.css">
   <style>
     body {
-      background-color: #0b0b2e;
-      /* Navy dark from current theme */
-      background-image: radial-gradient(circle at top right, rgba(124, 58, 237, 0.1), transparent),
-        radial-gradient(circle at bottom left, rgba(219, 39, 119, 0.1), transparent);
+      background-color: #0f172a;
+      /* Slate dark from current theme */
+      background-image: radial-gradient(circle at top right, rgba(251, 191, 36, 0.05), transparent),
+        radial-gradient(circle at bottom left, rgba(234, 88, 12, 0.05), transparent);
     }
 
     .glass-panel {
@@ -29,10 +29,10 @@
   <nav class="fixed top-0 w-full z-50 glass-nav border-b border-white/5 h-16 flex items-center">
     <div class="max-w-7xl mx-auto px-6 w-full flex justify-between items-center">
       <a href="index.html"
-        class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+        class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-600">
         &lt;Back to Site /&gt;
       </a>
-      <h1 class="text-lg font-mono text-purple-400">ADMIN_DASHBOARD_v1.0</h1>
+      <h1 class="text-lg font-mono text-amber-500">ADMIN_DASHBOARD_v1.0</h1>
     </div>
   </nav>
 
@@ -79,10 +79,10 @@
 
       noMessages.classList.add('hidden');
       container.innerHTML = messages.map((msg, index) => `
-        <div class="glass-panel p-8 rounded-3xl border-white/5 relative group hover:border-purple-500/30 transition-all">
+        <div class="glass-panel p-8 rounded-3xl border-white/5 relative group hover:border-amber-500/30 transition-all">
           <div class="flex justify-between items-start mb-6">
             <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center font-bold text-lg">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center font-bold text-lg text-black">
                 ${msg.first_name[0]}
               </div>
               <div>
@@ -96,12 +96,12 @@
           </div>
           
           <div class="mb-4">
-            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest block mb-1">Subject</span>
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-widest block mb-1">Subject</span>
             <p class="text-white font-medium">${msg.subject}</p>
           </div>
 
           <div>
-            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest block mb-1">Message</span>
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-widest block mb-1">Message</span>
             <p class="text-slate-300 leading-relaxed bg-white/5 p-4 rounded-xl italic">
               "${msg.message_text}"
             </p>

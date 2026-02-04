@@ -10,8 +10,10 @@ export default {
         'sans': ['Inter', 'sans-serif'],
       },
       colors: {
-        'glass': 'rgba(255, 255, 255, 0.1)',
-        'glass-border': 'rgba(255, 255, 255, 0.2)',
+        'glass': 'rgba(255, 255, 255, 0.05)',
+        'glass-border': 'rgba(255, 255, 255, 0.1)',
+        'amber-glow': '#fbbf24',
+        'slate-dark': '#0f172a',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

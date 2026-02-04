@@ -235,7 +235,7 @@ if (window.emailjs) {
 }
 
 if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     // Disable button and show loading state
@@ -244,31 +244,51 @@ if (contactForm) {
     formStatus.className = 'hidden';
 
     // Get Form Data
-    const formData = {
-      id: Date.now().toString().slice(-6),
-      first_name: document.getElementById('first_name').value,
-      last_name: document.getElementById('last_name').value,
-      user_email: document.getElementById('user_email').value,
-      subject: document.getElementById('subject').value,
-      message_text: document.getElementById('message_text').value,
-      timestamp: new Date().toLocaleString()
-    };
+    const formData = new FormData(contactForm);
 
-    // Save to LocalStorage (Simulating a database)
-    const existingMessages = JSON.parse(localStorage.getItem('sent_messages') || '[]');
-    existingMessages.unshift(formData); // Add at the beginning
-    localStorage.setItem('sent_messages', JSON.stringify(existingMessages));
+    try {
+      // --- FORMSPREE INTEGRATION ---
+      // Replace the URL below with your actual Formspree endpoint
+      const FORMSPREE_ENDPOINT = "https://formspree.io/f/mrelndrz";
 
-    // Simulate Network Lag for better UX
-    setTimeout(() => {
-      formStatus.textContent = 'Message sent successfully! You can view it in the Messages Dashboard.';
-      formStatus.className = 'text-sm font-medium p-4 rounded-xl bg-green-500/10 text-green-500 mb-6';
-      contactForm.reset();
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
 
+      if (response.ok) {
+        formStatus.textContent = 'Message sent successfully! I will get back to you soon.';
+        formStatus.className = 'text-sm font-medium p-4 rounded-xl bg-green-500/10 text-green-500 mb-6';
+        contactForm.reset();
+
+        // Optional: Still save locally for quick access on this device if desired
+        const data = Object.fromEntries(formData.entries());
+        data.id = Date.now().toString().slice(-6);
+        data.timestamp = new Date().toLocaleString();
+        const existingMessages = JSON.parse(localStorage.getItem('sent_messages') || '[]');
+        existingMessages.unshift(data);
+        localStorage.setItem('sent_messages', JSON.stringify(existingMessages));
+
+      } else {
+        const data = await response.json();
+        if (Object.hasOwn(data, 'errors')) {
+          formStatus.textContent = data["errors"].map(error => error["message"]).join(", ");
+        } else {
+          formStatus.textContent = "Oops! There was a problem submitting your form";
+        }
+        formStatus.className = 'text-sm font-medium p-4 rounded-xl bg-red-500/10 text-red-500 mb-6';
+      }
+    } catch (error) {
+      formStatus.textContent = "Oops! There was a problem submitting your form";
+      formStatus.className = 'text-sm font-medium p-4 rounded-xl bg-red-500/10 text-red-500 mb-6';
+    } finally {
       submitBtn.disabled = false;
       btnText.textContent = 'Send Message';
       formStatus.classList.remove('hidden');
-    }, 1000);
+    }
   });
 }
 
