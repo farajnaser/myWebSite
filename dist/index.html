@@ -1,220 +1,1070 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark scroll-smooth" dir="ltr">
 
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="./vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio | Creative Developer</title>
-  <meta name="description" content="Portfolio of a creative developer specializing in modern web experiences." />
-  <script type="module" crossorigin src="./assets/index-CgXCn_Xs.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BkB7RZt_.css">
+  <title>Faraj Alrmah | Frontend Web Developer</title>
+  <meta name="description" content="Official Portfolio of Faraj Alrmah — Frontend Web Developer specializing in modern web applications, React, Next.js, TypeScript, and interactive UI/UX." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'royal-blue': '#2563eb',
+            'sky-electric': '#0ea5e9'
+          }
+        }
+      }
+    }
+  </script>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js"
+      }
+    }
+  </script>
+  <script type="module" crossorigin src="./assets/index-B3_Y8mjk.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Cc_68Fpq.css">
 </head>
 
-<body class="text-slate-200 antialiased selection:bg-purple-500 selection:text-white">
+<body class="desk-controller-mode antialiased selection:bg-blue-600 selection:text-white">
 
-  <!-- Navigation -->
-  <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300" id="navbar">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex-shrink-0 cursor-pointer">
-          <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-            DevPortfolio
+  <!-- ==================== CLEAN SAPPHIRE TOP NAVIGATION BAR ==================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 pro-navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between gap-4">
+
+      <!-- Brand Identity -->
+      <button id="brand-desk-btn" class="flex items-center gap-3 text-left cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-sky-500 text-white font-mono-code font-bold text-xs flex items-center justify-center shadow-md border border-sky-300/40">
+          &lt;/&gt;
+        </div>
+        <div>
+          <span class="font-display font-extrabold text-base tracking-tight block leading-none">
+            Faraj <span class="text-sky-400">Alrmah</span>
+          </span>
+          <span class="font-mono-code text-[10px] text-sky-400/80 block mt-0.5">
+            Frontend Web Developer
           </span>
         </div>
+      </button>
 
-        <!-- Desktop Menu -->
-        <div class="hidden md:block">
-          <div class="ml-10 flex items-baseline space-x-8">
-            <a href="#home"
-              class="hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
-            <a href="#about"
-              class="hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
-            <a href="#projects"
-              class="hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Projects</a>
-            <a href="#contact"
-              class="px-4 py-2 rounded-full bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium transition-all shadow-lg hover:shadow-purple-500/30">Contact
-              Me</a>
-          </div>
-        </div>
+      <!-- Clean Screen Navigation Pills -->
+      <nav class="hidden lg:flex items-center gap-1.5">
+        <button data-screen-nav="desk" class="nav-screen-btn active">Desk</button>
+        <button data-screen-nav="projects" class="nav-screen-btn">Projects</button>
+        <button data-screen-nav="about" class="nav-screen-btn">About</button>
+        <button data-screen-nav="services" class="nav-screen-btn">Services</button>
+        <button data-screen-nav="skills" class="nav-screen-btn">Skills</button>
+        <button data-screen-nav="arcade" class="nav-screen-btn">Break Room</button>
+        <button data-screen-nav="contact" class="nav-screen-btn">Contact</button>
+      </nav>
 
-        <!-- Mobile menu button -->
-        <div class="-mr-2 flex md:hidden">
-          <button type="button"
-            class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-700 focus:outline-none"
-            aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-btn">
-            <span class="sr-only">Open main menu</span>
-            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
+      <!-- Essential Action Controls Only -->
+      <div class="flex items-center gap-2">
+        <button id="top-back-desk-btn" class="hidden nav-mode-btn">
+          <span>←</span>
+          <span>Back to Desk</span>
+        </button>
+
+        <button id="toggle-full-site-btn" class="nav-mode-btn">
+          <span id="full-site-btn-label">Full Website</span>
+        </button>
+
+        <button id="open-studio-btn" class="nav-cms-btn" title="Add or Edit Projects (Ctrl+Shift+A)">
+          <span>+ Manage Work</span>
+          <span id="studio-status-dot" class="w-2 h-2 rounded-full bg-sky-400"></span>
+        </button>
+
+        <button id="theme-toggle" class="nav-tool-btn" title="Toggle Dark/Light Mode">
+          <span id="theme-icon">☀️</span>
+        </button>
+
+        <button id="mobile-menu-btn" class="lg:hidden nav-tool-btn !p-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
       </div>
     </div>
 
     <!-- Mobile Menu -->
-    <div class="md:hidden hidden bg-slate-900 border-b border-slate-800" id="mobile-menu">
-      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <a href="#home" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
-        <a href="#about"
-          class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
-        <a href="#projects"
-          class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-        <a href="#contact"
-          class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-blue-800/60 bg-slate-950/95 px-6 py-4">
+      <div class="grid grid-cols-2 gap-2">
+        <button data-screen-nav="desk" class="nav-screen-btn justify-center">Desk</button>
+        <button data-screen-nav="projects" class="nav-screen-btn justify-center">Projects</button>
+        <button data-screen-nav="about" class="nav-screen-btn justify-center">About</button>
+        <button data-screen-nav="services" class="nav-screen-btn justify-center">Services</button>
+        <button data-screen-nav="skills" class="nav-screen-btn justify-center">Skills</button>
+        <button data-screen-nav="arcade" class="nav-screen-btn justify-center">Break Room</button>
+        <button data-screen-nav="contact" class="nav-screen-btn justify-center col-span-2">Contact</button>
       </div>
     </div>
-  </nav>
+  </header>
 
-  <!-- Hero Section -->
-  <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-    <!-- Background decorators -->
-    <div class="absolute top-20 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-purple-500/20 blur-3xl animate-pulse">
-    </div>
-    <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-pink-500/20 blur-3xl animate-pulse"
-      style="animation-delay: 1s;"></div>
+  <!-- ====================================================================== -->
+  <!-- MASTER INTERACTIVE DESK STAGE (ZERO OVERLAPPING CARDS OR DOCKS!)       -->
+  <!-- ====================================================================== -->
+  <main id="desk-master-stage">
 
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-      <div class="text-center">
-        <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-7xl">
-          <span class="block">Building Digital</span>
-          <span class="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Experiences
-            That Matter</span>
-        </h1>
-        <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-slate-400">
-          I'm a creative developer passionate about building beautiful, functional, and accessible web applications. I
-          turn ideas into reality with code.
-        </p>
-        <div class="mt-10 flex justify-center gap-4">
-          <a href="#projects"
-            class="rounded-full shadow-lg bg-purple-600 px-8 py-3 text-base font-medium text-white hover:bg-purple-700 hover:shadow-purple-500/30 transition-all md:py-4 md:text-lg md:px-10">
-            View Work
-          </a>
-          <a href="#contact"
-            class="rounded-full shadow-lg bg-slate-800 border border-slate-700 px-8 py-3 text-base font-medium text-slate-200 hover:bg-slate-700 hover:text-white transition-all md:py-4 md:text-lg md:px-10">
-            Contact Me
-          </a>
+    <!-- Clean Non-Overlapping Top Strip (Sits ABOVE the Desk Canvas, Never Covers Models) -->
+    <div class="desk-header-strip">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
+        <div class="flex items-center gap-3 text-white">
+          <span class="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
+          <span class="font-display font-bold">Faraj Alrmah's Interactive Desk</span>
+          <span class="hidden md:inline text-blue-200/80">
+            — Click any item on the desk (Monitors, Keyboard, ID Frame, Client Pad, Arcade, Phone, or Coffee) to open its screen.
+          </span>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span id="energy-status-badge" class="font-mono-code text-xs text-sky-300">
+            ☕ Coffee Today: 3 Cups (Focus 100%)
+          </span>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- About Section -->
-  <section id="about" class="py-20 bg-slate-900/50 reveal">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
-        <div class="relative group">
-          <div
-            class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200">
+    <!-- Playful Blue Toast Notification (When clicking Coffee or Lamp on the Desk) -->
+    <div id="desk-toast" class="hidden fixed top-20 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-700 to-sky-600 text-white font-bold text-xs sm:text-sm shadow-2xl border border-sky-300 flex items-center gap-2">
+      <span id="desk-toast-icon">☕</span>
+      <span id="desk-toast-text">Fresh espresso poured! Coding velocity boosted by 200%!</span>
+    </div>
+
+    <!-- Unobstructed Desk Canvas Area -->
+    <div id="desk-canvas-wrap">
+      <div id="desk-hover-tooltip">Click to Open Screen</div>
+      <canvas id="desk-canvas"></canvas>
+    </div>
+
+  </main>
+
+  <!-- ====================================================================== -->
+  <!-- DEDICATED SCREENS CONTAINER (OPAQUE BACKGROUND, ZERO VISUAL OVERLAP)   -->
+  <!-- ====================================================================== -->
+  <div id="screens-container" class="hidden-overlay">
+
+    <!-- Clean Screen Control Bar (Only Back to Desk + Screen Title + Full Website Toggle) -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+      <div class="pro-card p-4 border-blue-500/35 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <button id="screen-back-desk-btn" class="nav-mode-btn !py-2 !px-4 text-xs sm:text-sm">
+            <span>←</span>
+            <span>Back to Desk</span>
+          </button>
+          <div class="h-5 w-px bg-blue-500/30 hidden sm:block"></div>
+          <div class="flex items-center gap-2">
+            <span id="active-screen-icon" class="text-lg">🖥️</span>
+            <span id="active-screen-title" class="font-display font-extrabold text-sm sm:text-base text-blue-600 dark:text-sky-400">
+              Featured Projects &amp; Case Studies
+            </span>
           </div>
-          <div class="relative glass-panel rounded-lg p-8 aspect-video flex items-center justify-center">
-            <!-- Placeholder for About Image or Code snippet -->
-            <div class="text-center">
-              <div class="text-6xl mb-4">👨‍💻</div>
-              <code class="text-sm text-purple-300 font-mono block">
-                    const developer = {<br>
-                    &nbsp;&nbsp;name: 'Fero',<br>
-                    &nbsp;&nbsp;passion: 'Web Development',<br>
-                    &nbsp;&nbsp;status: 'Ready to work'<br>
-                    };
-                  </code>
+        </div>
+
+        <button id="screen-show-all-btn" class="btn-secondary !py-2 !px-3.5 text-xs font-bold !border-sky-500/40 !text-sky-400">
+          View Full Website
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================================================================== -->
+    <!-- SCREEN 01: PROJECTS & CASE STUDIES (OPENED BY MONITORS 🖥️)          -->
+    <!-- ==================================================================== -->
+    <section id="projects" class="screen-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="pro-card p-6 sm:p-8 mb-8 border-blue-500/30">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div>
+              <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
+                01 // SELECTED WORK
+              </span>
+              <h2 class="font-display text-2xl sm:text-3xl font-extrabold mb-2">
+                Featured Projects &amp; Web Platforms
+              </h2>
+              <p class="text-slate-600 dark:text-blue-100/80 max-w-2xl text-sm sm:text-base">
+                Real-world applications built from scratch with clean code and plenty of espresso ☕. Try live demos, clap for your favorites 👏, or add new projects directly inside the site.
+              </p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <button data-filter="all" class="filter-btn btn-primary !py-2 !px-4 text-xs">
+                All Projects
+              </button>
+              <button data-filter="web development" class="filter-btn btn-secondary !py-2 !px-4 text-xs">
+                Web Apps
+              </button>
+              <button data-filter="ui-ux" class="filter-btn btn-secondary !py-2 !px-4 text-xs">
+                UI / UX
+              </button>
+              <button id="projects-add-btn" class="btn-secondary !py-2 !px-4 text-xs !border-sky-400/50 !text-sky-400">
+                + Add / Edit Work
+              </button>
             </div>
           </div>
         </div>
-        <div class="mt-10 lg:mt-0">
-          <h2 class="text-3xl font-bold text-white mb-6">About Me</h2>
-          <p class="text-lg text-slate-400 mb-6">
-            I am a web developer with a keen eye for design. I specialize in the JavaScript ecosystem, focusing on
-            React, Vue, and modern CSS frameworks like Tailwind. My goal is to bridge the gap between design and
-            engineering.
-          </p>
-          <div class="flex flex-wrap gap-3">
-            <span
-              class="px-3 py-1 bg-purple-500/10 text-purple-300 rounded-full text-sm font-medium border border-purple-500/20">JavaScript</span>
-            <span
-              class="px-3 py-1 bg-blue-500/10 text-blue-300 rounded-full text-sm font-medium border border-blue-500/20">React</span>
-            <span
-              class="px-3 py-1 bg-cyan-500/10 text-cyan-300 rounded-full text-sm font-medium border border-cyan-500/20">Tailwind
-              CSS</span>
-            <span
-              class="px-3 py-1 bg-yellow-500/10 text-yellow-300 rounded-full text-sm font-medium border border-yellow-500/20">Node.js</span>
-            <span
-              class="px-3 py-1 bg-green-500/10 text-green-300 rounded-full text-sm font-medium border border-green-500/20">Vue.js</span>
+
+        <!-- Studio CMS Active Toolbar -->
+        <div id="studio-active-banner" class="hidden pro-card p-5 mb-8 border-sky-400/50 flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-600/20 border border-sky-400/40 flex items-center justify-center text-lg">
+              ⚙️
+            </div>
+            <div>
+              <h4 class="font-display font-bold text-sm sm:text-base">Studio CMS Unlocked</h4>
+              <p class="font-mono-code text-xs text-sky-400" id="studio-sync-status">
+                Add, edit, reorder, or delete projects below. Changes save automatically to public/projects.json.
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <button id="banner-new-project-btn" class="btn-primary !py-2 !px-3.5 text-xs">
+              + New Project
+            </button>
+            <button id="export-projects-btn" class="btn-secondary !py-2 !px-3.5 text-xs">
+              Export JSON
+            </button>
+            <label class="btn-secondary !py-2 !px-3.5 text-xs cursor-pointer">
+              Import JSON
+              <input type="file" id="import-projects-input" accept=".json" class="hidden" />
+            </label>
+            <button id="lock-studio-btn" class="btn-secondary !py-2 !px-3.5 text-xs !text-rose-400">
+              Lock CMS
+            </button>
           </div>
         </div>
+
+        <!-- Projects Grid -->
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" id="projects-grid"></div>
+
+        <!-- Pagination -->
+        <div class="mt-8 flex justify-center items-center gap-2" id="project-pagination"></div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="py-24 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-radial from-purple-900/10 to-transparent opacity-50"></div>
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-      <div class="text-center mb-16 reveal">
-        <h2 class="text-3xl font-bold text-white sm:text-4xl">Featured Projects</h2>
-        <p class="mt-4 text-xl text-slate-400">Some of my recent work and experiments.</p>
+    <!-- ==================================================================== -->
+    <!-- SCREEN 02: ABOUT FARAJ & CAREER TIMELINE (OPENED BY PORTRAIT 🖼️)    -->
+    <!-- ==================================================================== -->
+    <section id="about" class="screen-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Executive Benchmarks -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div class="pro-card p-5">
+            <div class="font-mono-code text-xs text-sky-400 uppercase font-bold mb-1">PERFORMANCE</div>
+            <div class="font-display font-extrabold text-3xl text-blue-600 dark:text-white">99+</div>
+            <div class="text-xs text-slate-500 dark:text-blue-200/70 mt-1">Fast Lighthouse &amp; Web Vitals</div>
+          </div>
+          <div class="pro-card p-5">
+            <div class="font-mono-code text-xs text-sky-400 uppercase font-bold mb-1">RESPONSIVE</div>
+            <div class="font-display font-extrabold text-3xl text-blue-600 dark:text-white">100%</div>
+            <div class="text-xs text-slate-500 dark:text-blue-200/70 mt-1">Mobile, Tablet &amp; Desktop Precision</div>
+          </div>
+          <div class="pro-card p-5">
+            <div class="font-mono-code text-xs text-sky-400 uppercase font-bold mb-1">ARCHITECTURE</div>
+            <div class="font-display font-extrabold text-3xl text-blue-600 dark:text-white">Clean</div>
+            <div class="text-xs text-slate-500 dark:text-blue-200/70 mt-1">Maintainable &amp; Scalable Code</div>
+          </div>
+          <div class="pro-card p-5">
+            <div class="font-mono-code text-xs text-sky-400 uppercase font-bold mb-1">LOCATION</div>
+            <div class="font-display font-extrabold text-3xl text-blue-600 dark:text-white">Global</div>
+            <div class="text-xs text-slate-500 dark:text-blue-200/70 mt-1">Tripoli, Libya • Remote Worldwide</div>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-start">
+
+          <!-- Left Profile + Fun Facts -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="pro-card p-7">
+              <div class="flex items-center gap-4 mb-6">
+                <img src="./assets/farajimage-DU9AhANU.png" alt="Faraj Alrmah" class="w-20 h-20 rounded-2xl object-cover border-2 border-blue-500 shadow-lg shrink-0" />
+                <div>
+                  <span class="font-mono-code text-xs text-sky-400 font-bold uppercase tracking-wider block">DEVELOPER PROFILE</span>
+                  <h2 class="font-display text-2xl font-extrabold">Faraj Alrmah</h2>
+                  <p class="text-xs text-slate-500 dark:text-blue-200/80 mt-0.5">
+                    Frontend Web Developer &amp; UI/UX Specialist
+                  </p>
+                </div>
+              </div>
+
+              <p class="text-sm sm:text-base text-slate-600 dark:text-blue-100/85 leading-relaxed mb-6">
+                Passionate frontend developer turning complex ideas into fast, intuitive, and memorable digital products. I specialize in building modern interfaces using React, Next.js, TypeScript, and Tailwind CSS that help companies stand out and users enjoy every click.
+              </p>
+
+              <div class="rounded-xl bg-slate-950 border border-blue-900/60 p-4 font-mono-code text-xs space-y-1.5 mb-6">
+                <div class="flex items-center justify-between text-sky-400 pb-2 mb-2 border-b border-blue-900/50">
+                  <span>faraj_profile.ts</span>
+                  <img src="./assets/vscode-logo-Br3jjzew.png" alt="VS Code" class="w-4 h-4 object-contain" />
+                </div>
+                <p><span class="text-sky-400">const</span> <span class="text-blue-300">faraj</span> = {</p>
+                <p class="pl-4 text-slate-300">name: <span class="text-sky-300">'Faraj Alrmah'</span>,</p>
+                <p class="pl-4 text-slate-300">location: <span class="text-sky-300">'Tripoli, Libya'</span>,</p>
+                <p class="pl-4 text-slate-300">stack: [<span class="text-blue-400">'React'</span>, <span class="text-blue-400">'Next.js'</span>, <span class="text-blue-400">'TypeScript'</span>],</p>
+                <p class="pl-4 text-slate-300">coffeeFuel: <span class="text-amber-300">'100% Ready ☕'</span></p>
+                <p>};</p>
+              </div>
+
+              <div class="flex flex-wrap gap-3">
+                <button data-screen-nav="contact" class="flex-1 btn-primary text-xs sm:text-sm">
+                  Hire Me / Discuss a Project
+                </button>
+                <a href="https://github.com/farajnaser" target="_blank" class="btn-secondary text-xs sm:text-sm font-mono-code">
+                  GitHub ↗
+                </a>
+              </div>
+            </div>
+
+            <!-- Playful Fun Facts Card -->
+            <div class="pro-card p-6 border-sky-500/30">
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-display font-bold text-sm text-sky-400">
+                  🎲 Behind the Code (Fun Facts)
+                </span>
+                <button id="next-fun-fact-btn" class="px-3 py-1 rounded-lg bg-blue-600 hover:bg-sky-500 text-white text-xs font-bold transition-colors cursor-pointer">
+                  Next Fact ↻
+                </button>
+              </div>
+              <p id="fun-fact-display" class="text-sm text-slate-700 dark:text-blue-100 leading-relaxed p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/20">
+                "I believe a great website should load in under a second—or before the first sip of espresso cools down! ☕⚡"
+              </p>
+            </div>
+          </div>
+
+          <!-- Right Career & Academic Journey -->
+          <div class="lg:col-span-7">
+            <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-2">
+              02 // EXPERIENCE &amp; EDUCATION
+            </span>
+            <h3 class="font-display text-2xl sm:text-3xl font-extrabold mb-3">
+              Engineering Reliable Digital Products
+            </h3>
+            <p class="text-slate-600 dark:text-blue-100/80 text-sm sm:text-base mb-6 leading-relaxed">
+              Combining a solid software engineering foundation with practical frontend craftsmanship for modern companies.
+            </p>
+
+            <div class="space-y-4">
+              <div class="pro-card pro-card-interactive p-6">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <h4 class="font-display font-bold text-lg">
+                    Frontend Web Developer &amp; UI Specialist
+                  </h4>
+                  <span class="px-3 py-1 rounded-full bg-blue-600/20 border border-sky-400/40 text-sky-400 font-mono-code text-xs font-bold">
+                    2024 — PRESENT
+                  </span>
+                </div>
+                <p class="text-sm text-slate-600 dark:text-blue-100/85 leading-relaxed mb-3">
+                  Building responsive corporate websites, interactive web applications, and custom dashboards using JavaScript (ES6+), React, Next.js, TypeScript, and Tailwind CSS.
+                </p>
+                <div class="flex flex-wrap gap-2 font-mono-code text-[11px] text-sky-300">
+                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">React &amp; Next.js</span>
+                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">TypeScript</span>
+                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">Tailwind CSS</span>
+                </div>
+              </div>
+
+              <div class="pro-card pro-card-interactive p-6">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <h4 class="font-display font-bold text-lg">
+                    Educational Platforms &amp; Digital Library Systems Lead
+                  </h4>
+                  <span class="px-3 py-1 rounded-full bg-sky-500/20 border border-sky-400/40 text-sky-300 font-mono-code text-xs font-bold">
+                    PRODUCTION SYSTEMS
+                  </span>
+                </div>
+                <p class="text-sm text-slate-600 dark:text-blue-100/85 leading-relaxed mb-3">
+                  Designed and developed the "Ta'allam" Educational Platform and the College Digital Library System with dynamic book cataloging and student search.
+                </p>
+                <div class="flex flex-wrap gap-2 font-mono-code text-[11px] text-sky-300">
+                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">HTML5 &amp; CSS3</span>
+                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">JavaScript</span>
+                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">PHP &amp; Databases</span>
+                </div>
+              </div>
+
+              <div class="pro-card pro-card-interactive p-6">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <h4 class="font-display font-bold text-lg">
+                    College of Electronic Technology — Tripoli, Libya
+                  </h4>
+                  <span class="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/40 text-blue-300 font-mono-code text-xs font-bold">
+                    ACADEMIC FOUNDATION
+                  </span>
+                </div>
+                <p class="text-sm text-slate-600 dark:text-blue-100/85 leading-relaxed">
+                  Comprehensive engineering education in software development, web systems architecture, algorithms, and databases.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
+    </section>
 
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" id="projects-grid">
-        <!-- Projects will be injected here via JS -->
+    <!-- ==================================================================== -->
+    <!-- SCREEN 03: COMPANY SERVICES & PROJECT ESTIMATOR (OPENED BY PAD 💼)   -->
+    <!-- ==================================================================== -->
+    <section id="services" class="screen-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="max-w-3xl mb-8">
+          <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
+            03 // COMPANY SOLUTIONS &amp; WORKFLOW
+          </span>
+          <h2 class="font-display text-2xl sm:text-3xl font-extrabold mb-2">
+            Tailored Web Engineering for Modern Businesses
+          </h2>
+          <p class="text-slate-600 dark:text-blue-100/80 text-sm sm:text-base">
+            From high-converting company platforms to complex React applications and custom dashboards.
+          </p>
+        </div>
+
+        <!-- 4 Services -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          <div class="pro-card pro-card-interactive p-6 flex flex-col justify-between">
+            <div>
+              <div class="w-11 h-11 rounded-xl bg-blue-600/20 border border-sky-400/40 flex items-center justify-center text-sky-400 font-mono-code font-bold text-sm mb-4">
+                01
+              </div>
+              <h3 class="font-display text-lg font-bold mb-2">Corporate Websites &amp; Web Apps</h3>
+              <p class="text-sm text-slate-600 dark:text-blue-100/80 leading-relaxed mb-4">
+                Fast, scalable applications engineered with React, Next.js, and TypeScript.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-blue-500/20 font-mono-code text-xs text-sky-400 font-bold">
+              React • Next.js • TypeScript
+            </div>
+          </div>
+
+          <div class="pro-card pro-card-interactive p-6 flex flex-col justify-between">
+            <div>
+              <div class="w-11 h-11 rounded-xl bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-sky-300 font-mono-code font-bold text-sm mb-4">
+                02
+              </div>
+              <h3 class="font-display text-lg font-bold mb-2">Interactive UI &amp; Smooth UX</h3>
+              <p class="text-sm text-slate-600 dark:text-blue-100/80 leading-relaxed mb-4">
+                Turning static layouts into lively, intuitive interfaces that engage visitors and boost conversions.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-blue-500/20 font-mono-code text-xs text-sky-400 font-bold">
+              Interactive UI • Motion UX
+            </div>
+          </div>
+
+          <div class="pro-card pro-card-interactive p-6 flex flex-col justify-between">
+            <div>
+              <div class="w-11 h-11 rounded-xl bg-blue-600/20 border border-sky-400/40 flex items-center justify-center text-sky-400 font-mono-code font-bold text-sm mb-4">
+                03
+              </div>
+              <h3 class="font-display text-lg font-bold mb-2">Custom Dashboards &amp; CMS</h3>
+              <p class="text-sm text-slate-600 dark:text-blue-100/80 leading-relaxed mb-4">
+                Admin panels, educational portals, and dynamic cataloging systems tailored to your workflow.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-blue-500/20 font-mono-code text-xs text-sky-400 font-bold">
+              Dashboards • Custom Systems
+            </div>
+          </div>
+
+          <div class="pro-card pro-card-interactive p-6 flex flex-col justify-between">
+            <div>
+              <div class="w-11 h-11 rounded-xl bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-sky-300 font-mono-code font-bold text-sm mb-4">
+                04
+              </div>
+              <h3 class="font-display text-lg font-bold mb-2">Speed Optimization &amp; SEO</h3>
+              <p class="text-sm text-slate-600 dark:text-blue-100/80 leading-relaxed mb-4">
+                Core Web Vitals tuning, clean asset bundling, and flawless mobile responsiveness.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-blue-500/20 font-mono-code text-xs text-sky-400 font-bold">
+              99+ Speed • SEO • Mobile
+            </div>
+          </div>
+        </div>
+
+        <!-- 4-Step Workflow + Project Scope Estimator -->
+        <div class="grid lg:grid-cols-12 gap-8 items-stretch">
+          <div class="lg:col-span-6 space-y-3.5">
+            <h3 class="font-display text-xl sm:text-2xl font-extrabold mb-2">
+              🚀 How I Take Projects From Concept to Launch
+            </h3>
+            <div class="pro-card p-4">
+              <div class="font-mono-code text-xs text-sky-400 font-bold mb-0.5">STEP 01 // PLANNING</div>
+              <h4 class="font-display font-bold text-base">Discovery &amp; Architecture</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-blue-100/80">Understanding your business goals and mapping clear user flows before writing code.</p>
+            </div>
+            <div class="pro-card p-4">
+              <div class="font-mono-code text-xs text-sky-400 font-bold mb-0.5">STEP 02 // DESIGN SYSTEM</div>
+              <h4 class="font-display font-bold text-base">UI/UX &amp; Interactive Prototyping</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-blue-100/80">Crafting responsive layouts, cohesive color tokens, and smooth interactive components.</p>
+            </div>
+            <div class="pro-card p-4">
+              <div class="font-mono-code text-xs text-sky-400 font-bold mb-0.5">STEP 03 // DEVELOPMENT</div>
+              <h4 class="font-display font-bold text-base">Clean Frontend Engineering</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-blue-100/80">Writing modular, well-documented React and TypeScript code built to scale.</p>
+            </div>
+            <div class="pro-card p-4">
+              <div class="font-mono-code text-xs text-sky-400 font-bold mb-0.5">STEP 04 // DELIVERY</div>
+              <h4 class="font-display font-bold text-base">QA Testing, Speed Audit &amp; Launch</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-blue-100/80">Cross-device verification, performance optimization, and production deployment.</p>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6">
+            <div class="pro-card p-6 sm:p-7 h-full flex flex-col justify-between border-sky-400/35">
+              <div>
+                <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
+                  🧮 INTERACTIVE PROJECT ESTIMATOR
+                </span>
+                <h3 class="font-display text-xl sm:text-2xl font-extrabold mb-2">
+                  Estimate Your Project Timeline Instantly
+                </h3>
+                <p class="text-sm text-slate-600 dark:text-blue-100/80 mb-5">
+                  Select the features required for your upcoming project:
+                </p>
+
+                <div class="space-y-3 mb-6">
+                  <label class="flex items-center justify-between p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/25 cursor-pointer hover:border-sky-400 transition-colors">
+                    <div class="flex items-center gap-3">
+                      <input type="checkbox" value="2" checked class="est-check w-4 h-4 accent-blue-600" data-label="Responsive Corporate Website / Web Application" />
+                      <span class="font-medium text-sm">Responsive Corporate Website / Web App</span>
+                    </div>
+                    <span class="font-mono-code text-xs text-sky-400 font-bold">Core</span>
+                  </label>
+
+                  <label class="flex items-center justify-between p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/25 cursor-pointer hover:border-sky-400 transition-colors">
+                    <div class="flex items-center gap-3">
+                      <input type="checkbox" value="2" checked class="est-check w-4 h-4 accent-blue-600" data-label="Custom Interactive UI & Motion Experience" />
+                      <span class="font-medium text-sm">Custom Interactive UI &amp; Smooth Motion</span>
+                    </div>
+                    <span class="font-mono-code text-xs text-sky-400 font-bold">+Interactive</span>
+                  </label>
+
+                  <label class="flex items-center justify-between p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/25 cursor-pointer hover:border-sky-400 transition-colors">
+                    <div class="flex items-center gap-3">
+                      <input type="checkbox" value="2" class="est-check w-4 h-4 accent-blue-600" data-label="Admin Dashboard & Content Management System" />
+                      <span class="font-medium text-sm">Admin Dashboard &amp; Content Management</span>
+                    </div>
+                    <span class="font-mono-code text-xs text-sky-400 font-bold">+CMS</span>
+                  </label>
+
+                  <label class="flex items-center justify-between p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/25 cursor-pointer hover:border-sky-400 transition-colors">
+                    <div class="flex items-center gap-3">
+                      <input type="checkbox" value="1" class="est-check w-4 h-4 accent-blue-600" data-label="Performance Optimization & SEO Structure" />
+                      <span class="font-medium text-sm">Speed Optimization &amp; Technical SEO</span>
+                    </div>
+                    <span class="font-mono-code text-xs text-sky-400 font-bold">+Speed</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-blue-600/15 border border-sky-400/35 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <span class="font-mono-code text-[10px] text-sky-300 uppercase block">RECOMMENDED STACK &amp; TIMELINE</span>
+                  <span id="est-result-text" class="font-display font-bold text-sm sm:text-base text-sky-400">
+                    React / Next.js • Est. 3–5 Weeks Delivery
+                  </span>
+                </div>
+                <button id="est-apply-btn" class="btn-primary !py-2.5 !px-4 text-xs">
+                  Send This Scope →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
+    </section>
 
-    </div>
-  </section>
+    <!-- ==================================================================== -->
+    <!-- SCREEN 04: SKILLS & TECH STACK (OPENED BY KEYBOARD ⌨️)               -->
+    <!-- ==================================================================== -->
+    <section id="skills" class="screen-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-  <!-- Contact Section -->
-  <section id="contact" class="py-24 bg-slate-900/50 reveal">
-    <div class="max-w-3xl mx-auto px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold text-white mb-8">Get In Touch</h2>
-      <p class="text-xl text-slate-400 mb-10">
-        I'm currently looking for new opportunities. Whether you have a question or just want to say hi, my inbox is
-        always open!
+        <div class="max-w-3xl mb-8">
+          <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
+            04 // TECHNICAL STACK
+          </span>
+          <h2 class="font-display text-2xl sm:text-3xl font-extrabold mb-2">
+            Core Technologies &amp; Engineering Proficiency
+          </h2>
+          <p class="text-slate-600 dark:text-blue-100/80 text-sm sm:text-base">
+            Click any technology module below (or press keys <code class="px-2 py-0.5 rounded bg-blue-600/20 text-sky-400 font-mono-code text-xs">1 - 8</code> on your keyboard) to inspect how I use it in production:
+          </p>
+        </div>
+
+        <!-- Skill Inspector Banner -->
+        <div class="pro-card p-6 sm:p-7 mb-8 border-sky-400/40">
+          <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div class="flex items-center gap-4">
+              <div id="hud-skill-badge" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-sky-500 text-white font-mono-code font-bold text-lg flex items-center justify-center shrink-0">
+                JS
+              </div>
+              <div>
+                <div class="flex items-center gap-2.5">
+                  <span id="hud-skill-category" class="font-mono-code text-xs text-sky-400 uppercase tracking-wider font-bold">01 // CORE LANGUAGE</span>
+                  <span id="hud-skill-metric" class="px-2.5 py-0.5 rounded-full bg-blue-600/25 text-sky-300 font-mono-code text-xs font-bold">96% Proficiency</span>
+                </div>
+                <h3 id="hud-skill-title" class="font-display text-xl sm:text-2xl font-extrabold mt-1">
+                  JavaScript (ES6+)
+                </h3>
+                <p id="hud-skill-desc" class="text-sm text-slate-600 dark:text-blue-100/85 mt-1 max-w-2xl">
+                  Building interactive application logic, asynchronous API integrations, and clean modular architecture.
+                </p>
+              </div>
+            </div>
+
+            <div class="w-full md:w-52 shrink-0">
+              <div class="flex justify-between font-mono-code text-xs text-sky-300 mb-1.5">
+                <span>Production Readiness</span>
+                <span id="hud-skill-pct" class="text-sky-400 font-bold">96%</span>
+              </div>
+              <div class="w-full h-2.5 rounded-full bg-blue-950 overflow-hidden border border-blue-800/60">
+                <div id="hud-skill-bar" class="h-full rounded-full bg-gradient-to-r from-blue-600 to-sky-400 transition-all duration-300" style="width: 96%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 Skill Modules Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="tech-cubes-grid"></div>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SCREEN 05: BREAK ROOM, BUG SMASHER & TERMINAL (OPENED BY ARCADE 🕹️)  -->
+    <!-- ==================================================================== -->
+    <section id="arcade" class="screen-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="max-w-3xl mb-8">
+          <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
+            05 // DEVELOPER BREAK ROOM &amp; LAB
+          </span>
+          <h2 class="font-display text-2xl sm:text-3xl font-extrabold mb-2">
+            Take a Quick Break: Smash Bugs or Test the Console!
+          </h2>
+          <p class="text-slate-600 dark:text-blue-100/80 text-sm sm:text-base">
+            Even the cleanest codebases need a fun break. Smash the bugs before deployment or run quick commands in the terminal.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-stretch">
+
+          <!-- Bug Smasher Mini-Game -->
+          <div class="lg:col-span-6">
+            <div class="pro-card overflow-hidden h-full flex flex-col justify-between border-sky-400/35">
+              <div class="bg-slate-950 border-b border-blue-900/60 px-5 py-3.5 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span>🕹️</span>
+                  <h3 class="font-display font-bold text-sm sm:text-base text-white">Production Bug Smasher</h3>
+                </div>
+                <div class="flex items-center gap-3 font-mono-code text-xs">
+                  <span class="text-sky-400">SCORE: <strong id="bug-score">0</strong></span>
+                  <span class="text-amber-300">BEST: <strong id="bug-high-score">0</strong></span>
+                  <span class="text-rose-400">TIME: <strong id="bug-timer">20s</strong></span>
+                </div>
+              </div>
+
+              <div id="bug-arena" class="bug-arena flex-1 min-h-[300px] bg-slate-950 flex items-center justify-center relative select-none">
+                <div id="bug-start-overlay" class="text-center p-6 bg-slate-900/95 border border-blue-500/40 rounded-2xl max-w-xs z-10">
+                  <div class="text-3xl mb-2">🐛🔨</div>
+                  <h4 class="font-display font-bold text-base text-white mb-1">Keep the Codebase Clean!</h4>
+                  <p class="text-xs text-blue-200/80 mb-4">
+                    Click the bugs as fast as you can in 20 seconds before the client demo starts!
+                  </p>
+                  <button id="start-bug-game-btn" class="btn-primary !py-2.5 !px-6 text-xs">
+                    Start Game 🚀
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Developer Terminal -->
+          <div class="lg:col-span-6">
+            <div class="pro-card overflow-hidden h-full flex flex-col justify-between border-blue-500/35">
+              <div class="bg-slate-950 border-b border-blue-900/60 px-5 py-3.5 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                  <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                  <span class="w-3 h-3 rounded-full bg-sky-400"></span>
+                  <span class="ml-2 font-mono-code text-xs text-sky-300">faraj_console.sh</span>
+                </div>
+                <span class="font-mono-code text-[11px] text-blue-400">Interactive Shell</span>
+              </div>
+
+              <div class="p-5 font-mono-code text-xs sm:text-sm bg-slate-950 flex-1 flex flex-col justify-between min-h-[300px]">
+                <div id="terminal-output" class="space-y-2 max-h-[200px] overflow-y-auto pr-2">
+                  <p class="text-sky-400 font-bold">Faraj Alrmah — Developer Console v4.0</p>
+                  <p class="text-slate-400">Click any command chip below or type a command:</p>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-blue-900/50">
+                  <div class="flex flex-wrap gap-1.5 mb-3">
+                    <button data-cmd="whoami" class="term-chip px-2.5 py-1 rounded-lg bg-blue-950/80 border border-blue-700/60 hover:border-sky-400 text-xs text-sky-200 cursor-pointer">whoami</button>
+                    <button data-cmd="stack" class="term-chip px-2.5 py-1 rounded-lg bg-blue-950/80 border border-blue-700/60 hover:border-sky-400 text-xs text-sky-200 cursor-pointer">stack</button>
+                    <button data-cmd="coffee" class="term-chip px-2.5 py-1 rounded-lg bg-blue-950/80 border border-blue-700/60 hover:border-sky-400 text-xs text-sky-200 cursor-pointer">coffee</button>
+                    <button data-cmd="joke" class="term-chip px-2.5 py-1 rounded-lg bg-blue-950/80 border border-blue-700/60 hover:border-sky-400 text-xs text-sky-200 cursor-pointer">joke</button>
+                    <button data-cmd="contact" class="term-chip px-2.5 py-1 rounded-lg bg-blue-950/80 border border-blue-700/60 hover:border-sky-400 text-xs text-sky-200 cursor-pointer">contact</button>
+                    <button data-cmd="clear" class="term-chip px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-xs text-slate-400 cursor-pointer">clear</button>
+                  </div>
+                  <form id="terminal-form" class="flex items-center gap-2 bg-slate-900 px-3.5 py-2 rounded-xl border border-blue-800/60">
+                    <span class="text-sky-400 font-bold">faraj@desk:~$</span>
+                    <input type="text" id="terminal-input" placeholder="Type whoami, stack, coffee, joke..." class="bg-transparent text-white focus:outline-none w-full text-xs" autocomplete="off" />
+                    <button type="submit" class="px-3 py-1 rounded-lg bg-blue-600 text-white font-bold text-xs cursor-pointer">Run</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SCREEN 06: DIRECT CONTACT & INQUIRY FORM (OPENED BY PHONE 📱)         -->
+    <!-- ==================================================================== -->
+    <section id="contact" class="screen-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-10 items-start">
+
+          <div class="lg:col-span-5">
+            <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
+              06 // DIRECT CONTACT
+            </span>
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold mb-3">
+              Let's Build Your Next Project Together
+            </h2>
+            <p class="text-slate-600 dark:text-blue-100/80 text-sm sm:text-base mb-6 leading-relaxed">
+              Available for frontend engineering roles, company web projects, and consulting. Reach out directly via email, phone, or the inquiry form.
+            </p>
+
+            <div class="space-y-3.5">
+              <a href="mailto:farajelrmahmoo@gmail.com" class="pro-card pro-card-interactive p-4 flex items-center gap-4 block">
+                <div class="w-11 h-11 rounded-xl bg-blue-600/20 border border-sky-400/40 flex items-center justify-center text-sky-400 text-lg shrink-0">
+                  ✉️
+                </div>
+                <div class="overflow-hidden">
+                  <div class="font-mono-code text-xs text-sky-400 uppercase">Email</div>
+                  <div class="font-display font-bold text-sm sm:text-base truncate">farajelrmahmoo@gmail.com</div>
+                </div>
+              </a>
+
+              <a href="tel:+218922613675" class="pro-card pro-card-interactive p-4 flex items-center gap-4 block">
+                <div class="w-11 h-11 rounded-xl bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-sky-300 text-lg shrink-0">
+                  📞
+                </div>
+                <div>
+                  <div class="font-mono-code text-xs text-sky-400 uppercase">Phone / WhatsApp</div>
+                  <div class="font-display font-bold text-base">+218 922613675</div>
+                </div>
+              </a>
+
+              <div class="pro-card p-4 flex items-center gap-4">
+                <div class="w-11 h-11 rounded-xl bg-blue-600/20 border border-sky-400/40 flex items-center justify-center text-sky-400 text-lg shrink-0">
+                  📍
+                </div>
+                <div>
+                  <div class="font-mono-code text-xs text-sky-400 uppercase">Location</div>
+                  <div class="font-display font-bold text-base">Tripoli, Libya • Remote Worldwide</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 flex items-center gap-3">
+              <a href="https://github.com/farajnaser" target="_blank" class="btn-secondary text-xs font-mono-code">
+                GitHub ↗
+              </a>
+              <a href="https://linkedin.com/in/farajalrmah" target="_blank" class="btn-secondary text-xs font-mono-code">
+                LinkedIn ↗
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7">
+            <div class="pro-card p-6 sm:p-8 border-blue-500/30">
+              <h3 class="font-display text-xl sm:text-2xl font-extrabold mb-2">
+                Send a Project Inquiry
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-blue-200/70 mb-4">
+                Pick a topic below or write your message directly:
+              </p>
+
+              <div class="flex flex-wrap gap-2 mb-5">
+                <button type="button" data-topic="Company Website / Web Application" class="topic-chip btn-secondary !py-1.5 !px-3 text-xs">
+                  💼 Web Application
+                </button>
+                <button type="button" data-topic="Interactive UI/UX Redesign" class="topic-chip btn-secondary !py-1.5 !px-3 text-xs">
+                  ✨ Interactive UI/UX
+                </button>
+                <button type="button" data-topic="Frontend Developer Role" class="topic-chip btn-secondary !py-1.5 !px-3 text-xs">
+                  🤝 Job Opportunity
+                </button>
+                <button type="button" data-topic="Technical Consulting" class="topic-chip btn-secondary !py-1.5 !px-3 text-xs">
+                  💡 Consulting
+                </button>
+              </div>
+
+              <form id="contact-form" class="space-y-4">
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">First Name</label>
+                    <input type="text" id="first_name" name="first_name" required class="pro-input" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">Last Name / Company</label>
+                    <input type="text" id="last_name" name="last_name" required class="pro-input" />
+                  </div>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">Email Address</label>
+                    <input type="email" id="user_email" name="user_email" required placeholder="name@company.com" class="pro-input" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">Phone Number</label>
+                    <input type="tel" id="user_phone" name="user_phone" required placeholder="+218 ..." class="pro-input" />
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">Subject</label>
+                  <input type="text" id="subject" name="subject" required placeholder="Project Inquiry" class="pro-input" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">Message</label>
+                  <textarea id="message_text" name="message_text" rows="4" required placeholder="Tell me about your project goals and timeline..." class="pro-input"></textarea>
+                </div>
+
+                <div id="form-status" class="hidden text-sm font-medium p-4 rounded-xl"></div>
+
+                <div class="grid sm:grid-cols-2 gap-3">
+                  <button type="submit" id="submit-btn" class="w-full btn-primary !py-3 text-sm">
+                    <span id="btn-text">Send Message Now 🚀</span>
+                  </button>
+                  <button type="button" id="whatsapp-send-btn" class="w-full btn-secondary !py-3 text-sm !border-sky-400/50 !text-sky-400">
+                    <span>💬 Send via WhatsApp</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Clean Footer -->
+    <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 border-t border-blue-500/20 mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-600 to-sky-500 text-white font-mono-code font-bold text-xs flex items-center justify-center">
+          &lt;/&gt;
+        </div>
+        <span class="font-mono-code text-xs text-slate-500 dark:text-blue-200/70">© 2026 Faraj Alrmah. All rights reserved.</span>
+      </div>
+      <button id="footer-back-desk-btn" class="btn-primary !py-2 !px-4 text-xs">
+        ← Back to Interactive Desk
+      </button>
+    </footer>
+
+  </div>
+
+  <!-- ==================== IN-SITE STUDIO CMS MODAL ==================== -->
+  <div id="studio-modal" class="fixed inset-0 z-50 hidden studio-backdrop bg-black/75 flex items-center justify-center p-4 overflow-y-auto">
+
+    <!-- STEP 1: PIN Lock Dialog (Secret PIN is hidden from visitors) -->
+    <div id="studio-pin-view" class="pro-card max-w-md w-full p-8 text-center relative border-sky-400/40">
+      <button id="close-pin-modal" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300">✕</button>
+      <div class="w-14 h-14 rounded-2xl bg-blue-600/20 border border-sky-400/40 mx-auto flex items-center justify-center text-2xl mb-4">
+        🔐
+      </div>
+      <h3 class="font-display text-2xl font-extrabold mb-2">
+        Owner Studio Panel
+      </h3>
+      <p class="text-xs text-slate-500 dark:text-blue-200/80 mb-6">
+        Enter your private owner PIN to manage projects, read inbox messages, or update security settings.
       </p>
-
-      <form class="glass-panel p-8 rounded-2xl text-left max-w-lg mx-auto space-y-6">
-        <div>
-          <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Name</label>
-          <input type="text" id="name"
-            class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-            placeholder="Your Name">
-        </div>
-        <div>
-          <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email</label>
-          <input type="email" id="email"
-            class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-            placeholder="you@example.com">
-        </div>
-        <div>
-          <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Message</label>
-          <textarea id="message" rows="4"
-            class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-            placeholder="Project details..."></textarea>
-        </div>
-        <button type="submit"
-          class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 px-4 rounded-lg hover:shadow-lg hover:shadow-purple-500/30 transition-all transform hover:-translate-y-0.5">
-          Send Message
+      <form id="studio-pin-form" class="space-y-4">
+        <input type="password" id="studio-pin-input" maxlength="12" placeholder="••••" class="pro-input text-center font-mono-code text-xl tracking-[0.35em] font-bold" />
+        <p id="studio-pin-error" class="hidden font-mono-code text-xs text-rose-500">Incorrect owner PIN. Please try again.</p>
+        <button type="submit" class="w-full btn-primary !py-3 text-sm">
+          Unlock Studio Panel
         </button>
       </form>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="bg-slate-950 py-12 border-t border-slate-800">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center bg-slate-950">
-      <div class="mb-4 md:mb-0">
-        <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-          DevPortfolio
-        </span>
-        <p class="text-slate-500 text-sm mt-1">© 2026 Stephen. All rights reserved.</p>
+    <!-- STEP 2: Unlocked Studio Admin Panel (Projects + Messages Inbox + Change PIN) -->
+    <div id="studio-editor-view" class="hidden pro-card max-w-3xl w-full p-6 sm:p-8 relative max-h-[92vh] overflow-y-auto border-sky-400/40">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-blue-500/20 pb-4 mb-5">
+        <div class="flex items-center gap-2">
+          <button type="button" id="cms-tab-projects" class="nav-screen-btn active">
+            📁 Projects
+          </button>
+          <button type="button" id="cms-tab-inbox" class="nav-screen-btn">
+            <span>📬 Messages Inbox</span>
+            <span id="inbox-count-badge" class="px-2 py-0.5 rounded-full bg-sky-500 text-slate-950 font-mono-code text-[11px] font-bold">0</span>
+          </button>
+          <button type="button" id="cms-tab-security" class="nav-screen-btn">
+            🔑 Change PIN
+          </button>
+        </div>
+        <button id="close-editor-modal" class="w-8 h-8 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300">✕</button>
       </div>
-      <div class="flex space-x-6">
-        <a href="#" class="text-slate-400 hover:text-white transition-colors">GitHub</a>
-        <a href="#" class="text-slate-400 hover:text-white transition-colors">Twitter</a>
-        <a href="#" class="text-slate-400 hover:text-white transition-colors">LinkedIn</a>
+
+      <!-- TAB 1: ADD / EDIT PROJECT FORM -->
+      <div id="cms-panel-projects">
+        <div class="mb-4">
+          <h3 id="studio-form-title" class="font-display text-xl font-extrabold">
+            Add New Project
+          </h3>
+          <p class="font-mono-code text-xs text-sky-400">
+            Saves directly to public/projects.json &amp; browser storage
+          </p>
+        </div>
+
+        <form id="studio-project-form" class="space-y-4">
+          <input type="hidden" id="proj-id" />
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-400 mb-1">Project Title *</label>
+              <input type="text" id="proj-title" required placeholder="e.g. Digital Services Portal" class="pro-input" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-400 mb-1">Badge Label *</label>
+              <input type="text" id="proj-category-label" required placeholder="e.g. Full-Stack Platform" class="pro-input" />
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-400 mb-1">Category *</label>
+              <select id="proj-category" class="pro-input">
+                <option value="web development">Web Applications</option>
+                <option value="ui-ux">UI / UX Design</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-400 mb-1">Accent Color</label>
+              <select id="proj-accent" class="pro-input">
+                <option value="#2563eb">Royal Blue</option>
+                <option value="#0ea5e9">Sky Blue</option>
+                <option value="#3b82f6">Electric Blue</option>
+                <option value="#38bdf8">Cyan Glow</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-400 mb-1">Project Description *</label>
+            <textarea id="proj-desc" rows="3" required placeholder="Describe the project architecture, features, and impact..." class="pro-input"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-400 mb-1">Technologies (Comma separated) *</label>
+            <input type="text" id="proj-tags" required placeholder="React, Next.js, TypeScript, Tailwind CSS" class="pro-input" />
+          </div>
+
+          <div class="p-4 rounded-xl bg-blue-950/40 border border-blue-500/30">
+            <label class="block text-xs font-bold text-sky-300 mb-2">
+              Project Cover Image (Upload File or Generate Blue Cover)
+            </label>
+            <div class="grid sm:grid-cols-12 gap-4 items-center">
+              <div class="sm:col-span-8 space-y-2">
+                <input type="text" id="proj-image-url" placeholder="Image URL or upload file..." class="pro-input !py-2 font-mono-code text-xs" />
+                <div class="flex flex-wrap items-center gap-2">
+                  <label class="btn-secondary !py-1.5 !px-3 text-xs cursor-pointer">
+                    📁 Upload Image
+                    <input type="file" id="proj-image-file" accept="image/*" class="hidden" />
+                  </label>
+                  <button type="button" id="generate-cover-btn" class="btn-secondary !py-1.5 !px-3 text-xs !text-sky-400">
+                    ✨ Auto-Generate Cover
+                  </button>
+                </div>
+              </div>
+              <div class="sm:col-span-4">
+                <img id="proj-image-preview" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNTAwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzA1MGIxOCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzBhMTkzNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwNzEzMjkiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJsdWVHbG93IiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMyNTYzZWIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMGVhNWU5Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJnbGFzcyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMTQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMDMiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8cGF0dGVybiBpZD0iZ3JpZEJsdWUiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxwYXRoIGQ9Ik0gNDAgMCBMIDAgMCAwIDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiMzYjgyZjYiIHN0cm9rZS13aWR0aD0iMC43IiBzdHJva2Utb3BhY2l0eT0iMC4xOCIvPgogICAgPC9wYXR0ZXJuPgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0idXJsKCNncmlkQmx1ZSkiLz4KICA8Y2lyY2xlIGN4PSI2NDAiIGN5PSIxMjAiIHI9IjExMCIgZmlsbD0iIzI1NjNlYiIgZmlsbC1vcGFjaXR5PSIwLjIyIi8+CiAgPGNpcmNsZSBjeD0iMTYwIiBjeT0iMzkwIiByPSIxMzAiIGZpbGw9IiMwZWE1ZTkiIGZpbGwtb3BhY2l0eT0iMC4xOCIvPgogIDxyZWN0IHg9IjExOCIgeT0iNzgiIHdpZHRoPSI1ODAiIGhlaWdodD0iMzYwIiByeD0iMjIiIGZpbGw9IiMwMjA2MTciIHN0cm9rZT0iIzNiODJmNiIgc3Ryb2tlLW9wYWNpdHk9IjAuMzUiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxyZWN0IHg9IjEwMCIgeT0iNjAiIHdpZHRoPSI1ODAiIGhlaWdodD0iMzYwIiByeD0iMjIiIGZpbGw9InVybCgjZ2xhc3MpIiBzdHJva2U9IiM2MGE1ZmEiIHN0cm9rZS1vcGFjaXR5PSIwLjQ1IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cmVjdCB4PSIxMDAiIHk9IjYwIiB3aWR0aD0iNTgwIiBoZWlnaHQ9IjQ0IiByeD0iMjIiIGZpbGw9IiMwZjE3MmEiIGZpbGwtb3BhY2l0eT0iMC44OCIvPgogIDxjaXJjbGUgY3g9IjEzMCIgY3k9IjgyIiByPSI2IiBmaWxsPSIjZWY0NDQ0Ii8+CiAgPGNpcmNsZSBjeD0iMTUwIiBjeT0iODIiIHI9IjYiIGZpbGw9IiNmNTllMGIiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSI4MiIgcj0iNiIgZmlsbD0iIzNiODJmNiIvPgogIDx0ZXh0IHg9IjM5MCIgeT0iODciIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM5M2M1ZmQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPmZhcmFqYWxybWFoLmRldiDigJQgSW50ZXJhY3RpdmUgRGV2ZWxvcGVyIFBvcnRmb2xpbzwvdGV4dD4KICA8cmVjdCB4PSIxNDAiIHk9IjE0MCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSIyNCIgcng9IjEyIiBmaWxsPSIjMjU2M2ViIiBmaWxsLW9wYWNpdHk9IjAuMjUiIHN0cm9rZT0iIzNiODJmNiIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPHRleHQgeD0iMjIwIiB5PSIxNTYiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtd2VpZ2h0PSJib2xkIiBmb250LXNpemU9IjEwIiBmaWxsPSIjNjBhNWZhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5SRUFDVCDigKIgTkVYVC5KUyDigKIgVUkvVVg8L3RleHQ+CiAgPHRleHQgeD0iMTQwIiB5PSIyMDUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iODAwIiBmb250LXNpemU9IjI4IiBmaWxsPSIjZjhmYWZjIj5GYXJhaiBBbHJtYWg8L3RleHQ+CiAgPHRleHQgeD0iMTQwIiB5PSIyNDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iODAwIiBmb250LXNpemU9IjI2IiBmaWxsPSIjMzhiZGY4Ij5Gcm9udGVuZCBEZXZlbG9wZXI8L3RleHQ+CiAgPHJlY3QgeD0iMTQwIiB5PSIyNjUiIHdpZHRoPSIyMjAiIGhlaWdodD0iMTAiIHJ4PSI1IiBmaWxsPSIjMWUzYThhIi8+CiAgPHJlY3QgeD0iMTQwIiB5PSIyODUiIHdpZHRoPSIxNzAiIGhlaWdodD0iMTAiIHJ4PSI1IiBmaWxsPSIjMWUyOTNiIi8+CiAgPHJlY3QgeD0iMTQwIiB5PSIzMjUiIHdpZHRoPSIxNTAiIGhlaWdodD0iNDAiIHJ4PSIxMCIgZmlsbD0idXJsKCNibHVlR2xvdykiLz4KICA8dGV4dCB4PSIyMTUiIHk9IjM1MCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSJib2xkIiBmb250LXNpemU9IjEzIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5MSVZFIFBSRVZJRVcg4oaXPC90ZXh0PgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUxNSwgMjQ1KSI+CiAgICA8cmVjdCB4PSItNzUiIHk9Ii02NSIgd2lkdGg9IjE1MCIgaGVpZ2h0PSIxMDUiIHJ4PSIxMiIgZmlsbD0iIzBmMTcyYSIgc3Ryb2tlPSIjMzhiZGY4IiBzdHJva2Utd2lkdGg9IjIuNSIvPgogICAgPHJlY3QgeD0iLTYyIiB5PSItNTIiIHdpZHRoPSIxMjQiIGhlaWdodD0iNzgiIHJ4PSI2IiBmaWxsPSIjMWUzYThhIiBmaWxsLW9wYWNpdHk9IjAuNDUiLz4KICAgIDx0ZXh0IHg9IjAiIHk9Ii04IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXdlaWdodD0iYm9sZCIgZm9udC1zaXplPSIyNiIgZmlsbD0iIzYwYTVmYSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Jmx0Oy8mZ3Q7PC90ZXh0PgogICAgPHJlY3QgeD0iLTkwIiB5PSI0MiIgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxMiIgcng9IjYiIGZpbGw9IiMzOGJkZjgiLz4KICA8L2c+Cjwvc3ZnPgo=" alt="Preview" class="h-24 w-full object-cover rounded-lg border border-blue-700 bg-slate-950" />
+              </div>
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-400 mb-1">Live Demo URL</label>
+              <input type="url" id="proj-link" placeholder="https://..." class="pro-input" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-400 mb-1">GitHub URL</label>
+              <input type="url" id="proj-github" placeholder="https://github.com/farajnaser/..." class="pro-input" />
+            </div>
+          </div>
+
+          <div class="flex items-center justify-end gap-3 pt-4 border-t border-blue-500/20">
+            <button type="button" id="cancel-editor-btn" class="btn-secondary text-xs">
+              Cancel
+            </button>
+            <button type="submit" class="btn-primary text-xs sm:text-sm">
+              Save Project 💾
+            </button>
+          </div>
+        </form>
       </div>
+
+      <!-- TAB 2: BUILT-IN MESSAGES INBOX -->
+      <div id="cms-panel-inbox" class="hidden space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h3 class="font-display text-xl font-extrabold">Messages Inbox</h3>
+            <p class="text-xs text-sky-400">
+              All contact form messages are saved here AND forwarded for free to <strong>farajelrmahmoo@gmail.com</strong>.
+            </p>
+          </div>
+          <button type="button" id="clear-inbox-btn" class="btn-secondary !py-1.5 !px-3 text-xs !text-rose-400">
+            🗑️ Clear All
+          </button>
+        </div>
+
+        <div id="inbox-messages-list" class="space-y-3 max-h-[55vh] overflow-y-auto pr-1"></div>
+      </div>
+
+      <!-- TAB 3: CHANGE ADMIN PIN -->
+      <div id="cms-panel-security" class="hidden space-y-4">
+        <div>
+          <h3 class="font-display text-xl font-extrabold">Change Owner PIN</h3>
+          <p class="text-xs text-sky-400">
+            Update the secret PIN used to unlock this Studio Panel.
+          </p>
+        </div>
+
+        <form id="change-pin-form" class="space-y-4 max-w-md">
+          <div>
+            <label class="block text-xs font-bold text-slate-400 mb-1">New Secret PIN *</label>
+            <input type="password" id="new-pin-input" required minlength="4" maxlength="12" placeholder="Enter new PIN (e.g. 9988)" class="pro-input font-mono-code text-lg tracking-widest" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-400 mb-1">Confirm New PIN *</label>
+            <input type="password" id="confirm-pin-input" required minlength="4" maxlength="12" placeholder="Confirm new PIN" class="pro-input font-mono-code text-lg tracking-widest" />
+          </div>
+          <p id="pin-change-status" class="hidden text-xs font-bold p-3 rounded-xl"></p>
+          <button type="submit" class="btn-primary text-xs sm:text-sm">
+            Save New PIN 🔐
+          </button>
+        </form>
+      </div>
+
     </div>
-  </footer>
+
+  </div>
 
 </body>
 

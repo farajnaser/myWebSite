@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class="dark scroll-smooth" dir="ltr">
 
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="./vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>faraj | Creative Developer</title>
-  <meta name="description" content="Portfolio of a creative developer specializing in modern web experiences." />
+  <title>Faraj Alrmah | Frontend Web Developer</title>
+  <meta name="description" content="Official Portfolio of Faraj Alrmah — Frontend Web Developer specializing in modern web applications, React, Next.js, TypeScript, and interactive UI/UX." />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -14,629 +14,1056 @@
       darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: {
-            'sans': ['Inter', 'sans-serif'],
-          },
           colors: {
-            'charcoal-bg': '#000000',
-            'charcoal-section': '#0f0f0f',
-            'forest-green': '#16a34a',
-            'forest-dark': '#15803d',
-            'glass-white': 'rgba(255, 255, 255, 0.03)',
-          },
-          backgroundImage: {
-            'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-          },
-          animation: {
-            'float': 'float 6s ease-in-out infinite',
-          },
-          keyframes: {
-            float: {
-              '0%, 100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(-20px)' },
-            }
+            'royal-blue': '#2563eb',
+            'sky-electric': '#0ea5e9'
           }
         }
       }
     }
   </script>
   <link rel="stylesheet" href="./style.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js"
+      }
+    }
+  </script>
 </head>
 
-<body class="antialiased selection:bg-forest-green selection:text-white transition-colors duration-300">
+<body class="desk-controller-mode antialiased selection:bg-blue-600 selection:text-white">
 
-  <!-- Navigation -->
-  <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300" id="navbar">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex-shrink-0 cursor-pointer">
-          <span class="text-2xl font-bold text-gray-900 dark:text-white">
-            &lt;Faraj/Alrmah &gt;
+  <!-- ==================== CLEAN SAPPHIRE TOP NAVIGATION BAR ==================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 pro-navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between gap-4">
+
+      <!-- Brand Identity -->
+      <button id="brand-desk-btn" class="flex items-center gap-3 text-left cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-sky-500 text-white font-mono-code font-bold text-xs flex items-center justify-center shadow-md border border-sky-300/40">
+          &lt;/&gt;
+        </div>
+        <div>
+          <span class="font-display font-extrabold text-base tracking-tight block leading-none">
+            Faraj <span class="text-sky-400">Alrmah</span>
+          </span>
+          <span class="font-mono-code text-[10px] text-sky-400/80 block mt-0.5">
+            Frontend Web Developer
           </span>
         </div>
+      </button>
 
-        <div class="hidden md:block">
-          <div class="ml-10 flex items-baseline space-x-8">
-            <a href="#home"
-              class="text-gray-600 dark:text-gray-300 hover:text-forest-green dark:hover:text-forest-green px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
-            <a href="#about"
-              class="text-gray-600 dark:text-gray-300 hover:text-forest-green dark:hover:text-forest-green px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
-            <a href="#services"
-              class="text-gray-600 dark:text-gray-300 hover:text-forest-green dark:hover:text-forest-green px-3 py-2 rounded-md text-sm font-medium transition-colors">Services</a>
-            <a href="#projects"
-              class="text-gray-600 dark:text-gray-300 hover:text-forest-green dark:hover:text-forest-green px-3 py-2 rounded-md text-sm font-medium transition-colors">Projects</a>
+      <!-- Clean Screen Navigation Pills -->
+      <nav class="hidden lg:flex items-center gap-1.5">
+        <button data-screen-nav="desk" class="nav-screen-btn active">Desk</button>
+        <button data-screen-nav="projects" class="nav-screen-btn">Projects</button>
+        <button data-screen-nav="about" class="nav-screen-btn">About</button>
+        <button data-screen-nav="services" class="nav-screen-btn">Services</button>
+        <button data-screen-nav="skills" class="nav-screen-btn">Skills</button>
+        <button data-screen-nav="arcade" class="nav-screen-btn">Break Room</button>
+        <button data-screen-nav="contact" class="nav-screen-btn">Contact</button>
+      </nav>
 
-            <!-- Dark Mode Toggle Desktop -->
-            <button id="theme-toggle"
-              class="p-2 rounded-lg bg-white/5 text-gray-400 hover:text-forest-green dark:hover:text-forest-green transition-all"
-              title="Toggle Theme">
-              <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-              </svg>
-              <svg id="theme-toggle-light-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-                  fill-rule="evenodd" clip-rule="evenodd"></path>
-              </svg>
-            </button>
+      <!-- Essential Action Controls Only -->
+      <div class="flex items-center gap-2">
+        <button id="top-back-desk-btn" class="hidden nav-mode-btn">
+          <span>←</span>
+          <span>Back to Desk</span>
+        </button>
 
-            <a href="#contact"
-              class="px-4 py-2 rounded-md bg-forest-green text-white text-sm font-bold transition-all shadow-lg hover:bg-forest-dark hover:-translate-y-0.5">Hire
-              Me</a>
-          </div>
-        </div>
+        <button id="toggle-full-site-btn" class="nav-mode-btn">
+          <span id="full-site-btn-label">Full Website</span>
+        </button>
 
-        <!-- Mobile menu button -->
-        <div class="-mr-2 flex md:hidden">
-          <button type="button"
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 dark:text-slate-400 hover:text-forest-green dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-700 focus:outline-none"
-            aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-btn">
-            <span class="sr-only">Open main menu</span>
-            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
+        <button id="open-studio-btn" class="nav-cms-btn" title="Add or Edit Projects (Ctrl+Shift+A)">
+          <span>+ Manage Work</span>
+          <span id="studio-status-dot" class="w-2 h-2 rounded-full bg-sky-400"></span>
+        </button>
+
+        <button id="theme-toggle" class="nav-tool-btn" title="Toggle Dark/Light Mode">
+          <span id="theme-icon">☀️</span>
+        </button>
+
+        <button id="mobile-menu-btn" class="lg:hidden nav-tool-btn !p-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
       </div>
     </div>
 
     <!-- Mobile Menu -->
-    <div class="md:hidden hidden bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800"
-      id="mobile-menu">
-      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <a href="#home"
-          class="text-gray-600 dark:text-gray-300 hover:text-forest-green dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
-        <a href="#about"
-          class="text-gray-600 dark:text-gray-300 hover:text-forest-green dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
-        <a href="#services"
-          class="text-gray-600 dark:text-gray-300 hover:text-forest-green dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium">Services</a>
-        <a href="#projects"
-          class="text-gray-600 dark:text-gray-300 hover:text-forest-green dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-blue-800/60 bg-slate-950/95 px-6 py-4">
+      <div class="grid grid-cols-2 gap-2">
+        <button data-screen-nav="desk" class="nav-screen-btn justify-center">Desk</button>
+        <button data-screen-nav="projects" class="nav-screen-btn justify-center">Projects</button>
+        <button data-screen-nav="about" class="nav-screen-btn justify-center">About</button>
+        <button data-screen-nav="services" class="nav-screen-btn justify-center">Services</button>
+        <button data-screen-nav="skills" class="nav-screen-btn justify-center">Skills</button>
+        <button data-screen-nav="arcade" class="nav-screen-btn justify-center">Break Room</button>
+        <button data-screen-nav="contact" class="nav-screen-btn justify-center col-span-2">Contact</button>
+      </div>
+    </div>
+  </header>
 
-        <!-- Dark Mode Toggle Mobile -->
-        <button id="theme-toggle-mobile"
-          class="flex items-center justify-center w-full p-2 rounded-lg bg-white/5 text-gray-400 hover:text-forest-green dark:hover:text-forest-green transition-all"
-          title="Toggle Theme">
-          <svg id="theme-toggle-dark-icon-mobile" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-          </svg>
-          <svg id="theme-toggle-light-icon-mobile" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-              fill-rule="evenodd" clip-rule="evenodd"></path>
-          </svg>
+  <!-- ====================================================================== -->
+  <!-- MASTER INTERACTIVE DESK STAGE (ZERO OVERLAPPING CARDS OR DOCKS!)       -->
+  <!-- ====================================================================== -->
+  <main id="desk-master-stage">
+
+    <!-- Clean Non-Overlapping Top Strip (Sits ABOVE the Desk Canvas, Never Covers Models) -->
+    <div class="desk-header-strip">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
+        <div class="flex items-center gap-3 text-white">
+          <span class="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
+          <span class="font-display font-bold">Faraj Alrmah's Interactive Desk</span>
+          <span class="hidden md:inline text-blue-200/80">
+            — Click any item on the desk (Monitors, Keyboard, ID Frame, Client Pad, Arcade, Phone, or Coffee) to open its screen.
+          </span>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span id="energy-status-badge" class="font-mono-code text-xs text-sky-300">
+            ☕ Coffee Today: 3 Cups (Focus 100%)
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Playful Blue Toast Notification (When clicking Coffee or Lamp on the Desk) -->
+    <div id="desk-toast" class="hidden fixed top-20 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-700 to-sky-600 text-white font-bold text-xs sm:text-sm shadow-2xl border border-sky-300 flex items-center gap-2">
+      <span id="desk-toast-icon">☕</span>
+      <span id="desk-toast-text">Fresh espresso poured! Coding velocity boosted by 200%!</span>
+    </div>
+
+    <!-- Unobstructed Desk Canvas Area -->
+    <div id="desk-canvas-wrap">
+      <div id="desk-hover-tooltip">Click to Open Screen</div>
+      <canvas id="desk-canvas"></canvas>
+    </div>
+
+  </main>
+
+  <!-- ====================================================================== -->
+  <!-- DEDICATED SCREENS CONTAINER (OPAQUE BACKGROUND, ZERO VISUAL OVERLAP)   -->
+  <!-- ====================================================================== -->
+  <div id="screens-container" class="hidden-overlay">
+
+    <!-- Clean Screen Control Bar (Only Back to Desk + Screen Title + Full Website Toggle) -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+      <div class="pro-card p-4 border-blue-500/35 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <button id="screen-back-desk-btn" class="nav-mode-btn !py-2 !px-4 text-xs sm:text-sm">
+            <span>←</span>
+            <span>Back to Desk</span>
+          </button>
+          <div class="h-5 w-px bg-blue-500/30 hidden sm:block"></div>
+          <div class="flex items-center gap-2">
+            <span id="active-screen-icon" class="text-lg">🖥️</span>
+            <span id="active-screen-title" class="font-display font-extrabold text-sm sm:text-base text-blue-600 dark:text-sky-400">
+              Featured Projects &amp; Case Studies
+            </span>
+          </div>
+        </div>
+
+        <button id="screen-show-all-btn" class="btn-secondary !py-2 !px-3.5 text-xs font-bold !border-sky-500/40 !text-sky-400">
+          View Full Website
         </button>
-
-        <a href="#contact"
-          class="block px-3 py-2 rounded-md text-base font-bold bg-forest-green text-white shadow-lg">Hire
-          Me</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-    <!-- Background decorators (Simplified to avoid "AI" feel) -->
-    <div class="absolute top-20 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-amber-500/5 blur-3xl"></div>
-
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-      <div class="text-center reveal">
-        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
-          <span class="block text-gray-900 dark:text-white">Engineering</span>
-          <span class="block text-forest-green">Web Developer</span>
-        </h1>
-        <p class="max-w-2xl mx-auto text-xl text-gray-600 dark:text-gray-400 mb-10 leading-relaxed">
-          Crafting high-performance web solutions with <span
-            class="text-forest-green font-semibold italic">precision</span> and <span
-            class="text-gray-900 dark:text-white font-semibold italic">purpose</span>.
-        </p>
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <a href="#projects"
-            class="px-8 py-4 rounded-xl bg-forest-green text-white font-bold hover:bg-forest-dark transition-all shadow-lg">View
-            Work</a>
-          <a href="#contact"
-            class="px-8 py-4 rounded-xl glass-panel border border-black/5 dark:border-white/10 text-gray-900 dark:text-white font-bold hover:bg-gray-100 dark:hover:bg-white/5 transition-all">Get
-            in
-            Touch</a>
-        </div>
       </div>
     </div>
 
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-      <div class="w-6 h-10 border-2 border-forest-green/30 rounded-full flex justify-center p-1">
-        <div class="w-1 h-2 bg-forest-green rounded-full"></div>
-      </div>
-    </div>
-  </section>
+    <!-- ==================================================================== -->
+    <!-- SCREEN 01: PROJECTS & CASE STUDIES (OPENED BY MONITORS 🖥️)          -->
+    <!-- ==================================================================== -->
+    <section id="projects" class="screen-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-  <!-- About Me Section -->
-  <section id="about" class="py-24 bg-gray-50 dark:bg-charcoal-section transition-colors duration-300 reveal">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
-        <!-- Left: Code Terminal with Photo -->
-        <div class="relative group mb-12 lg:mb-0 w-full max-w-[450px] mx-auto">
-          <div
-            class="relative bg-white dark:bg-black/40 border border-black/5 dark:border-white/5 p-8 pt-16 rounded-2xl min-h-[440px] flex flex-col items-center justify-center shadow-xl">
-
-            <!-- VS Code Terminal Header Look -->
-            <div
-              class="absolute top-0 left-0 right-0 h-10 bg-gray-100 dark:bg-white/5 border-b border-black/5 dark:border-white/5 rounded-t-2xl flex items-center px-4 gap-2">
-              <div class="w-3 h-3 rounded-full bg-gray-600"></div>
-              <div class="w-3 h-3 rounded-full bg-gray-600"></div>
-              <div class="w-3 h-3 rounded-full bg-gray-600"></div>
-              <span class="ml-2 text-[10px] text-gray-500 font-mono">faraj_alrmah.js — Visual Studio Code</span>
+        <div class="pro-card p-6 sm:p-8 mb-8 border-blue-500/30">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div>
+              <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
+                01 // SELECTED WORK
+              </span>
+              <h2 class="font-display text-2xl sm:text-3xl font-extrabold mb-2">
+                Featured Projects &amp; Web Platforms
+              </h2>
+              <p class="text-slate-600 dark:text-blue-100/80 max-w-2xl text-sm sm:text-base">
+                Real-world applications built from scratch with clean code and plenty of espresso ☕. Try live demos, clap for your favorites 👏, or add new projects directly inside the site.
+              </p>
             </div>
 
-            <!-- Integrated Photo -->
-            <div class="flex flex-col items-center mb-8">
-              <div class="relative">
-                <img src="dist/assets/images/farajimage.png" alt="Faraj Alrmah"
-                  class="relative w-32 h-32 rounded-full object-cover border-2 border-white/10 shadow-xl" />
-              </div>
-            </div>
-
-            <!-- JS Code Block -->
-            <div class="text-left font-mono text-sm space-y-2 w-full max-w-[280px]">
-              <p class="text-forest-green">const <span class="text-blue-500">developer</span> = {</p>
-              <p class="ml-6 text-gray-500 dark:text-gray-400">name: <span
-                  class="text-green-600 dark:text-green-300">'Faraj Alrmah'</span>,</p>
-              <p class="ml-6 text-gray-500 dark:text-gray-400">focus: <span
-                  class="text-green-600 dark:text-green-300">'web development'</span>,</p>
-              <p class="ml-6 text-gray-500 dark:text-gray-400">status: <span
-                  class="text-green-600 dark:text-green-300">'Ready for hire'</span></p>
-              <p class="text-forest-green">};</p>
-            </div>
-
-            <!-- VS Code Branding Badge -->
-            <div
-              class="absolute -bottom-6 -right-6 glass-panel p-4 rounded-2xl border border-white/20 shadow-2xl transition-all group-hover:scale-110 group-hover:-translate-y-2 duration-500 z-10">
-              <div class="bg-black/40 backdrop-blur-md p-2 rounded-xl">
-                <img src="dist/assets/images/vscode-logo.png" alt="VS Code" class="w-10 h-10 object-contain" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right: Content -->
-        <div class="lg:max-w-lg">
-          <h2 class="text-base font-semibold leading-7 text-forest-green uppercase tracking-widest">About Me</h2>
-          <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">Engineering
-            Quality
-            Digital Experiences</p>
-          <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
-            Passionate web developer with a keen eye for detail and a commitiment to deliverying high-performance,
-            scalable, and user-centric web applications. I specialize in the JavaScript ecosystem, focusing on
-            creating seamless user interfaces with React and Next.js. My goal is to deliver pixel-perfect, accessible,
-            and high-performance frontend code.
-          </p>
-
-          <div class="flex flex-wrap gap-3">
-            <span
-              class="px-5 py-2 rounded-full bg-forest-green/10 border border-forest-green/20 text-forest-green text-sm font-medium transition-all cursor-default">JavaScript</span>
-            <span
-              class="px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium transition-all cursor-default">React</span>
-            <span
-              class="px-5 py-2 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-sm font-medium transition-all cursor-default">Tailwind
-              CSS</span>
-            <span
-              class="px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium transition-all cursor-default">TypeScript</span>
-            <span
-              class="px-5 py-2 rounded-full bg-forest-green/10 border border-forest-green/20 text-forest-green text-sm font-medium transition-all cursor-default">Next.js</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills & Expertise Section -->
-  <section id="services" class="py-20 bg-white dark:bg-charcoal-bg transition-colors duration-300 reveal">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold">
-          <span class="text-gray-900 dark:text-white">Skills</span> <span class="text-forest-green">& Expertise</span>
-        </h2>
-      </div>
-
-      <!-- Skills Cards -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-        <!-- Modern JS Card -->
-        <div
-          class="bg-gray-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/5 p-8 rounded-2xl hover:border-forest-green transition-all duration-300 group shadow-sm hover:shadow-md">
-          <div class="flex flex-col items-center text-center">
-            <div class="text-forest-green mb-6 group-hover:scale-110 transition-transform">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-              </svg>
-            </div>
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Modern JS</h3>
-            <ul class="text-gray-600 dark:text-gray-400 space-y-3 text-left w-full">
-
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-forest-green"></span> Async
-                Programming</li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-forest-green"></span> Design
-                Patterns</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Development Card -->
-        <div
-          class="bg-gray-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/5 p-8 rounded-2xl hover:border-blue-500 transition-all duration-300 group shadow-sm hover:shadow-md">
-          <div class="flex flex-col items-center text-center">
-            <div class="text-blue-500 mb-6 group-hover:scale-110 transition-transform">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-              </svg>
-            </div>
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">web development</h3>
-            <ul class="text-gray-600 dark:text-gray-400 space-y-3 text-left w-full">
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> HTML</li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> CSS</li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Tailwind
-                CSS</li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> JavaScript
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Optimization Card -->
-        <div
-          class="bg-gray-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/5 p-8 rounded-2xl hover:border-blue-600 transition-all duration-300 group shadow-sm hover:shadow-md">
-          <div class="flex flex-col items-center text-center">
-            <div class="text-blue-600 mb-6 group-hover:scale-110 transition-transform">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Optimization</h3>
-            <ul class="text-gray-600 dark:text-gray-400 space-y-3 text-left w-full">
-
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span> Web
-                Performance</li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span> High
-                Availability</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Workflow Card -->
-        <div
-          class="bg-gray-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/5 p-8 rounded-2xl hover:border-teal-500 transition-all duration-300 group shadow-sm hover:shadow-md">
-          <div class="flex flex-col items-center text-center">
-            <div class="text-teal-500 mb-6 group-hover:scale-110 transition-transform">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M11 4a2 2 0 114 0v1a2 2 0 002 2h1a2 2 0 110 4h-1a2 2 0 00-2 2v1a2 2 0 11-4 0v-1a2 2 0 00-2-2H7a2 2 0 110-4h1a2 2 0 002-2V4z" />
-              </svg>
-            </div>
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Workflow</h3>
-            <ul class="text-gray-600 dark:text-gray-400 space-y-3 text-left w-full">
-
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span> Git
-                Strategy</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tools sub-section -->
-      <div class="reveal mt-20 border-t border-black/5 dark:border-white/5 pt-16">
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">Tools & Technologies</h3>
-        <div class="flex flex-wrap gap-4">
-          <span
-            class="px-6 py-2 rounded-full border border-black/5 dark:border-white/5 text-gray-600 dark:text-gray-400 hover:border-forest-green hover:text-forest-green transition-colors cursor-default bg-gray-50 dark:bg-transparent">Photoshop</span>
-          <span
-            class="px-6 py-2 rounded-full border border-black/5 dark:border-white/5 text-gray-600 dark:text-gray-400 hover:border-forest-green hover:text-forest-green transition-colors cursor-default bg-gray-50 dark:bg-transparent">HTML</span>
-          <span
-            class="px-6 py-2 rounded-full border border-black/5 dark:border-white/5 text-gray-600 dark:text-gray-400 hover:border-forest-green hover:text-forest-green transition-colors cursor-default bg-gray-50 dark:bg-transparent">Tailwind
-            CSS</span>
-          <span
-            class="px-6 py-2 rounded-full border border-black/5 dark:border-white/5 text-gray-600 dark:text-gray-400 hover:border-forest-green hover:text-forest-green transition-colors cursor-default bg-gray-50 dark:bg-transparent">Ai
-            Tools</span>
-          <span
-            class="px-6 py-2 rounded-full border border-black/5 dark:border-white/5 text-gray-600 dark:text-gray-400 hover:border-forest-green hover:text-forest-green transition-colors cursor-default bg-gray-50 dark:bg-transparent">CSS</span>
-          <span
-            class="px-6 py-2 rounded-full border border-black/5 dark:border-white/5 text-gray-600 dark:text-gray-400 hover:border-forest-green hover:text-forest-green transition-colors cursor-default bg-gray-50 dark:bg-transparent">Git</span>
-          <span
-            class="px-6 py-2 rounded-full border border-black/5 dark:border-white/5 text-gray-600 dark:text-gray-400 hover:border-forest-green hover:text-forest-green transition-colors cursor-default bg-gray-50 dark:bg-transparent">JavaScript</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section id="projects"
-    class="py-24 bg-gray-100 dark:bg-zinc-900/30 transition-colors duration-300 reveal border-y border-black/5 dark:border-white/5">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-        <div>
-          <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Featured <span
-              class="text-forest-green">Projects</span></h2>
-          <p class="text-gray-600 dark:text-gray-400 max-w-xl">
-            A curated selection of my recent work, ranging from complex web applications to interactive user interfaces.
-          </p>
-        </div>
-        <div class="flex flex-wrap gap-2 reveal">
-          <button data-filter="all"
-            class="filter-btn px-6 py-2 rounded-xl border border-black/5 dark:border-white/5 hover:border-forest-green transition-all active bg-forest-green text-white">All</button>
-          <button data-filter="web development"
-            class="filter-btn px-6 py-2 rounded-xl border border-black/5 dark:border-white/5 hover:border-forest-green transition-all text-gray-600 dark:text-gray-400">Development</button>
-          <button data-filter="ui-ux"
-            class="filter-btn px-6 py-2 rounded-xl border border-black/5 dark:border-white/5 hover:border-forest-green transition-all text-gray-600 dark:text-gray-400">UI/UX</button>
-        </div>
-      </div>
-
-      <!-- Projects Grid -->
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" id="projects-grid"></div>
-
-      <!-- Pagination -->
-      <div class="mt-16 flex justify-center items-center gap-3" id="project-pagination"></div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact"
-    class="py-24 relative overflow-hidden bg-white dark:bg-charcoal-bg transition-colors duration-300">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-      <div class="lg:grid lg:grid-cols-2 lg:gap-16">
-        <!-- Contact Info -->
-        <div class="reveal mb-12 lg:mb-0">
-          <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-6">Let's <span
-              class="text-forest-green">Connect</span></h2>
-          <p class="text-gray-600 dark:text-gray-400 text-lg mb-10 leading-relaxed">
-            I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
-          </p>
-
-          <div class="grid gap-6">
-            <!-- Email Card -->
-            <div
-              class="glass-panel p-6 rounded-2xl group border border-black/5 dark:border-white/5 hover:border-forest-green transition-all shadow-sm">
-              <div class="flex items-start gap-4">
-                <div class="text-forest-green mt-1 group-hover:scale-110 transition-transform">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="text-gray-900 dark:text-white font-bold mb-1">Email</h4>
-                  <p class="text-gray-500 text-sm mb-3">farajelrmahmoo@gmail.com</p>
-                  <a href="mailto:farajelrmahmoo@gmail.com"
-                    class="text-[10px] font-black uppercase tracking-widest text-forest-green hover:underline">Send
-                    Email via Gmail</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Call Card -->
-            <div
-              class="glass-panel p-6 rounded-2xl group border border-black/5 dark:border-white/5 hover:border-forest-green transition-all shadow-sm">
-              <div class="flex items-start gap-4">
-                <div class="text-forest-green mt-1 group-hover:scale-110 transition-transform">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="text-gray-900 dark:text-white font-bold mb-1">Call</h4>
-                  <p class="text-gray-500 text-sm mb-3">+218 922613675</p>
-                  <a href="tel:+218922613675"
-                    class="text-[10px] font-black uppercase tracking-widest text-forest-green hover:underline">Call
-                    Now</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Location Card -->
-            <div
-              class="glass-panel p-6 rounded-2xl group border border-black/5 dark:border-white/5 hover:border-forest-green transition-all shadow-sm">
-              <div class="flex items-start gap-4">
-                <div class="text-forest-green mt-1 group-hover:scale-110 transition-transform">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="text-gray-900 dark:text-white font-bold mb-1">Location</h4>
-                  <p class="text-gray-500 text-sm mb-3">Tripoli, Libya</p>
-                  <span class="text-[10px] font-black uppercase tracking-widest text-forest-green">Available for Remote
-                    Work</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Socials in Contact -->
-          <div class="mt-12">
-            <h4 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-[0.3em] mb-6">Follow Me</h4>
-            <div class="flex gap-4">
-              <a href="https://linkedin.com/in/farajalrmah" target="_blank"
-                class="w-10 h-10 rounded-lg bg-gray-100 dark:bg-white/5 border border-black/5 dark:border-white/5 flex items-center justify-center text-gray-500 hover:text-forest-green transition-all shadow-sm">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                </svg>
-              </a>
-              <a href="https://github.com/farajnaser" target="_blank"
-                class="w-10 h-10 rounded-lg bg-gray-100 dark:bg-white/5 border border-black/5 dark:border-white/5 flex items-center justify-center text-gray-500 hover:text-forest-green transition-all shadow-sm">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Contact Form -->
-        <div class="reveal">
-          <div
-            class="glass-panel p-8 rounded-2xl border border-black/5 dark:border-white/5 relative overflow-hidden shadow-lg">
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">Send me a message</h3>
-            <form id="contact-form" class="space-y-6">
-              <div class="grid grid-cols-2 gap-6">
-                <div>
-                  <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">First Name</label>
-                  <input type="text" id="first_name" name="first_name" required
-                    class="w-full bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-forest-green transition-all" />
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Last Name</label>
-                  <input type="text" id="last_name" name="last_name" required
-                    class="w-full bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-forest-green transition-all" />
-                </div>
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Email</label>
-                <input type="email" id="user_email" name="user_email" placeholder="example@gmail.com" required
-                  class="w-full bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-forest-green transition-all" />
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Phone Number</label>
-                <input type="tel" id="user_phone" name="user_phone" placeholder="+218 ..." required
-                  class="w-full bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-forest-green transition-all" />
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Subject</label>
-                <input type="text" id="subject" name="subject" placeholder="Project Inquiry" required
-                  class="w-full bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-forest-green transition-all" />
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Message</label>
-                <textarea id="message_text" name="message_text" rows="4" placeholder="Tell me about your project..."
-                  required
-                  class="w-full bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-forest-green transition-all"></textarea>
-              </div>
-
-              <!-- Integration with formspree logic in main.js will use this status div -->
-              <div id="form-status" class="hidden text-sm font-medium p-4 rounded-xl"></div>
-
-              <button type="submit" id="submit-btn"
-                class="w-full bg-forest-green text-white font-bold py-4 rounded-xl shadow-lg hover:bg-forest-dark hover:-translate-y-0.5 transition-all group overflow-hidden relative">
-                <span class="relative z-10 flex items-center justify-center gap-2">
-                  <span id="btn-text">Send Message</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform"
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-                  </svg>
-                </span>
+            <div class="flex flex-wrap items-center gap-2">
+              <button data-filter="all" class="filter-btn btn-primary !py-2 !px-4 text-xs">
+                All Projects
               </button>
-            </form>
+              <button data-filter="web development" class="filter-btn btn-secondary !py-2 !px-4 text-xs">
+                Web Apps
+              </button>
+              <button data-filter="ui-ux" class="filter-btn btn-secondary !py-2 !px-4 text-xs">
+                UI / UX
+              </button>
+              <button id="projects-add-btn" class="btn-secondary !py-2 !px-4 text-xs !border-sky-400/50 !text-sky-400">
+                + Add / Edit Work
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Footer -->
-  <footer
-    class="bg-gray-50 dark:bg-black py-20 border-t border-black/5 dark:border-white/5 transition-colors duration-300">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="grid md:grid-cols-4 gap-12 mb-16">
-        <!-- Brand -->
-        <div class="col-span-2">
-          <div class="flex-shrink-0 mb-6">
-            <span class="text-2xl font-bold text-gray-900 dark:text-white">&lt;Faraj/Alrmah &gt;</span>
+        <!-- Studio CMS Active Toolbar -->
+        <div id="studio-active-banner" class="hidden pro-card p-5 mb-8 border-sky-400/50 flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-600/20 border border-sky-400/40 flex items-center justify-center text-lg">
+              ⚙️
+            </div>
+            <div>
+              <h4 class="font-display font-bold text-sm sm:text-base">Studio CMS Unlocked</h4>
+              <p class="font-mono-code text-xs text-sky-400" id="studio-sync-status">
+                Add, edit, reorder, or delete projects below. Changes save automatically to public/projects.json.
+              </p>
+            </div>
           </div>
-          <p class="text-gray-600 dark:text-gray-400 max-w-sm mb-8">
-            Frontend Web Developer passionate about creating beautiful, functional digital experiences.
+          <div class="flex flex-wrap items-center gap-2">
+            <button id="banner-new-project-btn" class="btn-primary !py-2 !px-3.5 text-xs">
+              + New Project
+            </button>
+            <button id="export-projects-btn" class="btn-secondary !py-2 !px-3.5 text-xs">
+              Export JSON
+            </button>
+            <label class="btn-secondary !py-2 !px-3.5 text-xs cursor-pointer">
+              Import JSON
+              <input type="file" id="import-projects-input" accept=".json" class="hidden" />
+            </label>
+            <button id="lock-studio-btn" class="btn-secondary !py-2 !px-3.5 text-xs !text-rose-400">
+              Lock CMS
+            </button>
+          </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" id="projects-grid"></div>
+
+        <!-- Pagination -->
+        <div class="mt-8 flex justify-center items-center gap-2" id="project-pagination"></div>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SCREEN 02: ABOUT FARAJ & CAREER TIMELINE (OPENED BY PORTRAIT 🖼️)    -->
+    <!-- ==================================================================== -->
+    <section id="about" class="screen-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Executive Benchmarks -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div class="pro-card p-5">
+            <div class="font-mono-code text-xs text-sky-400 uppercase font-bold mb-1">PERFORMANCE</div>
+            <div class="font-display font-extrabold text-3xl text-blue-600 dark:text-white">99+</div>
+            <div class="text-xs text-slate-500 dark:text-blue-200/70 mt-1">Fast Lighthouse &amp; Web Vitals</div>
+          </div>
+          <div class="pro-card p-5">
+            <div class="font-mono-code text-xs text-sky-400 uppercase font-bold mb-1">RESPONSIVE</div>
+            <div class="font-display font-extrabold text-3xl text-blue-600 dark:text-white">100%</div>
+            <div class="text-xs text-slate-500 dark:text-blue-200/70 mt-1">Mobile, Tablet &amp; Desktop Precision</div>
+          </div>
+          <div class="pro-card p-5">
+            <div class="font-mono-code text-xs text-sky-400 uppercase font-bold mb-1">ARCHITECTURE</div>
+            <div class="font-display font-extrabold text-3xl text-blue-600 dark:text-white">Clean</div>
+            <div class="text-xs text-slate-500 dark:text-blue-200/70 mt-1">Maintainable &amp; Scalable Code</div>
+          </div>
+          <div class="pro-card p-5">
+            <div class="font-mono-code text-xs text-sky-400 uppercase font-bold mb-1">LOCATION</div>
+            <div class="font-display font-extrabold text-3xl text-blue-600 dark:text-white">Global</div>
+            <div class="text-xs text-slate-500 dark:text-blue-200/70 mt-1">Tripoli, Libya • Remote Worldwide</div>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-start">
+
+          <!-- Left Profile + Fun Facts -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="pro-card p-7">
+              <div class="flex items-center gap-4 mb-6">
+                <img src="./images/farajimage.png" alt="Faraj Alrmah" class="w-20 h-20 rounded-2xl object-cover border-2 border-blue-500 shadow-lg shrink-0" />
+                <div>
+                  <span class="font-mono-code text-xs text-sky-400 font-bold uppercase tracking-wider block">DEVELOPER PROFILE</span>
+                  <h2 class="font-display text-2xl font-extrabold">Faraj Alrmah</h2>
+                  <p class="text-xs text-slate-500 dark:text-blue-200/80 mt-0.5">
+                    Frontend Web Developer &amp; UI/UX Specialist
+                  </p>
+                </div>
+              </div>
+
+              <p class="text-sm sm:text-base text-slate-600 dark:text-blue-100/85 leading-relaxed mb-6">
+                Passionate frontend developer turning complex ideas into fast, intuitive, and memorable digital products. I specialize in building modern interfaces using React, Next.js, TypeScript, and Tailwind CSS that help companies stand out and users enjoy every click.
+              </p>
+
+              <div class="rounded-xl bg-slate-950 border border-blue-900/60 p-4 font-mono-code text-xs space-y-1.5 mb-6">
+                <div class="flex items-center justify-between text-sky-400 pb-2 mb-2 border-b border-blue-900/50">
+                  <span>faraj_profile.ts</span>
+                  <img src="./images/vscode-logo.png" alt="VS Code" class="w-4 h-4 object-contain" />
+                </div>
+                <p><span class="text-sky-400">const</span> <span class="text-blue-300">faraj</span> = {</p>
+                <p class="pl-4 text-slate-300">name: <span class="text-sky-300">'Faraj Alrmah'</span>,</p>
+                <p class="pl-4 text-slate-300">location: <span class="text-sky-300">'Tripoli, Libya'</span>,</p>
+                <p class="pl-4 text-slate-300">stack: [<span class="text-blue-400">'React'</span>, <span class="text-blue-400">'Next.js'</span>, <span class="text-blue-400">'TypeScript'</span>],</p>
+                <p class="pl-4 text-slate-300">coffeeFuel: <span class="text-amber-300">'100% Ready ☕'</span></p>
+                <p>};</p>
+              </div>
+
+              <div class="flex flex-wrap gap-3">
+                <button data-screen-nav="contact" class="flex-1 btn-primary text-xs sm:text-sm">
+                  Hire Me / Discuss a Project
+                </button>
+                <a href="https://github.com/farajnaser" target="_blank" class="btn-secondary text-xs sm:text-sm font-mono-code">
+                  GitHub ↗
+                </a>
+              </div>
+            </div>
+
+            <!-- Playful Fun Facts Card -->
+            <div class="pro-card p-6 border-sky-500/30">
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-display font-bold text-sm text-sky-400">
+                  🎲 Behind the Code (Fun Facts)
+                </span>
+                <button id="next-fun-fact-btn" class="px-3 py-1 rounded-lg bg-blue-600 hover:bg-sky-500 text-white text-xs font-bold transition-colors cursor-pointer">
+                  Next Fact ↻
+                </button>
+              </div>
+              <p id="fun-fact-display" class="text-sm text-slate-700 dark:text-blue-100 leading-relaxed p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/20">
+                "I believe a great website should load in under a second—or before the first sip of espresso cools down! ☕⚡"
+              </p>
+            </div>
+          </div>
+
+          <!-- Right Career & Academic Journey -->
+          <div class="lg:col-span-7">
+            <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-2">
+              02 // EXPERIENCE &amp; EDUCATION
+            </span>
+            <h3 class="font-display text-2xl sm:text-3xl font-extrabold mb-3">
+              Engineering Reliable Digital Products
+            </h3>
+            <p class="text-slate-600 dark:text-blue-100/80 text-sm sm:text-base mb-6 leading-relaxed">
+              Combining a solid software engineering foundation with practical frontend craftsmanship for modern companies.
+            </p>
+
+            <div class="space-y-4">
+              <div class="pro-card pro-card-interactive p-6">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <h4 class="font-display font-bold text-lg">
+                    Frontend Web Developer &amp; UI Specialist
+                  </h4>
+                  <span class="px-3 py-1 rounded-full bg-blue-600/20 border border-sky-400/40 text-sky-400 font-mono-code text-xs font-bold">
+                    2024 — PRESENT
+                  </span>
+                </div>
+                <p class="text-sm text-slate-600 dark:text-blue-100/85 leading-relaxed mb-3">
+                  Building responsive corporate websites, interactive web applications, and custom dashboards using JavaScript (ES6+), React, Next.js, TypeScript, and Tailwind CSS.
+                </p>
+                <div class="flex flex-wrap gap-2 font-mono-code text-[11px] text-sky-300">
+                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">React &amp; Next.js</span>
+                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">TypeScript</span>
+                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">Tailwind CSS</span>
+                </div>
+              </div>
+
+              <div class="pro-card pro-card-interactive p-6">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <h4 class="font-display font-bold text-lg">
+                    Educational Platforms &amp; Digital Library Systems Lead
+                  </h4>
+                  <span class="px-3 py-1 rounded-full bg-sky-500/20 border border-sky-400/40 text-sky-300 font-mono-code text-xs font-bold">
+                    PRODUCTION SYSTEMS
+                  </span>
+                </div>
+                <p class="text-sm text-slate-600 dark:text-blue-100/85 leading-relaxed mb-3">
+                  Designed and developed the "Ta'allam" Educational Platform and the College Digital Library System with dynamic book cataloging and student search.
+                </p>
+                <div class="flex flex-wrap gap-2 font-mono-code text-[11px] text-sky-300">
+                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">HTML5 &amp; CSS3</span>
+                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">JavaScript</span>
+                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">PHP &amp; Databases</span>
+                </div>
+              </div>
+
+              <div class="pro-card pro-card-interactive p-6">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <h4 class="font-display font-bold text-lg">
+                    College of Electronic Technology — Tripoli, Libya
+                  </h4>
+                  <span class="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/40 text-blue-300 font-mono-code text-xs font-bold">
+                    ACADEMIC FOUNDATION
+                  </span>
+                </div>
+                <p class="text-sm text-slate-600 dark:text-blue-100/85 leading-relaxed">
+                  Comprehensive engineering education in software development, web systems architecture, algorithms, and databases.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SCREEN 03: COMPANY SERVICES & PROJECT ESTIMATOR (OPENED BY PAD 💼)   -->
+    <!-- ==================================================================== -->
+    <section id="services" class="screen-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="max-w-3xl mb-8">
+          <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
+            03 // COMPANY SOLUTIONS &amp; WORKFLOW
+          </span>
+          <h2 class="font-display text-2xl sm:text-3xl font-extrabold mb-2">
+            Tailored Web Engineering for Modern Businesses
+          </h2>
+          <p class="text-slate-600 dark:text-blue-100/80 text-sm sm:text-base">
+            From high-converting company platforms to complex React applications and custom dashboards.
           </p>
-          <div class="flex gap-4">
-            <a href="https://linkedin.com/in/farajalrmah" target="_blank"
-              class="w-10 h-10 rounded-lg bg-gray-100 dark:bg-white/5 border border-black/5 dark:border-white/5 flex items-center justify-center text-gray-500 hover:text-forest-green transition-all">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-              </svg>
-            </a>
-            <a href="https://github.com/farajnaser" target="_blank"
-              class="w-10 h-10 rounded-lg bg-gray-100 dark:bg-white/5 border border-black/5 dark:border-white/5 flex items-center justify-center text-gray-500 hover:text-forest-green transition-all">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-              </svg>
-            </a>
+        </div>
+
+        <!-- 4 Services -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          <div class="pro-card pro-card-interactive p-6 flex flex-col justify-between">
+            <div>
+              <div class="w-11 h-11 rounded-xl bg-blue-600/20 border border-sky-400/40 flex items-center justify-center text-sky-400 font-mono-code font-bold text-sm mb-4">
+                01
+              </div>
+              <h3 class="font-display text-lg font-bold mb-2">Corporate Websites &amp; Web Apps</h3>
+              <p class="text-sm text-slate-600 dark:text-blue-100/80 leading-relaxed mb-4">
+                Fast, scalable applications engineered with React, Next.js, and TypeScript.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-blue-500/20 font-mono-code text-xs text-sky-400 font-bold">
+              React • Next.js • TypeScript
+            </div>
+          </div>
+
+          <div class="pro-card pro-card-interactive p-6 flex flex-col justify-between">
+            <div>
+              <div class="w-11 h-11 rounded-xl bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-sky-300 font-mono-code font-bold text-sm mb-4">
+                02
+              </div>
+              <h3 class="font-display text-lg font-bold mb-2">Interactive UI &amp; Smooth UX</h3>
+              <p class="text-sm text-slate-600 dark:text-blue-100/80 leading-relaxed mb-4">
+                Turning static layouts into lively, intuitive interfaces that engage visitors and boost conversions.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-blue-500/20 font-mono-code text-xs text-sky-400 font-bold">
+              Interactive UI • Motion UX
+            </div>
+          </div>
+
+          <div class="pro-card pro-card-interactive p-6 flex flex-col justify-between">
+            <div>
+              <div class="w-11 h-11 rounded-xl bg-blue-600/20 border border-sky-400/40 flex items-center justify-center text-sky-400 font-mono-code font-bold text-sm mb-4">
+                03
+              </div>
+              <h3 class="font-display text-lg font-bold mb-2">Custom Dashboards &amp; CMS</h3>
+              <p class="text-sm text-slate-600 dark:text-blue-100/80 leading-relaxed mb-4">
+                Admin panels, educational portals, and dynamic cataloging systems tailored to your workflow.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-blue-500/20 font-mono-code text-xs text-sky-400 font-bold">
+              Dashboards • Custom Systems
+            </div>
+          </div>
+
+          <div class="pro-card pro-card-interactive p-6 flex flex-col justify-between">
+            <div>
+              <div class="w-11 h-11 rounded-xl bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-sky-300 font-mono-code font-bold text-sm mb-4">
+                04
+              </div>
+              <h3 class="font-display text-lg font-bold mb-2">Speed Optimization &amp; SEO</h3>
+              <p class="text-sm text-slate-600 dark:text-blue-100/80 leading-relaxed mb-4">
+                Core Web Vitals tuning, clean asset bundling, and flawless mobile responsiveness.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-blue-500/20 font-mono-code text-xs text-sky-400 font-bold">
+              99+ Speed • SEO • Mobile
+            </div>
           </div>
         </div>
 
-        <!-- Quick Links -->
-        <div>
-          <h4 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-widest mb-6">Quick Links</h4>
-          <ul class="space-y-4">
-            <li><a href="#about" class="text-gray-500 hover:text-forest-green transition-colors">About</a></li>
-            <li><a href="#services" class="text-gray-500 hover:text-forest-green transition-colors">Skills</a></li>
-            <li><a href="#projects" class="text-gray-500 hover:text-forest-green transition-colors">Projects</a></li>
-            <li><a href="#contact" class="text-gray-500 hover:text-forest-green transition-colors">Contact</a></li>
-          </ul>
+        <!-- 4-Step Workflow + Project Scope Estimator -->
+        <div class="grid lg:grid-cols-12 gap-8 items-stretch">
+          <div class="lg:col-span-6 space-y-3.5">
+            <h3 class="font-display text-xl sm:text-2xl font-extrabold mb-2">
+              🚀 How I Take Projects From Concept to Launch
+            </h3>
+            <div class="pro-card p-4">
+              <div class="font-mono-code text-xs text-sky-400 font-bold mb-0.5">STEP 01 // PLANNING</div>
+              <h4 class="font-display font-bold text-base">Discovery &amp; Architecture</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-blue-100/80">Understanding your business goals and mapping clear user flows before writing code.</p>
+            </div>
+            <div class="pro-card p-4">
+              <div class="font-mono-code text-xs text-sky-400 font-bold mb-0.5">STEP 02 // DESIGN SYSTEM</div>
+              <h4 class="font-display font-bold text-base">UI/UX &amp; Interactive Prototyping</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-blue-100/80">Crafting responsive layouts, cohesive color tokens, and smooth interactive components.</p>
+            </div>
+            <div class="pro-card p-4">
+              <div class="font-mono-code text-xs text-sky-400 font-bold mb-0.5">STEP 03 // DEVELOPMENT</div>
+              <h4 class="font-display font-bold text-base">Clean Frontend Engineering</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-blue-100/80">Writing modular, well-documented React and TypeScript code built to scale.</p>
+            </div>
+            <div class="pro-card p-4">
+              <div class="font-mono-code text-xs text-sky-400 font-bold mb-0.5">STEP 04 // DELIVERY</div>
+              <h4 class="font-display font-bold text-base">QA Testing, Speed Audit &amp; Launch</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-blue-100/80">Cross-device verification, performance optimization, and production deployment.</p>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6">
+            <div class="pro-card p-6 sm:p-7 h-full flex flex-col justify-between border-sky-400/35">
+              <div>
+                <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
+                  🧮 INTERACTIVE PROJECT ESTIMATOR
+                </span>
+                <h3 class="font-display text-xl sm:text-2xl font-extrabold mb-2">
+                  Estimate Your Project Timeline Instantly
+                </h3>
+                <p class="text-sm text-slate-600 dark:text-blue-100/80 mb-5">
+                  Select the features required for your upcoming project:
+                </p>
+
+                <div class="space-y-3 mb-6">
+                  <label class="flex items-center justify-between p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/25 cursor-pointer hover:border-sky-400 transition-colors">
+                    <div class="flex items-center gap-3">
+                      <input type="checkbox" value="2" checked class="est-check w-4 h-4 accent-blue-600" data-label="Responsive Corporate Website / Web Application" />
+                      <span class="font-medium text-sm">Responsive Corporate Website / Web App</span>
+                    </div>
+                    <span class="font-mono-code text-xs text-sky-400 font-bold">Core</span>
+                  </label>
+
+                  <label class="flex items-center justify-between p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/25 cursor-pointer hover:border-sky-400 transition-colors">
+                    <div class="flex items-center gap-3">
+                      <input type="checkbox" value="2" checked class="est-check w-4 h-4 accent-blue-600" data-label="Custom Interactive UI & Motion Experience" />
+                      <span class="font-medium text-sm">Custom Interactive UI &amp; Smooth Motion</span>
+                    </div>
+                    <span class="font-mono-code text-xs text-sky-400 font-bold">+Interactive</span>
+                  </label>
+
+                  <label class="flex items-center justify-between p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/25 cursor-pointer hover:border-sky-400 transition-colors">
+                    <div class="flex items-center gap-3">
+                      <input type="checkbox" value="2" class="est-check w-4 h-4 accent-blue-600" data-label="Admin Dashboard & Content Management System" />
+                      <span class="font-medium text-sm">Admin Dashboard &amp; Content Management</span>
+                    </div>
+                    <span class="font-mono-code text-xs text-sky-400 font-bold">+CMS</span>
+                  </label>
+
+                  <label class="flex items-center justify-between p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/25 cursor-pointer hover:border-sky-400 transition-colors">
+                    <div class="flex items-center gap-3">
+                      <input type="checkbox" value="1" class="est-check w-4 h-4 accent-blue-600" data-label="Performance Optimization & SEO Structure" />
+                      <span class="font-medium text-sm">Speed Optimization &amp; Technical SEO</span>
+                    </div>
+                    <span class="font-mono-code text-xs text-sky-400 font-bold">+Speed</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-blue-600/15 border border-sky-400/35 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <span class="font-mono-code text-[10px] text-sky-300 uppercase block">RECOMMENDED STACK &amp; TIMELINE</span>
+                  <span id="est-result-text" class="font-display font-bold text-sm sm:text-base text-sky-400">
+                    React / Next.js • Est. 3–5 Weeks Delivery
+                  </span>
+                </div>
+                <button id="est-apply-btn" class="btn-primary !py-2.5 !px-4 text-xs">
+                  Send This Scope →
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Services -->
-        <div>
-          <h4 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-widest mb-6">Services</h4>
-          <ul class="space-y-4">
-            <li class="text-gray-500">Custom UI Components</li>
-            <li class="text-gray-500">Frontend Architecture</li>
-            <li class="text-gray-500">Interactive Prototypes</li>
-            <li class="text-gray-500">Performance Tuning</li>
-            <li class="text-gray-500">Responsive Design</li>
-            <li class="text-gray-500">Frontend Consulting</li>
-          </ul>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SCREEN 04: SKILLS & TECH STACK (OPENED BY KEYBOARD ⌨️)               -->
+    <!-- ==================================================================== -->
+    <section id="skills" class="screen-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="max-w-3xl mb-8">
+          <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
+            04 // TECHNICAL STACK
+          </span>
+          <h2 class="font-display text-2xl sm:text-3xl font-extrabold mb-2">
+            Core Technologies &amp; Engineering Proficiency
+          </h2>
+          <p class="text-slate-600 dark:text-blue-100/80 text-sm sm:text-base">
+            Click any technology module below (or press keys <code class="px-2 py-0.5 rounded bg-blue-600/20 text-sky-400 font-mono-code text-xs">1 - 8</code> on your keyboard) to inspect how I use it in production:
+          </p>
+        </div>
+
+        <!-- Skill Inspector Banner -->
+        <div class="pro-card p-6 sm:p-7 mb-8 border-sky-400/40">
+          <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div class="flex items-center gap-4">
+              <div id="hud-skill-badge" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-sky-500 text-white font-mono-code font-bold text-lg flex items-center justify-center shrink-0">
+                JS
+              </div>
+              <div>
+                <div class="flex items-center gap-2.5">
+                  <span id="hud-skill-category" class="font-mono-code text-xs text-sky-400 uppercase tracking-wider font-bold">01 // CORE LANGUAGE</span>
+                  <span id="hud-skill-metric" class="px-2.5 py-0.5 rounded-full bg-blue-600/25 text-sky-300 font-mono-code text-xs font-bold">96% Proficiency</span>
+                </div>
+                <h3 id="hud-skill-title" class="font-display text-xl sm:text-2xl font-extrabold mt-1">
+                  JavaScript (ES6+)
+                </h3>
+                <p id="hud-skill-desc" class="text-sm text-slate-600 dark:text-blue-100/85 mt-1 max-w-2xl">
+                  Building interactive application logic, asynchronous API integrations, and clean modular architecture.
+                </p>
+              </div>
+            </div>
+
+            <div class="w-full md:w-52 shrink-0">
+              <div class="flex justify-between font-mono-code text-xs text-sky-300 mb-1.5">
+                <span>Production Readiness</span>
+                <span id="hud-skill-pct" class="text-sky-400 font-bold">96%</span>
+              </div>
+              <div class="w-full h-2.5 rounded-full bg-blue-950 overflow-hidden border border-blue-800/60">
+                <div id="hud-skill-bar" class="h-full rounded-full bg-gradient-to-r from-blue-600 to-sky-400 transition-all duration-300" style="width: 96%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 Skill Modules Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="tech-cubes-grid"></div>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SCREEN 05: BREAK ROOM, BUG SMASHER & TERMINAL (OPENED BY ARCADE 🕹️)  -->
+    <!-- ==================================================================== -->
+    <section id="arcade" class="screen-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="max-w-3xl mb-8">
+          <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
+            05 // DEVELOPER BREAK ROOM &amp; LAB
+          </span>
+          <h2 class="font-display text-2xl sm:text-3xl font-extrabold mb-2">
+            Take a Quick Break: Smash Bugs or Test the Console!
+          </h2>
+          <p class="text-slate-600 dark:text-blue-100/80 text-sm sm:text-base">
+            Even the cleanest codebases need a fun break. Smash the bugs before deployment or run quick commands in the terminal.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-stretch">
+
+          <!-- Bug Smasher Mini-Game -->
+          <div class="lg:col-span-6">
+            <div class="pro-card overflow-hidden h-full flex flex-col justify-between border-sky-400/35">
+              <div class="bg-slate-950 border-b border-blue-900/60 px-5 py-3.5 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span>🕹️</span>
+                  <h3 class="font-display font-bold text-sm sm:text-base text-white">Production Bug Smasher</h3>
+                </div>
+                <div class="flex items-center gap-3 font-mono-code text-xs">
+                  <span class="text-sky-400">SCORE: <strong id="bug-score">0</strong></span>
+                  <span class="text-amber-300">BEST: <strong id="bug-high-score">0</strong></span>
+                  <span class="text-rose-400">TIME: <strong id="bug-timer">20s</strong></span>
+                </div>
+              </div>
+
+              <div id="bug-arena" class="bug-arena flex-1 min-h-[300px] bg-slate-950 flex items-center justify-center relative select-none">
+                <div id="bug-start-overlay" class="text-center p-6 bg-slate-900/95 border border-blue-500/40 rounded-2xl max-w-xs z-10">
+                  <div class="text-3xl mb-2">🐛🔨</div>
+                  <h4 class="font-display font-bold text-base text-white mb-1">Keep the Codebase Clean!</h4>
+                  <p class="text-xs text-blue-200/80 mb-4">
+                    Click the bugs as fast as you can in 20 seconds before the client demo starts!
+                  </p>
+                  <button id="start-bug-game-btn" class="btn-primary !py-2.5 !px-6 text-xs">
+                    Start Game 🚀
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Developer Terminal -->
+          <div class="lg:col-span-6">
+            <div class="pro-card overflow-hidden h-full flex flex-col justify-between border-blue-500/35">
+              <div class="bg-slate-950 border-b border-blue-900/60 px-5 py-3.5 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                  <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                  <span class="w-3 h-3 rounded-full bg-sky-400"></span>
+                  <span class="ml-2 font-mono-code text-xs text-sky-300">faraj_console.sh</span>
+                </div>
+                <span class="font-mono-code text-[11px] text-blue-400">Interactive Shell</span>
+              </div>
+
+              <div class="p-5 font-mono-code text-xs sm:text-sm bg-slate-950 flex-1 flex flex-col justify-between min-h-[300px]">
+                <div id="terminal-output" class="space-y-2 max-h-[200px] overflow-y-auto pr-2">
+                  <p class="text-sky-400 font-bold">Faraj Alrmah — Developer Console v4.0</p>
+                  <p class="text-slate-400">Click any command chip below or type a command:</p>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-blue-900/50">
+                  <div class="flex flex-wrap gap-1.5 mb-3">
+                    <button data-cmd="whoami" class="term-chip px-2.5 py-1 rounded-lg bg-blue-950/80 border border-blue-700/60 hover:border-sky-400 text-xs text-sky-200 cursor-pointer">whoami</button>
+                    <button data-cmd="stack" class="term-chip px-2.5 py-1 rounded-lg bg-blue-950/80 border border-blue-700/60 hover:border-sky-400 text-xs text-sky-200 cursor-pointer">stack</button>
+                    <button data-cmd="coffee" class="term-chip px-2.5 py-1 rounded-lg bg-blue-950/80 border border-blue-700/60 hover:border-sky-400 text-xs text-sky-200 cursor-pointer">coffee</button>
+                    <button data-cmd="joke" class="term-chip px-2.5 py-1 rounded-lg bg-blue-950/80 border border-blue-700/60 hover:border-sky-400 text-xs text-sky-200 cursor-pointer">joke</button>
+                    <button data-cmd="contact" class="term-chip px-2.5 py-1 rounded-lg bg-blue-950/80 border border-blue-700/60 hover:border-sky-400 text-xs text-sky-200 cursor-pointer">contact</button>
+                    <button data-cmd="clear" class="term-chip px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-xs text-slate-400 cursor-pointer">clear</button>
+                  </div>
+                  <form id="terminal-form" class="flex items-center gap-2 bg-slate-900 px-3.5 py-2 rounded-xl border border-blue-800/60">
+                    <span class="text-sky-400 font-bold">faraj@desk:~$</span>
+                    <input type="text" id="terminal-input" placeholder="Type whoami, stack, coffee, joke..." class="bg-transparent text-white focus:outline-none w-full text-xs" autocomplete="off" />
+                    <button type="submit" class="px-3 py-1 rounded-lg bg-blue-600 text-white font-bold text-xs cursor-pointer">Run</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
+    </section>
 
-      <div
-        class="pt-8 border-t border-black/5 dark:border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-gray-500 text-sm italic">&copy; 2026 Faraj Alrmah. All rights reserved.</p>
-        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-          class="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-2 group">
-          Back To Top
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 group-hover:-translate-y-1 transition-transform"
-            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-          </svg>
+    <!-- ==================================================================== -->
+    <!-- SCREEN 06: DIRECT CONTACT & INQUIRY FORM (OPENED BY PHONE 📱)         -->
+    <!-- ==================================================================== -->
+    <section id="contact" class="screen-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-10 items-start">
+
+          <div class="lg:col-span-5">
+            <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
+              06 // DIRECT CONTACT
+            </span>
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold mb-3">
+              Let's Build Your Next Project Together
+            </h2>
+            <p class="text-slate-600 dark:text-blue-100/80 text-sm sm:text-base mb-6 leading-relaxed">
+              Available for frontend engineering roles, company web projects, and consulting. Reach out directly via email, phone, or the inquiry form.
+            </p>
+
+            <div class="space-y-3.5">
+              <a href="mailto:farajelrmahmoo@gmail.com" class="pro-card pro-card-interactive p-4 flex items-center gap-4 block">
+                <div class="w-11 h-11 rounded-xl bg-blue-600/20 border border-sky-400/40 flex items-center justify-center text-sky-400 text-lg shrink-0">
+                  ✉️
+                </div>
+                <div class="overflow-hidden">
+                  <div class="font-mono-code text-xs text-sky-400 uppercase">Email</div>
+                  <div class="font-display font-bold text-sm sm:text-base truncate">farajelrmahmoo@gmail.com</div>
+                </div>
+              </a>
+
+              <a href="tel:+218922613675" class="pro-card pro-card-interactive p-4 flex items-center gap-4 block">
+                <div class="w-11 h-11 rounded-xl bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-sky-300 text-lg shrink-0">
+                  📞
+                </div>
+                <div>
+                  <div class="font-mono-code text-xs text-sky-400 uppercase">Phone / WhatsApp</div>
+                  <div class="font-display font-bold text-base">+218 922613675</div>
+                </div>
+              </a>
+
+              <div class="pro-card p-4 flex items-center gap-4">
+                <div class="w-11 h-11 rounded-xl bg-blue-600/20 border border-sky-400/40 flex items-center justify-center text-sky-400 text-lg shrink-0">
+                  📍
+                </div>
+                <div>
+                  <div class="font-mono-code text-xs text-sky-400 uppercase">Location</div>
+                  <div class="font-display font-bold text-base">Tripoli, Libya • Remote Worldwide</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 flex items-center gap-3">
+              <a href="https://github.com/farajnaser" target="_blank" class="btn-secondary text-xs font-mono-code">
+                GitHub ↗
+              </a>
+              <a href="https://linkedin.com/in/farajalrmah" target="_blank" class="btn-secondary text-xs font-mono-code">
+                LinkedIn ↗
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7">
+            <div class="pro-card p-6 sm:p-8 border-blue-500/30">
+              <h3 class="font-display text-xl sm:text-2xl font-extrabold mb-2">
+                Send a Project Inquiry
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-blue-200/70 mb-4">
+                Pick a topic below or write your message directly:
+              </p>
+
+              <div class="flex flex-wrap gap-2 mb-5">
+                <button type="button" data-topic="Company Website / Web Application" class="topic-chip btn-secondary !py-1.5 !px-3 text-xs">
+                  💼 Web Application
+                </button>
+                <button type="button" data-topic="Interactive UI/UX Redesign" class="topic-chip btn-secondary !py-1.5 !px-3 text-xs">
+                  ✨ Interactive UI/UX
+                </button>
+                <button type="button" data-topic="Frontend Developer Role" class="topic-chip btn-secondary !py-1.5 !px-3 text-xs">
+                  🤝 Job Opportunity
+                </button>
+                <button type="button" data-topic="Technical Consulting" class="topic-chip btn-secondary !py-1.5 !px-3 text-xs">
+                  💡 Consulting
+                </button>
+              </div>
+
+              <form id="contact-form" class="space-y-4">
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">First Name</label>
+                    <input type="text" id="first_name" name="first_name" required class="pro-input" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">Last Name / Company</label>
+                    <input type="text" id="last_name" name="last_name" required class="pro-input" />
+                  </div>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">Email Address</label>
+                    <input type="email" id="user_email" name="user_email" required placeholder="name@company.com" class="pro-input" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">Phone Number</label>
+                    <input type="tel" id="user_phone" name="user_phone" required placeholder="+218 ..." class="pro-input" />
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">Subject</label>
+                  <input type="text" id="subject" name="subject" required placeholder="Project Inquiry" class="pro-input" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">Message</label>
+                  <textarea id="message_text" name="message_text" rows="4" required placeholder="Tell me about your project goals and timeline..." class="pro-input"></textarea>
+                </div>
+
+                <div id="form-status" class="hidden text-sm font-medium p-4 rounded-xl"></div>
+
+                <div class="grid sm:grid-cols-2 gap-3">
+                  <button type="submit" id="submit-btn" class="w-full btn-primary !py-3 text-sm">
+                    <span id="btn-text">Send Message Now 🚀</span>
+                  </button>
+                  <button type="button" id="whatsapp-send-btn" class="w-full btn-secondary !py-3 text-sm !border-sky-400/50 !text-sky-400">
+                    <span>💬 Send via WhatsApp</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Clean Footer -->
+    <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 border-t border-blue-500/20 mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-600 to-sky-500 text-white font-mono-code font-bold text-xs flex items-center justify-center">
+          &lt;/&gt;
+        </div>
+        <span class="font-mono-code text-xs text-slate-500 dark:text-blue-200/70">© 2026 Faraj Alrmah. All rights reserved.</span>
+      </div>
+      <button id="footer-back-desk-btn" class="btn-primary !py-2 !px-4 text-xs">
+        ← Back to Interactive Desk
+      </button>
+    </footer>
+
+  </div>
+
+  <!-- ==================== IN-SITE STUDIO CMS MODAL ==================== -->
+  <div id="studio-modal" class="fixed inset-0 z-50 hidden studio-backdrop bg-black/75 flex items-center justify-center p-4 overflow-y-auto">
+
+    <!-- STEP 1: PIN Lock Dialog (Secret PIN is hidden from visitors) -->
+    <div id="studio-pin-view" class="pro-card max-w-md w-full p-8 text-center relative border-sky-400/40">
+      <button id="close-pin-modal" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300">✕</button>
+      <div class="w-14 h-14 rounded-2xl bg-blue-600/20 border border-sky-400/40 mx-auto flex items-center justify-center text-2xl mb-4">
+        🔐
+      </div>
+      <h3 class="font-display text-2xl font-extrabold mb-2">
+        Owner Studio Panel
+      </h3>
+      <p class="text-xs text-slate-500 dark:text-blue-200/80 mb-6">
+        Enter your private owner PIN to manage projects, read inbox messages, or update security settings.
+      </p>
+      <form id="studio-pin-form" class="space-y-4">
+        <input type="password" id="studio-pin-input" maxlength="12" placeholder="••••" class="pro-input text-center font-mono-code text-xl tracking-[0.35em] font-bold" />
+        <p id="studio-pin-error" class="hidden font-mono-code text-xs text-rose-500">Incorrect owner PIN. Please try again.</p>
+        <button type="submit" class="w-full btn-primary !py-3 text-sm">
+          Unlock Studio Panel
         </button>
-      </div>
+      </form>
     </div>
-  </footer>
 
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <!-- STEP 2: Unlocked Studio Admin Panel (Projects + Messages Inbox + Change PIN) -->
+    <div id="studio-editor-view" class="hidden pro-card max-w-3xl w-full p-6 sm:p-8 relative max-h-[92vh] overflow-y-auto border-sky-400/40">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-blue-500/20 pb-4 mb-5">
+        <div class="flex items-center gap-2">
+          <button type="button" id="cms-tab-projects" class="nav-screen-btn active">
+            📁 Projects
+          </button>
+          <button type="button" id="cms-tab-inbox" class="nav-screen-btn">
+            <span>📬 Messages Inbox</span>
+            <span id="inbox-count-badge" class="px-2 py-0.5 rounded-full bg-sky-500 text-slate-950 font-mono-code text-[11px] font-bold">0</span>
+          </button>
+          <button type="button" id="cms-tab-security" class="nav-screen-btn">
+            🔑 Change PIN
+          </button>
+        </div>
+        <button id="close-editor-modal" class="w-8 h-8 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300">✕</button>
+      </div>
+
+      <!-- TAB 1: ADD / EDIT PROJECT FORM -->
+      <div id="cms-panel-projects">
+        <div class="mb-4">
+          <h3 id="studio-form-title" class="font-display text-xl font-extrabold">
+            Add New Project
+          </h3>
+          <p class="font-mono-code text-xs text-sky-400">
+            Saves directly to public/projects.json &amp; browser storage
+          </p>
+        </div>
+
+        <form id="studio-project-form" class="space-y-4">
+          <input type="hidden" id="proj-id" />
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-400 mb-1">Project Title *</label>
+              <input type="text" id="proj-title" required placeholder="e.g. Digital Services Portal" class="pro-input" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-400 mb-1">Badge Label *</label>
+              <input type="text" id="proj-category-label" required placeholder="e.g. Full-Stack Platform" class="pro-input" />
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-400 mb-1">Category *</label>
+              <select id="proj-category" class="pro-input">
+                <option value="web development">Web Applications</option>
+                <option value="ui-ux">UI / UX Design</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-400 mb-1">Accent Color</label>
+              <select id="proj-accent" class="pro-input">
+                <option value="#2563eb">Royal Blue</option>
+                <option value="#0ea5e9">Sky Blue</option>
+                <option value="#3b82f6">Electric Blue</option>
+                <option value="#38bdf8">Cyan Glow</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-400 mb-1">Project Description *</label>
+            <textarea id="proj-desc" rows="3" required placeholder="Describe the project architecture, features, and impact..." class="pro-input"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-400 mb-1">Technologies (Comma separated) *</label>
+            <input type="text" id="proj-tags" required placeholder="React, Next.js, TypeScript, Tailwind CSS" class="pro-input" />
+          </div>
+
+          <div class="p-4 rounded-xl bg-blue-950/40 border border-blue-500/30">
+            <label class="block text-xs font-bold text-sky-300 mb-2">
+              Project Cover Image (Upload File or Generate Blue Cover)
+            </label>
+            <div class="grid sm:grid-cols-12 gap-4 items-center">
+              <div class="sm:col-span-8 space-y-2">
+                <input type="text" id="proj-image-url" placeholder="Image URL or upload file..." class="pro-input !py-2 font-mono-code text-xs" />
+                <div class="flex flex-wrap items-center gap-2">
+                  <label class="btn-secondary !py-1.5 !px-3 text-xs cursor-pointer">
+                    📁 Upload Image
+                    <input type="file" id="proj-image-file" accept="image/*" class="hidden" />
+                  </label>
+                  <button type="button" id="generate-cover-btn" class="btn-secondary !py-1.5 !px-3 text-xs !text-sky-400">
+                    ✨ Auto-Generate Cover
+                  </button>
+                </div>
+              </div>
+              <div class="sm:col-span-4">
+                <img id="proj-image-preview" src="./images/portfolio-cover.svg" alt="Preview" class="h-24 w-full object-cover rounded-lg border border-blue-700 bg-slate-950" />
+              </div>
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-400 mb-1">Live Demo URL</label>
+              <input type="url" id="proj-link" placeholder="https://..." class="pro-input" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-400 mb-1">GitHub URL</label>
+              <input type="url" id="proj-github" placeholder="https://github.com/farajnaser/..." class="pro-input" />
+            </div>
+          </div>
+
+          <div class="flex items-center justify-end gap-3 pt-4 border-t border-blue-500/20">
+            <button type="button" id="cancel-editor-btn" class="btn-secondary text-xs">
+              Cancel
+            </button>
+            <button type="submit" class="btn-primary text-xs sm:text-sm">
+              Save Project 💾
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- TAB 2: BUILT-IN MESSAGES INBOX -->
+      <div id="cms-panel-inbox" class="hidden space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h3 class="font-display text-xl font-extrabold">Messages Inbox</h3>
+            <p class="text-xs text-sky-400">
+              All contact form messages are saved here AND forwarded for free to <strong>farajelrmahmoo@gmail.com</strong>.
+            </p>
+          </div>
+          <button type="button" id="clear-inbox-btn" class="btn-secondary !py-1.5 !px-3 text-xs !text-rose-400">
+            🗑️ Clear All
+          </button>
+        </div>
+
+        <div id="inbox-messages-list" class="space-y-3 max-h-[55vh] overflow-y-auto pr-1"></div>
+      </div>
+
+      <!-- TAB 3: CHANGE ADMIN PIN -->
+      <div id="cms-panel-security" class="hidden space-y-4">
+        <div>
+          <h3 class="font-display text-xl font-extrabold">Change Owner PIN</h3>
+          <p class="text-xs text-sky-400">
+            Update the secret PIN used to unlock this Studio Panel.
+          </p>
+        </div>
+
+        <form id="change-pin-form" class="space-y-4 max-w-md">
+          <div>
+            <label class="block text-xs font-bold text-slate-400 mb-1">New Secret PIN *</label>
+            <input type="password" id="new-pin-input" required minlength="4" maxlength="12" placeholder="Enter new PIN (e.g. 9988)" class="pro-input font-mono-code text-lg tracking-widest" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-400 mb-1">Confirm New PIN *</label>
+            <input type="password" id="confirm-pin-input" required minlength="4" maxlength="12" placeholder="Confirm new PIN" class="pro-input font-mono-code text-lg tracking-widest" />
+          </div>
+          <p id="pin-change-status" class="hidden text-xs font-bold p-3 rounded-xl"></p>
+          <button type="submit" class="btn-primary text-xs sm:text-sm">
+            Save New PIN 🔐
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+
   <script type="module" src="./main.js"></script>
 </body>
 

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "proj-portfolio",
+    "title": "Interactive Developer Portfolio & CMS",
+    "category": "web development",
+    "categoryLabel": "Frontend & Interactive UI",
+    "description": "A modern interactive developer portfolio featuring a virtual workspace desk, project scope estimator, and a built-in content management system to add and edit projects directly.",
+    "tags": ["JavaScript", "Tailwind CSS", "Interactive UI", "Vite"],
+    "image": "./images/portfolio-cover.svg",
+    "github": "https://github.com/farajnaser/myWebSite",
+    "link": "https://farajnaser.github.io/myWebSite",
+    "accent": "#2563eb",
+    "claps": 48,
+    "featured": true
+  },
+  {
+    "id": "proj-taallam",
+    "title": "Ta'allam Educational Platform",
+    "category": "web development",
+    "categoryLabel": "EdTech Platform",
+    "description": "Developed a responsive, high-performance educational platform using HTML5, CSS3, and JavaScript, focusing on user-centered UI/UX and seamless course navigation.",
+    "tags": ["HTML5", "CSS3", "JavaScript", "UI/UX Design"],
+    "image": "./images/learning-cover.svg",
+    "github": "https://github.com/farajnaser/EduWebProject",
+    "link": "https://farajnaser.github.io/EduWebProject/",
+    "accent": "#0ea5e9",
+    "claps": 39,
+    "featured": true
+  },
+  {
+    "id": "proj-library",
+    "title": "College Digital Library System",
+    "category": "web development",
+    "categoryLabel": "Full-Stack Web System",
+    "description": "Designed and engineered a full-featured web platform for the College of Electronic Technology using HTML, CSS, JavaScript, and PHP for dynamic book cataloging and student search.",
+    "tags": ["HTML5", "CSS3", "JavaScript", "PHP"],
+    "image": "./images/library-cover.svg",
+    "github": "https://github.com/farajnaser/phpProject0",
+    "link": "https://github.com/farajnaser/phpProject0",
+    "accent": "#3b82f6",
+    "claps": 34,
+    "featured": true
+  }
+]
