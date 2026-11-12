@@ -21,6 +21,78 @@
   --nav-h: 64px;
 }
 
+html.light {
+  --ink: #f1f5f9;
+  --ink-2: #e2e8f0;
+  --panel: rgba(255, 255, 255, 0.96);
+  --panel-solid: #ffffff;
+  --line: rgba(15, 23, 42, 0.11);
+  --line-strong: rgba(15, 23, 42, 0.22);
+  --text: #0f172a;
+  --muted: #475569;
+  --dim: #64748b;
+  --blue: #2563eb;
+  --blue-deep: #1d4ed8;
+  --sky: #0284c7;
+}
+
+html.light #scene {
+  background: radial-gradient(ellipse 70% 60% at 50% 45%, #dbeafe 0%, #eff6ff 55%, #f8fafc 100%);
+}
+
+html.light #scene::after {
+  background: linear-gradient(90deg, transparent 0%, transparent 45%, rgba(241, 245, 249, 0.65) 100%);
+}
+
+html.light .site-nav,
+html.light .site-nav.scrolled {
+  background: rgba(248, 250, 252, 0.92);
+}
+
+html.light .panel,
+html.light .hero {
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 20px 50px -20px rgba(15, 23, 42, 0.16);
+}
+
+html.light #mobile-menu,
+html.light body.mobile-window-open .mobile-win-bar {
+  background: rgba(255, 255, 255, 0.97);
+}
+
+html.light .mobile-desk-pills button,
+html.light .work-item,
+html.light .estimator,
+html.light .skill-inspector,
+html.light .pro-input,
+html.light .bug-arena,
+html.light #desk-hover-tooltip {
+  background: rgba(248, 250, 252, 0.96);
+  color: var(--text);
+}
+
+html.light .hero-kicker {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.theme-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--line-strong);
+  background: rgba(148, 180, 255, 0.08);
+  color: var(--text);
+  display: inline-grid;
+  place-items: center;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.theme-btn:hover { background: rgba(59, 130, 246, 0.16); }
+.theme-btn:active { transform: scale(0.95); }
+
 * { box-sizing: border-box; }
 
 html {

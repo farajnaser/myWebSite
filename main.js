@@ -110,7 +110,7 @@ const deskCanvas = document.getElementById('desk-canvas');
 const hoverTooltip = document.getElementById('desk-hover-tooltip');
 
 let scene, camera, renderer, studioRoot;
-let lampSpotLight, lampBulbMat, rgbStripMat;
+let ambientLight, keyLight, lampSpotLight, lampBulbMat, rgbStripMat;
 let isLampOn = true;
 let activeStation = 'overview';
 
@@ -326,9 +326,10 @@ function initDesk3D() {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   // Lighting
-  scene.add(new THREE.AmbientLight(0xdbeafe, 0.95));
+  ambientLight = new THREE.AmbientLight(0xdbeafe, 0.95);
+  scene.add(ambientLight);
 
-  const keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
+  keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
   keyLight.position.set(5, 8, 6);
   keyLight.castShadow = true;
   keyLight.shadow.mapSize.width = 1024;
@@ -1984,7 +1985,29 @@ contactForm?.addEventListener('submit', async (e) => {
 // ============================================================================
 // INITIALIZE APPLICATION
 // ============================================================================
+const themeToggleBtn = document.getElementById('theme-toggle-btn');
+
+function applyTheme(theme) {
+  const isLight = theme === 'light';
+  document.documentElement.classList.toggle('light', isLight);
+  document.documentElement.classList.toggle('dark', !isLight);
+  if (themeToggleBtn) {
+    themeToggleBtn.textContent = isLight ? '🌙' : '☀️';
+    themeToggleBtn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+  }
+  if (ambientLight) ambientLight.intensity = isLight ? 1.45 : 0.95;
+  if (keyLight) keyLight.intensity = isLight ? 2.25 : 1.8;
+  try { localStorage.setItem('faraj_theme', isLight ? 'light' : 'dark'); } catch (_) {}
+}
+
+themeToggleBtn?.addEventListener('click', () => {
+  playSound('click');
+  const next = document.documentElement.classList.contains('light') ? 'dark' : 'light';
+  applyTheme(next);
+});
+
 initDesk3D();
+applyTheme((() => { try { return localStorage.getItem('faraj_theme') || 'dark'; } catch (_) { return 'dark'; } })());
 renderTechSkillsGrid();
 selectTechModule(0, false);
 updateStudioUI();
