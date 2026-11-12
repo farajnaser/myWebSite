@@ -81,6 +81,12 @@
   <!-- ============================== STORY ============================== -->
   <main id="story">
 
+    <!-- Mobile-only sticky window bar (shown when a desk object window is open) -->
+    <div id="mobile-window-bar" class="mobile-win-bar hidden">
+      <button type="button" id="mobile-back-desk-btn" class="mobile-back-btn">← Back to desk</button>
+      <span id="mobile-win-title" class="mono text-xs text-sky-400 truncate">Selected work</span>
+    </div>
+
     <!-- 00 — THE DESK -->
     <section id="top" class="chapter chapter--hero in-view" data-station="overview">
       <div class="hero">
@@ -93,6 +99,16 @@
         <div class="hero-actions">
           <a href="#projects" class="btn-primary">See my work</a>
           <a href="#contact" class="btn-secondary">Get in touch</a>
+        </div>
+        <div class="mobile-desk-pills" aria-label="Desk stations">
+          <button type="button" data-station-pill="monitors">🖥️ Work</button>
+          <button type="button" data-station-pill="portrait">👤 About</button>
+          <button type="button" data-station-pill="notebook">💼 Services</button>
+          <button type="button" data-station-pill="keyboard">⌨️ Skills</button>
+          <button type="button" data-station-pill="arcade">🕹️ Lab</button>
+          <button type="button" data-station-pill="phone">📱 Contact</button>
+          <button type="button" data-station-pill="coffee">☕ Coffee</button>
+          <button type="button" data-station-pill="lamp">💡 Lamp</button>
         </div>
         <div class="hero-hint">
           <span class="mouse"></span>

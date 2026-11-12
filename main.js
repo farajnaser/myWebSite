@@ -136,12 +136,13 @@ function getResponsiveCameraView(stationKey = 'overview') {
   const look = base.look.clone();
 
   if (isMobile) {
-    // On mobile, #scene is a sticky top strip (34svh), so center the 3D desk/object cleanly in it
+    // On mobile, #scene is full-screen with a compact hero card at the bottom; frame the 3D desk in the upper area
+    const portraitFactor = Math.min(1.85, Math.max(1.0, 1.1 / Math.max(aspect, 0.48)));
     if (stationKey === 'overview') {
-      pos.set(0, 4.35, 8.7);
-      look.set(0, 0.9, 0);
+      pos.set(0, 4.4 * (0.9 + portraitFactor * 0.18), 8.8 * (0.9 + portraitFactor * 0.25));
+      look.set(0, 0.2, 0);
     } else {
-      pos.set(base.look.x, base.pos.y + 0.12, base.pos.z + 0.75);
+      pos.set(base.look.x, base.pos.y + 0.15, base.pos.z + (portraitFactor - 0.85) * 1.2);
       look.copy(base.look);
     }
   } else {
@@ -739,6 +740,93 @@ function toggleLampLight() {
   showDeskToast('💡', isLampOn ? 'Desk lamp switched on.' : 'Lamp off — night mode.');
 }
 
+const mobileWindowBar = document.getElementById('mobile-window-bar');
+const mobileWinTitle = document.getElementById('mobile-win-title');
+const mobileBackDeskBtn = document.getElementById('mobile-back-desk-btn');
+
+const sectionTitles = {
+  projects: '01 · Selected work',
+  about: '02 · About me',
+  services: '03 · Services',
+  skills: '04 · Skills',
+  lab: '05 · Break room',
+  contact: '06 · Contact'
+};
+
+function openSection(sectionId, withZoomDelay = false) {
+  if (!sectionId || sectionId === 'top') {
+    closeMobileWindow();
+    if (window.innerWidth > 900) {
+      document.getElementById('top')?.scrollIntoView({ behavior: 'smooth' });
+    }
+    return;
+  }
+
+  const targetEl = document.getElementById(sectionId);
+  if (!targetEl) return;
+
+  if (window.innerWidth <= 900) {
+    const station = targetEl.getAttribute('data-station') || 'overview';
+    activeStation = station;
+    const view = getResponsiveCameraView(station);
+    targetCamPos.copy(view.pos);
+    targetCamLook.copy(view.look);
+    playSound('zoom');
+
+    const revealWindow = () => {
+      chapters.forEach((ch) => ch.classList.toggle('mobile-active', ch.id === sectionId));
+      document.body.classList.add('mobile-window-open');
+      mobileWindowBar?.classList.remove('hidden');
+      if (mobileWinTitle) mobileWinTitle.textContent = sectionTitles[sectionId] || '';
+      targetEl.scrollTop = 0;
+      document.getElementById('mobile-menu')?.classList.add('hidden');
+    };
+
+    if (withZoomDelay) {
+      setTimeout(revealWindow, 260);
+    } else {
+      revealWindow();
+    }
+  } else {
+    playSound('zoom');
+    targetEl.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+function closeMobileWindow() {
+  document.body.classList.remove('mobile-window-open');
+  mobileWindowBar?.classList.add('hidden');
+  chapters.forEach((ch) => ch.classList.remove('mobile-active'));
+  activeStation = 'overview';
+  const view = getResponsiveCameraView('overview');
+  targetCamPos.copy(view.pos);
+  targetCamLook.copy(view.look);
+  document.getElementById('mobile-menu')?.classList.add('hidden');
+}
+
+mobileBackDeskBtn?.addEventListener('click', () => {
+  playSound('click');
+  closeMobileWindow();
+});
+
+document.querySelectorAll('[data-station-pill]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const st = btn.getAttribute('data-station-pill');
+    if (st) handleDeskStationClick(st);
+  });
+});
+
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener('click', (e) => {
+    const id = link.getAttribute('href')?.slice(1);
+    if (!id) return;
+    if (window.innerWidth <= 900) {
+      e.preventDefault();
+      openSection(id, false);
+    }
+  });
+});
+
 function handleDeskStationClick(stationKey) {
   if (stationKey === 'lamp') {
     toggleLampLight();
@@ -751,13 +839,12 @@ function handleDeskStationClick(stationKey) {
 
   const cfg = stationConfig[stationKey];
   if (cfg && cfg.sectionId) {
-    playSound('zoom');
-    document.getElementById(cfg.sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    openSection(cfg.sectionId, true);
   }
 }
 
 function setActiveChapter(chapterEl) {
-  if (!chapterEl) return;
+  if (!chapterEl || window.innerWidth <= 900) return;
   const id = chapterEl.id;
   const station = chapterEl.getAttribute('data-station') || 'overview';
 
@@ -777,16 +864,15 @@ function setActiveChapter(chapterEl) {
 }
 
 function updateActiveChapterFromScroll() {
-  const isMobile = window.innerWidth <= 900;
-  const mid = isMobile ? window.innerHeight * 0.62 : window.innerHeight * 0.45;
-  const minBottom = isMobile ? window.innerHeight * 0.36 : 80;
+  if (window.innerWidth <= 900) return;
+  const mid = window.innerHeight * 0.45;
   let best = null;
   let bestDist = Infinity;
 
   chapters.forEach((ch) => {
     const r = ch.getBoundingClientRect();
-    if (r.bottom < minBottom || r.top > window.innerHeight - 60) return;
-    const anchor = isMobile ? Math.max(r.top, minBottom) + 60 : r.top + Math.min(r.height, window.innerHeight) * 0.4;
+    if (r.bottom < 80 || r.top > window.innerHeight - 60) return;
+    const anchor = r.top + Math.min(r.height, window.innerHeight) * 0.4;
     const dist = Math.abs(anchor - mid);
     if (dist < bestDist) {
       bestDist = dist;
@@ -1260,7 +1346,7 @@ estApplyBtn?.addEventListener('click', () => {
   if (msg) {
     msg.value = `Hi Faraj,\n\nI'd like to discuss a project with:\n- ${labels.join('\n- ')}\n\nLet me know your availability.`;
   }
-  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  openSection('contact');
 });
 
 // Interactive Terminal
@@ -1726,7 +1812,7 @@ studioProjectForm?.addEventListener('submit', async (e) => {
   await persistProjects();
   playSound('success');
   closeStudioModal();
-  document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+  openSection('projects');
 });
 
 window.editProject = (id) => {
