@@ -27338,13 +27338,14 @@ function createMonitorTexture(titleText, accentColor = "#38bdf8") {
   tex.needsUpdate = true;
   return tex;
 }
-function registerStationGroup(group, key) {
+function registerStationGroup(group, key, withHitBox = true) {
   group.traverse((child) => {
     if (child.isMesh) {
       child.userData.station = key;
       clickableMeshes.push(child);
     }
   });
+  if (!withHitBox) return;
   const box = new Box3().setFromObject(group);
   if (!box.isEmpty()) {
     const size = new Vector3();
@@ -27448,7 +27449,7 @@ function initDesk3D() {
   skyFillLight.position.set(3.5, 2.5, 1.5);
   scene.add(skyFillLight);
   lampSpotLight = new SpotLight(16707722, 4.2, 11, Math.PI / 3.1, 0.5, 1);
-  lampSpotLight.position.set(-2.6, 2.7, -0.65);
+  lampSpotLight.position.set(-2.78, 2.7, -0.45);
   lampSpotLight.target.position.set(-0.5, 0.8, 0.2);
   lampSpotLight.castShadow = true;
   scene.add(lampSpotLight);
@@ -27652,7 +27653,7 @@ function initDesk3D() {
   studioRoot.add(phoneGroup);
   registerStationGroup(phoneGroup, "phone");
   const lampGroup = new Group();
-  lampGroup.position.set(-2.85, 0.86, -0.82);
+  lampGroup.position.set(-3.02, 0.86, -0.58);
   const lBase = new Mesh(new CylinderGeometry(0.24, 0.27, 0.07, 24), metalMat);
   lBase.position.y = 0.035;
   lampGroup.add(lBase);
@@ -27668,7 +27669,7 @@ function initDesk3D() {
   lBulb.position.set(0.26, 1.26, 0.12);
   lampGroup.add(lBulb);
   studioRoot.add(lampGroup);
-  registerStationGroup(lampGroup, "lamp");
+  registerStationGroup(lampGroup, "lamp", false);
   const raycaster = new Raycaster();
   const pointer = new Vector2();
   let isDragging = false;

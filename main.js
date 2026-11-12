@@ -251,13 +251,15 @@ function createMonitorTexture(titleText, accentColor = '#38bdf8') {
   return tex;
 }
 
-function registerStationGroup(group, key) {
+function registerStationGroup(group, key, withHitBox = true) {
   group.traverse((child) => {
     if (child.isMesh) {
       child.userData.station = key;
       clickableMeshes.push(child);
     }
   });
+
+  if (!withHitBox) return;
 
   const box = new THREE.Box3().setFromObject(group);
   if (!box.isEmpty()) {
@@ -377,7 +379,7 @@ function initDesk3D() {
   scene.add(skyFillLight);
 
   lampSpotLight = new THREE.SpotLight(0xfef08a, 4.2, 11, Math.PI / 3.1, 0.5, 1);
-  lampSpotLight.position.set(-2.6, 2.7, -0.65);
+  lampSpotLight.position.set(-2.78, 2.7, -0.45);
   lampSpotLight.target.position.set(-0.5, 0.8, 0.2);
   lampSpotLight.castShadow = true;
   scene.add(lampSpotLight);
@@ -635,7 +637,7 @@ function initDesk3D() {
 
   // 8. DESK LAMP ('lamp' -> Toggle Light)
   const lampGroup = new THREE.Group();
-  lampGroup.position.set(-2.85, 0.86, -0.82);
+  lampGroup.position.set(-3.02, 0.86, -0.58);
 
   const lBase = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.27, 0.07, 24), metalMat);
   lBase.position.y = 0.035;
@@ -656,7 +658,7 @@ function initDesk3D() {
   lampGroup.add(lBulb);
 
   studioRoot.add(lampGroup);
-  registerStationGroup(lampGroup, 'lamp');
+  registerStationGroup(lampGroup, 'lamp', false);
 
   // --- RAYCASTING + TOOLTIP + SUBTLE DRAG ROTATION ---
   const raycaster = new THREE.Raycaster();
