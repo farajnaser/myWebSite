@@ -27353,14 +27353,15 @@ function registerStationGroup(group, key) {
     box.getCenter(center);
     group.worldToLocal(center);
     const hitGeo = new BoxGeometry(
-      Math.max(0.78, size.x + 0.25),
-      Math.max(0.68, size.y + 0.25),
-      Math.max(0.78, size.z + 0.25)
+      Math.max(0.38, size.x + 0.08),
+      Math.max(0.38, size.y + 0.08),
+      Math.max(0.38, size.z + 0.08)
     );
     const hitMat = new MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false });
     const hitMesh = new Mesh(hitGeo, hitMat);
     hitMesh.position.copy(center);
     hitMesh.userData.station = key;
+    hitMesh.userData.isHitBox = true;
     group.add(hitMesh);
     clickableMeshes.push(hitMesh);
   }
@@ -27704,7 +27705,8 @@ function initDesk3D() {
     raycaster.setFromCamera(pointer, camera);
     const hits = raycaster.intersectObjects(clickableMeshes, false);
     if (hits.length > 0) {
-      const st = hits[0].object.userData.station;
+      const chosenHit = hits.find((h) => !h.object.userData.isHitBox) || hits[0];
+      const st = chosenHit.object.userData.station;
       deskCanvas.classList.add("hovering-object");
       if (hoverTooltip && st && stationConfig[st]) {
         hoverTooltip.innerHTML = stationConfig[st].label;
@@ -27733,7 +27735,8 @@ function initDesk3D() {
     raycaster.setFromCamera(pointer, camera);
     const hits = raycaster.intersectObjects(clickableMeshes, false);
     if (hits.length > 0) {
-      const st = hits[0].object.userData.station;
+      const chosenHit = hits.find((h) => !h.object.userData.isHitBox) || hits[0];
+      const st = chosenHit.object.userData.station;
       if (st) handleDeskStationClick(st);
     }
   });
