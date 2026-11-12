@@ -1,902 +1,347 @@
 <!doctype html>
-<html lang="en" class="dark scroll-smooth" dir="ltr">
+<html lang="en" dir="ltr" class="dark">
 
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050b18" />
   <link rel="icon" type="image/svg+xml" href="./vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Faraj Alrmah | Frontend Web Developer</title>
-  <meta name="description" content="Official Portfolio of Faraj Alrmah — Frontend Web Developer specializing in modern web applications, React, Next.js, TypeScript, and interactive UI/UX." />
+  <title>Faraj Alrmah — Frontend Developer</title>
+  <meta name="description" content="Faraj Alrmah is a frontend developer from Tripoli, Libya, building fast, thoughtful web interfaces with React, Next.js and TypeScript." />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            'royal-blue': '#2563eb',
-            'sky-electric': '#0ea5e9'
-          }
-        }
-      }
-    }
+    tailwind.config = { darkMode: 'class', corePlugins: { preflight: false } }
   </script>
   <link rel="stylesheet" href="./style.css">
   <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js"
-      }
-    }
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js" } }
   </script>
 </head>
 
-<body class="desk-controller-mode antialiased selection:bg-blue-600 selection:text-white">
+<body>
 
-  <!-- ==================== CLEAN SAPPHIRE TOP NAVIGATION BAR ==================== -->
-  <header class="fixed top-0 left-0 right-0 z-50 pro-navbar">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 h-full flex items-center justify-between gap-2 sm:gap-4">
+  <!-- ============================== NAV ============================== -->
+  <header class="site-nav" id="site-nav">
+    <div class="nav-inner">
+      <a href="#top" class="brand" id="brand-desk-btn" aria-label="Back to top">
+        <span class="brand-mark">f</span>
+        <span class="brand-name">Faraj Alrmah <span>/ frontend developer</span></span>
+      </a>
 
-      <!-- Brand Identity -->
-      <button id="brand-desk-btn" class="flex items-center gap-2 sm:gap-3 text-left cursor-pointer shrink-0">
-        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-blue-600 to-sky-500 text-white font-mono-code font-bold text-xs flex items-center justify-center shadow-md border border-sky-300/40">
-          &lt;/&gt;
-        </div>
-        <div>
-          <span class="font-display font-extrabold text-sm sm:text-base tracking-tight block leading-none">
-            Faraj <span class="text-sky-400">Alrmah</span>
-          </span>
-          <span class="font-mono-code text-[10px] text-sky-400/80 hidden sm:block mt-0.5">
-            Frontend Web Developer
-          </span>
-        </div>
-      </button>
-
-      <!-- Clean Screen Navigation Pills -->
-      <nav class="hidden lg:flex items-center gap-1.5">
-        <button data-screen-nav="desk" class="nav-screen-btn active">Desk</button>
-        <button data-screen-nav="projects" class="nav-screen-btn">Projects</button>
-        <button data-screen-nav="about" class="nav-screen-btn">About</button>
-        <button data-screen-nav="services" class="nav-screen-btn">Services</button>
-        <button data-screen-nav="skills" class="nav-screen-btn">Skills</button>
-        <button data-screen-nav="arcade" class="nav-screen-btn">Break Room</button>
-        <button data-screen-nav="contact" class="nav-screen-btn">Contact</button>
+      <nav class="nav-links" aria-label="Sections">
+        <a href="#projects" class="nav-link" data-nav="projects">Work</a>
+        <a href="#about" class="nav-link" data-nav="about">About</a>
+        <a href="#services" class="nav-link" data-nav="services">Services</a>
+        <a href="#skills" class="nav-link" data-nav="skills">Skills</a>
+        <a href="#lab" class="nav-link" data-nav="lab">Lab</a>
+        <a href="#contact" class="nav-link" data-nav="contact">Contact</a>
       </nav>
 
-      <!-- Essential Action Controls Only -->
-      <div class="flex items-center gap-1.5 sm:gap-2">
-        <button id="top-back-desk-btn" class="hidden nav-mode-btn">
-          <span>←</span>
-          <span class="hidden sm:inline">Back to Desk</span>
-          <span class="sm:hidden">Desk</span>
-        </button>
-
-        <button id="toggle-full-site-btn" class="nav-mode-btn">
-          <span id="full-site-btn-label">Full Website</span>
-        </button>
-
-        <button id="open-studio-btn" class="hidden md:inline-flex nav-cms-btn" title="Add or Edit Projects (Ctrl+Shift+A)">
-          <span>+ Manage Work</span>
-          <span id="studio-status-dot" class="w-2 h-2 rounded-full bg-sky-400"></span>
-        </button>
-
-        <button id="theme-toggle" class="nav-tool-btn" title="Toggle Dark/Light Mode">
-          <span id="theme-icon">☀️</span>
-        </button>
-
-        <button id="mobile-menu-btn" class="lg:hidden nav-tool-btn !p-2" aria-label="Open Menu">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden lg:hidden border-t border-blue-800/60 bg-slate-950/98 px-4 py-3.5 shadow-2xl">
-      <div class="grid grid-cols-2 gap-2">
-        <button data-screen-nav="desk" class="nav-screen-btn justify-center">🖥️ 3D Desk</button>
-        <button data-screen-nav="projects" class="nav-screen-btn justify-center">📁 Projects</button>
-        <button data-screen-nav="about" class="nav-screen-btn justify-center">👤 About</button>
-        <button data-screen-nav="services" class="nav-screen-btn justify-center">💼 Services</button>
-        <button data-screen-nav="skills" class="nav-screen-btn justify-center">⌨️ Skills</button>
-        <button data-screen-nav="arcade" class="nav-screen-btn justify-center">🕹️ Break Room</button>
-        <button data-screen-nav="contact" class="nav-screen-btn justify-center col-span-2">📱 Direct Contact</button>
-        <button id="mobile-open-studio-btn" class="nav-cms-btn justify-center col-span-2 !py-2.5 mt-1">
-          <span>🔐 + Manage Work / Studio CMS</span>
+      <div class="flex items-center gap-2">
+        <a href="#contact" class="nav-cta"><span class="dot"></span>Available for work</a>
+        <button id="mobile-menu-btn" class="menu-btn" aria-label="Open menu">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" /></svg>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- ====================================================================== -->
-  <!-- MASTER INTERACTIVE DESK STAGE (ZERO OVERLAPPING CARDS OR DOCKS!)       -->
-  <!-- ====================================================================== -->
-  <main id="desk-master-stage">
+  <div id="mobile-menu" class="hidden">
+    <a href="#projects">Work <span>monitors</span></a>
+    <a href="#about">About <span>portrait</span></a>
+    <a href="#services">Services <span>client pad</span></a>
+    <a href="#skills">Skills <span>keyboard</span></a>
+    <a href="#lab">Lab <span>arcade</span></a>
+    <a href="#contact">Contact <span>phone</span></a>
+  </div>
 
-    <!-- Clean Non-Overlapping Top Strip (Sits ABOVE the Desk Canvas, Never Covers Models) -->
-    <div class="desk-header-strip">
-      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
-        <div class="flex items-center gap-2 sm:gap-3 text-white">
-          <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-sky-400 animate-pulse shrink-0"></span>
-          <span class="font-display font-bold text-xs sm:text-sm">Faraj's Interactive Desk</span>
-          <span class="hidden md:inline text-blue-200/80">
-            — Click any item on the desk (Monitors, Keyboard, ID Frame, Client Pad, Arcade, Phone, or Coffee) to open its screen.
-          </span>
-          <span class="md:hidden text-[11px] text-sky-300/90">
-            — Tap any 3D object or swipe to look around
-          </span>
+  <!-- chapter rail: shows which object on the desk you're looking at -->
+  <nav class="rail" aria-hidden="true">
+    <a href="#top" data-rail="top"><i></i><span>The desk</span></a>
+    <a href="#projects" data-rail="projects"><i></i><span>Monitors — work</span></a>
+    <a href="#about" data-rail="about"><i></i><span>Portrait — about</span></a>
+    <a href="#services" data-rail="services"><i></i><span>Client pad — services</span></a>
+    <a href="#skills" data-rail="skills"><i></i><span>Keyboard — skills</span></a>
+    <a href="#lab" data-rail="lab"><i></i><span>Arcade — lab</span></a>
+    <a href="#contact" data-rail="contact"><i></i><span>Phone — contact</span></a>
+  </nav>
+
+  <!-- ============================== 3D DESK (fixed) ============================== -->
+  <div id="scene">
+    <div id="desk-hover-tooltip"></div>
+    <canvas id="desk-canvas"></canvas>
+  </div>
+
+  <div id="desk-toast" class="hidden" role="status">
+    <span id="desk-toast-icon">☕</span>
+    <span id="desk-toast-text"></span>
+  </div>
+
+  <!-- ============================== STORY ============================== -->
+  <main id="story">
+
+    <!-- 00 — THE DESK -->
+    <section id="top" class="chapter chapter--hero in-view" data-station="overview">
+      <div class="hero">
+        <div class="hero-kicker"><span class="dot"></span>Tripoli, Libya · working remotely</div>
+        <h1>I build websites people <em>enjoy</em> using.</h1>
+        <p>
+          Hi, I'm Faraj — a frontend developer. This is my desk. Scroll down and I'll walk you around it,
+          or click anything on it to jump straight there.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn-primary">See my work</a>
+          <a href="#contact" class="btn-secondary">Get in touch</a>
         </div>
-
-        <div class="hidden sm:flex items-center gap-3">
-          <span id="energy-status-badge" class="font-mono-code text-xs text-sky-300">
-            ☕ Coffee Today: 3 Cups (Focus 100%)
-          </span>
+        <div class="hero-hint">
+          <span class="mouse"></span>
+          <span id="energy-status-badge">Coffee today: 3 cups</span>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Playful Blue Toast Notification (When clicking Coffee or Lamp on the Desk) -->
-    <div id="desk-toast" class="hidden fixed top-16 sm:top-20 left-1/2 -translate-x-1/2 z-50 w-[92vw] max-w-md px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-700 to-sky-600 text-white font-bold text-xs sm:text-sm shadow-2xl border border-sky-300 flex items-center justify-center gap-2 text-center">
-      <span id="desk-toast-icon">☕</span>
-      <span id="desk-toast-text">Fresh espresso poured! Coding velocity boosted by 200%!</span>
-    </div>
+    <!-- 01 — MONITORS / WORK -->
+    <section id="projects" class="chapter" data-station="monitors">
+      <div class="panel">
+        <div class="chapter-tag"><span class="num">01</span><span class="sep"></span>On the monitors</div>
+        <h2 class="chapter-title">Selected <em>work</em></h2>
+        <p class="lead">A few things I've designed and built end to end. Each one taught me something — usually about a bug I swore I'd never write again.</p>
 
-    <!-- Unobstructed Desk Canvas Area -->
-    <div id="desk-canvas-wrap">
-      <div id="desk-hover-tooltip">Click to Open Screen</div>
-      <canvas id="desk-canvas"></canvas>
-    </div>
+        <div class="work-toolbar">
+          <div class="filters">
+            <button data-filter="all" class="filter-btn is-active">All</button>
+            <button data-filter="web development" class="filter-btn">Web apps</button>
+            <button data-filter="ui-ux" class="filter-btn">UI / UX</button>
+          </div>
+          <button id="projects-add-btn" class="text-link">Manage projects</button>
+        </div>
 
-    <!-- Mobile & Tablet Quick-Tap Station Bar (Sits cleanly below 3D canvas on touch devices) -->
-    <div class="desk-mobile-dock lg:hidden">
-      <div class="flex items-center gap-2 min-w-max mx-auto px-1">
-        <button type="button" data-desk-station="monitors" class="desk-quick-pill">🖥️ Projects</button>
-        <button type="button" data-desk-station="portrait" class="desk-quick-pill">👤 About</button>
-        <button type="button" data-desk-station="notebook" class="desk-quick-pill">💼 Services</button>
-        <button type="button" data-desk-station="keyboard" class="desk-quick-pill">⌨️ Skills</button>
-        <button type="button" data-desk-station="arcade" class="desk-quick-pill">🕹️ Break Room</button>
-        <button type="button" data-desk-station="phone" class="desk-quick-pill">📱 Contact</button>
-        <button type="button" data-desk-station="coffee" class="desk-quick-pill">☕ Coffee</button>
-        <button type="button" data-desk-station="lamp" class="desk-quick-pill">💡 Lamp</button>
+        <!-- owner toolbar (only visible after unlocking the studio) -->
+        <div id="studio-active-banner" class="hidden mb-5 p-4 rounded-2xl border border-sky-400/30 bg-blue-600/10">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <div class="text-sm font-semibold">Owner mode</div>
+              <div class="mono text-xs text-slate-400" id="studio-sync-status">Changes save to projects.json and this browser.</div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button id="banner-new-project-btn" class="btn-primary !py-2 !px-3 !text-xs">New project</button>
+              <button id="export-projects-btn" class="btn-secondary !py-2 !px-3 !text-xs">Export</button>
+              <label class="btn-secondary !py-2 !px-3 !text-xs cursor-pointer">Import<input type="file" id="import-projects-input" accept=".json" class="hidden" /></label>
+              <button id="lock-studio-btn" class="btn-secondary !py-2 !px-3 !text-xs">Lock</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="projects-grid"></div>
+        <div id="project-pagination"></div>
+
+        <a href="#about" class="next-link"><span>Next — <b>the portrait frame</b></span><span class="arrow">↓</span></a>
       </div>
-    </div>
+    </section>
 
+    <!-- 02 — PORTRAIT / ABOUT -->
+    <section id="about" class="chapter" data-station="portrait">
+      <div class="panel">
+        <div class="chapter-tag"><span class="num">02</span><span class="sep"></span>The portrait frame</div>
+
+        <div class="about-head">
+          <img src="./images/farajimage.png" alt="Faraj Alrmah" />
+          <div>
+            <h2 class="chapter-title !mb-1">About <em>me</em></h2>
+            <div class="mono text-xs text-slate-400">Faraj Alrmah · Frontend developer</div>
+          </div>
+        </div>
+
+        <div class="prose">
+          <p>I studied software engineering at the <strong>College of Electronic Technology</strong> in Tripoli, and somewhere between algorithms and database classes I realised the part I loved most was the part people actually see.</p>
+          <p>Today I build interfaces with <strong>React, Next.js, TypeScript and Tailwind</strong>. I care about the small things — how a button feels when you press it, how fast a page shows up on a slow connection, and whether the layout still holds together on a cheap phone.</p>
+        </div>
+
+        <ul class="timeline">
+          <li>
+            <div class="when">2024 — now</div>
+            <h4>Frontend developer</h4>
+            <p>Company websites, web apps and dashboards for clients, mostly in React and Next.js.</p>
+          </li>
+          <li>
+            <div class="when">Projects</div>
+            <h4>Ta'allam learning platform &amp; college digital library</h4>
+            <p>Designed and built both, from the first wireframe to the PHP back end.</p>
+          </li>
+          <li>
+            <div class="when">Education</div>
+            <h4>College of Electronic Technology, Tripoli</h4>
+            <p>Software development, web systems, algorithms and databases.</p>
+          </li>
+        </ul>
+
+        <div class="sticky-note">
+          <div class="label"><span>note stuck to the frame</span><button id="next-fun-fact-btn">another one →</button></div>
+          <p id="fun-fact-display">"A good page should load before the coffee gets cold."</p>
+        </div>
+
+        <a href="#services" class="next-link"><span>Next — <b>the client pad</b></span><span class="arrow">↓</span></a>
+      </div>
+    </section>
+
+    <!-- 03 — CLIENT PAD / SERVICES -->
+    <section id="services" class="chapter" data-station="notebook">
+      <div class="panel">
+        <div class="chapter-tag"><span class="num">03</span><span class="sep"></span>On the client pad</div>
+        <h2 class="chapter-title">What I can <em>do for you</em></h2>
+        <p class="lead">This is where I jot down what clients need. Usually it's one of these.</p>
+
+        <ul class="service-list">
+          <li><span class="n">01</span><div><h4>Company websites &amp; web apps</h4><p>Fast, maintainable sites built with React, Next.js and TypeScript.</p></div></li>
+          <li><span class="n">02</span><div><h4>Interface design &amp; motion</h4><p>Turning static mockups into interfaces that feel alive without getting in the way.</p></div></li>
+          <li><span class="n">03</span><div><h4>Dashboards &amp; admin panels</h4><p>Internal tools, content managers and catalogues shaped around how your team works.</p></div></li>
+          <li><span class="n">04</span><div><h4>Speed &amp; SEO clean-up</h4><p>Making slow sites fast and making sure search engines can actually read them.</p></div></li>
+        </ul>
+
+        <div class="estimator">
+          <h4>Rough timeline</h4>
+          <p>Tick what your project needs and I'll give you a ballpark.</p>
+          <label class="est-option"><input type="checkbox" class="est-check" value="2" checked data-label="Responsive website / web app" />Responsive website or web app<span class="w">+2 wk</span></label>
+          <label class="est-option"><input type="checkbox" class="est-check" value="2" checked data-label="Custom interactive UI" />Custom interactive UI<span class="w">+2 wk</span></label>
+          <label class="est-option"><input type="checkbox" class="est-check" value="2" data-label="Admin dashboard / CMS" />Admin dashboard / CMS<span class="w">+2 wk</span></label>
+          <label class="est-option"><input type="checkbox" class="est-check" value="1" data-label="Speed &amp; SEO work" />Speed &amp; SEO work<span class="w">+1 wk</span></label>
+          <div class="est-result">
+            <span id="est-result-text">About 5–7 weeks</span>
+            <button id="est-apply-btn" class="btn-primary !py-2.5 !text-sm">Send me this scope →</button>
+          </div>
+        </div>
+
+        <a href="#skills" class="next-link"><span>Next — <b>the keyboard</b></span><span class="arrow">↓</span></a>
+      </div>
+    </section>
+
+    <!-- 04 — KEYBOARD / SKILLS -->
+    <section id="skills" class="chapter" data-station="keyboard">
+      <div class="panel">
+        <div class="chapter-tag"><span class="num">04</span><span class="sep"></span>The keyboard</div>
+        <h2 class="chapter-title">Tools I <em>type</em> with</h2>
+        <p class="lead">Press <kbd class="mono text-xs px-1.5 py-0.5 rounded bg-white/10">1</kbd> – <kbd class="mono text-xs px-1.5 py-0.5 rounded bg-white/10">8</kbd> on your keyboard, or tap one below.</p>
+
+        <div class="skill-inspector">
+          <div id="hud-skill-badge">JS</div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between gap-3">
+              <span id="hud-skill-category">01 · Core language</span>
+              <span id="hud-skill-pct" class="mono text-xs text-sky-400">96%</span>
+            </div>
+            <h3 id="hud-skill-title">JavaScript</h3>
+            <p id="hud-skill-desc"></p>
+            <span id="hud-skill-metric" class="hidden"></span>
+            <div class="bar"><div id="hud-skill-bar" style="width: 96%"></div></div>
+          </div>
+        </div>
+
+        <div id="tech-cubes-grid"></div>
+
+        <a href="#lab" class="next-link"><span>Next — <b>the arcade machine</b></span><span class="arrow">↓</span></a>
+      </div>
+    </section>
+
+    <!-- 05 — ARCADE / LAB -->
+    <section id="lab" class="chapter" data-station="arcade">
+      <div class="panel">
+        <div class="chapter-tag"><span class="num">05</span><span class="sep"></span>The arcade machine</div>
+        <h2 class="chapter-title">Take a <em>break</em></h2>
+        <p class="lead">Every desk needs one. Squash some bugs before the client demo, or poke around my terminal.</p>
+
+        <div class="lab-box">
+          <div class="lab-head">
+            <strong>bug_smasher</strong>
+            <span>score <strong id="bug-score">0</strong> · best <strong id="bug-high-score">0</strong> · <strong id="bug-timer">20s</strong></span>
+          </div>
+          <div id="bug-arena" class="bug-arena">
+            <div id="bug-start-overlay">
+              <h4>The demo is in 20 seconds.</h4>
+              <p>Click every bug before the client sees it.</p>
+              <button id="start-bug-game-btn" class="btn-primary !py-2.5 !text-sm">Start</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="lab-box">
+          <div class="lab-head"><strong>faraj@desk ~</strong><span>terminal</span></div>
+          <div class="terminal-body">
+            <div id="terminal-output">
+              <p class="text-slate-400">Try a command below.</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <button data-cmd="whoami" class="term-chip">whoami</button>
+              <button data-cmd="stack" class="term-chip">stack</button>
+              <button data-cmd="coffee" class="term-chip">coffee</button>
+              <button data-cmd="joke" class="term-chip">joke</button>
+              <button data-cmd="contact" class="term-chip">contact</button>
+              <button data-cmd="clear" class="term-chip">clear</button>
+            </div>
+            <form id="terminal-form">
+              <span class="text-sky-400">$</span>
+              <input type="text" id="terminal-input" placeholder="type a command…" autocomplete="off" />
+            </form>
+          </div>
+        </div>
+
+        <a href="#contact" class="next-link"><span>Next — <b>the phone</b></span><span class="arrow">↓</span></a>
+      </div>
+    </section>
+
+    <!-- 06 — PHONE / CONTACT -->
+    <section id="contact" class="chapter" data-station="phone">
+      <div class="panel">
+        <div class="chapter-tag"><span class="num">06</span><span class="sep"></span>The phone</div>
+        <h2 class="chapter-title">Let's <em>talk</em></h2>
+        <p class="lead">Have a project, a role, or just a question? I usually reply within a day.</p>
+
+        <ul class="contact-lines">
+          <li><a href="mailto:farajelrmahmoo@gmail.com">farajelrmahmoo@gmail.com <span>email</span></a></li>
+          <li><a href="https://wa.me/218922613675" target="_blank" rel="noopener">+218 92 261 3675 <span>whatsapp</span></a></li>
+          <li><a href="https://github.com/farajnaser" target="_blank" rel="noopener">github.com/farajnaser <span>code</span></a></li>
+          <li><a href="https://linkedin.com/in/farajalrmah" target="_blank" rel="noopener">linkedin.com/in/farajalrmah <span>linkedin</span></a></li>
+        </ul>
+
+        <div class="flex flex-wrap gap-2 mb-4">
+          <button type="button" class="topic-chip" data-topic="New website or web app">New website</button>
+          <button type="button" class="topic-chip" data-topic="Interface redesign">Redesign</button>
+          <button type="button" class="topic-chip" data-topic="Frontend developer role">Job offer</button>
+          <button type="button" class="topic-chip" data-topic="Just saying hi">Just saying hi</button>
+        </div>
+
+        <form id="contact-form" class="space-y-3">
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div><label class="field-label" for="first_name">First name</label><input type="text" id="first_name" name="first_name" required class="pro-input" /></div>
+            <div><label class="field-label" for="last_name">Last name or company</label><input type="text" id="last_name" name="last_name" required class="pro-input" /></div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div><label class="field-label" for="user_email">Email</label><input type="email" id="user_email" name="user_email" required placeholder="you@company.com" class="pro-input" /></div>
+            <div><label class="field-label" for="user_phone">Phone</label><input type="tel" id="user_phone" name="user_phone" placeholder="+218 …" class="pro-input" /></div>
+          </div>
+          <div><label class="field-label" for="subject">Subject</label><input type="text" id="subject" name="subject" required class="pro-input" /></div>
+          <div><label class="field-label" for="message_text">Message</label><textarea id="message_text" name="message_text" rows="4" required placeholder="A few lines about what you have in mind…" class="pro-input"></textarea></div>
+
+          <div id="form-status" class="hidden"></div>
+
+          <div class="flex flex-wrap gap-2 pt-1">
+            <button type="submit" id="submit-btn" class="btn-primary flex-1"><span id="btn-text">Send message</span></button>
+            <button type="button" id="whatsapp-send-btn" class="btn-secondary">Send on WhatsApp</button>
+          </div>
+        </form>
+      </div>
+    </section>
   </main>
 
-  <!-- ====================================================================== -->
-  <!-- DEDICATED SCREENS CONTAINER (OPAQUE BACKGROUND, ZERO VISUAL OVERLAP)   -->
-  <!-- ====================================================================== -->
-  <div id="screens-container" class="hidden-overlay">
-
-    <!-- Clean Screen Control Bar (Sticky on mobile for instant 1-tap return to Desk) -->
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 mb-4 sm:mb-6 sticky top-0 z-30">
-      <div class="pro-card p-3 sm:p-4 border-blue-500/35 flex flex-wrap items-center justify-between gap-2 sm:gap-3 backdrop-blur-md">
-        <div class="flex items-center gap-2 sm:gap-3 min-w-0">
-          <button id="screen-back-desk-btn" class="nav-mode-btn !py-1.5 sm:!py-2 !px-3 sm:!px-4 text-xs sm:text-sm shrink-0">
-            <span>←</span>
-            <span>Back to Desk</span>
-          </button>
-          <div class="h-5 w-px bg-blue-500/30 hidden sm:block"></div>
-          <div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
-            <span id="active-screen-icon" class="text-base sm:text-lg shrink-0">🖥️</span>
-            <span id="active-screen-title" class="font-display font-extrabold text-xs sm:text-base text-blue-600 dark:text-sky-400 truncate">
-              Featured Projects &amp; Case Studies
-            </span>
-          </div>
-        </div>
-
-        <button id="screen-show-all-btn" class="btn-secondary !py-1.5 sm:!py-2 !px-2.5 sm:!px-3.5 text-[11px] sm:text-xs font-bold !border-sky-500/40 !text-sky-400 shrink-0">
-          Full Website
-        </button>
-      </div>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>© 2026 Faraj Alrmah. Built by hand, fuelled by coffee.</span>
+      <span class="flex items-center gap-4">
+        <a href="#top" class="text-link">Back to the desk ↑</a>
+        <button id="open-studio-btn" class="text-link">Owner</button>
+      </span>
     </div>
-
-    <!-- ==================================================================== -->
-    <!-- SCREEN 01: PROJECTS & CASE STUDIES (OPENED BY MONITORS 🖥️)          -->
-    <!-- ==================================================================== -->
-    <section id="projects" class="screen-section">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <div class="pro-card p-6 sm:p-8 mb-8 border-blue-500/30">
-          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            <div>
-              <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
-                01 // SELECTED WORK
-              </span>
-              <h2 class="font-display text-2xl sm:text-3xl font-extrabold mb-2">
-                Featured Projects &amp; Web Platforms
-              </h2>
-              <p class="text-slate-600 dark:text-blue-100/80 max-w-2xl text-sm sm:text-base">
-                Real-world applications built from scratch with clean code and plenty of espresso ☕. Try live demos, clap for your favorites 👏, or add new projects directly inside the site.
-              </p>
-            </div>
-
-            <div class="flex flex-wrap items-center gap-2">
-              <button data-filter="all" class="filter-btn btn-primary !py-2 !px-4 text-xs">
-                All Projects
-              </button>
-              <button data-filter="web development" class="filter-btn btn-secondary !py-2 !px-4 text-xs">
-                Web Apps
-              </button>
-              <button data-filter="ui-ux" class="filter-btn btn-secondary !py-2 !px-4 text-xs">
-                UI / UX
-              </button>
-              <button id="projects-add-btn" class="btn-secondary !py-2 !px-4 text-xs !border-sky-400/50 !text-sky-400">
-                + Add / Edit Work
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Studio CMS Active Toolbar -->
-        <div id="studio-active-banner" class="hidden pro-card p-5 mb-8 border-sky-400/50 flex flex-wrap items-center justify-between gap-4">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-blue-600/20 border border-sky-400/40 flex items-center justify-center text-lg">
-              ⚙️
-            </div>
-            <div>
-              <h4 class="font-display font-bold text-sm sm:text-base">Studio CMS Unlocked</h4>
-              <p class="font-mono-code text-xs text-sky-400" id="studio-sync-status">
-                Add, edit, reorder, or delete projects below. Changes save automatically to public/projects.json.
-              </p>
-            </div>
-          </div>
-          <div class="flex flex-wrap items-center gap-2">
-            <button id="banner-new-project-btn" class="btn-primary !py-2 !px-3.5 text-xs">
-              + New Project
-            </button>
-            <button id="export-projects-btn" class="btn-secondary !py-2 !px-3.5 text-xs">
-              Export JSON
-            </button>
-            <label class="btn-secondary !py-2 !px-3.5 text-xs cursor-pointer">
-              Import JSON
-              <input type="file" id="import-projects-input" accept=".json" class="hidden" />
-            </label>
-            <button id="lock-studio-btn" class="btn-secondary !py-2 !px-3.5 text-xs !text-rose-400">
-              Lock CMS
-            </button>
-          </div>
-        </div>
-
-        <!-- Projects Grid -->
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" id="projects-grid"></div>
-
-        <!-- Pagination -->
-        <div class="mt-8 flex justify-center items-center gap-2" id="project-pagination"></div>
-      </div>
-    </section>
-
-    <!-- ==================================================================== -->
-    <!-- SCREEN 02: ABOUT FARAJ & CAREER TIMELINE (OPENED BY PORTRAIT 🖼️)    -->
-    <!-- ==================================================================== -->
-    <section id="about" class="screen-section">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <!-- Executive Benchmarks -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div class="pro-card p-5">
-            <div class="font-mono-code text-xs text-sky-400 uppercase font-bold mb-1">PERFORMANCE</div>
-            <div class="font-display font-extrabold text-3xl text-blue-600 dark:text-white">99+</div>
-            <div class="text-xs text-slate-500 dark:text-blue-200/70 mt-1">Fast Lighthouse &amp; Web Vitals</div>
-          </div>
-          <div class="pro-card p-5">
-            <div class="font-mono-code text-xs text-sky-400 uppercase font-bold mb-1">RESPONSIVE</div>
-            <div class="font-display font-extrabold text-3xl text-blue-600 dark:text-white">100%</div>
-            <div class="text-xs text-slate-500 dark:text-blue-200/70 mt-1">Mobile, Tablet &amp; Desktop Precision</div>
-          </div>
-          <div class="pro-card p-5">
-            <div class="font-mono-code text-xs text-sky-400 uppercase font-bold mb-1">ARCHITECTURE</div>
-            <div class="font-display font-extrabold text-3xl text-blue-600 dark:text-white">Clean</div>
-            <div class="text-xs text-slate-500 dark:text-blue-200/70 mt-1">Maintainable &amp; Scalable Code</div>
-          </div>
-          <div class="pro-card p-5">
-            <div class="font-mono-code text-xs text-sky-400 uppercase font-bold mb-1">LOCATION</div>
-            <div class="font-display font-extrabold text-3xl text-blue-600 dark:text-white">Global</div>
-            <div class="text-xs text-slate-500 dark:text-blue-200/70 mt-1">Tripoli, Libya • Remote Worldwide</div>
-          </div>
-        </div>
-
-        <div class="grid lg:grid-cols-12 gap-8 items-start">
-
-          <!-- Left Profile + Fun Facts -->
-          <div class="lg:col-span-5 space-y-6">
-            <div class="pro-card p-7">
-              <div class="flex items-center gap-4 mb-6">
-                <img src="./images/farajimage.png" alt="Faraj Alrmah" class="w-20 h-20 rounded-2xl object-cover border-2 border-blue-500 shadow-lg shrink-0" />
-                <div>
-                  <span class="font-mono-code text-xs text-sky-400 font-bold uppercase tracking-wider block">DEVELOPER PROFILE</span>
-                  <h2 class="font-display text-2xl font-extrabold">Faraj Alrmah</h2>
-                  <p class="text-xs text-slate-500 dark:text-blue-200/80 mt-0.5">
-                    Frontend Web Developer &amp; UI/UX Specialist
-                  </p>
-                </div>
-              </div>
-
-              <p class="text-sm sm:text-base text-slate-600 dark:text-blue-100/85 leading-relaxed mb-6">
-                Passionate frontend developer turning complex ideas into fast, intuitive, and memorable digital products. I specialize in building modern interfaces using React, Next.js, TypeScript, and Tailwind CSS that help companies stand out and users enjoy every click.
-              </p>
-
-              <div class="rounded-xl bg-slate-950 border border-blue-900/60 p-4 font-mono-code text-xs space-y-1.5 mb-6">
-                <div class="flex items-center justify-between text-sky-400 pb-2 mb-2 border-b border-blue-900/50">
-                  <span>faraj_profile.ts</span>
-                  <img src="./images/vscode-logo.png" alt="VS Code" class="w-4 h-4 object-contain" />
-                </div>
-                <p><span class="text-sky-400">const</span> <span class="text-blue-300">faraj</span> = {</p>
-                <p class="pl-4 text-slate-300">name: <span class="text-sky-300">'Faraj Alrmah'</span>,</p>
-                <p class="pl-4 text-slate-300">location: <span class="text-sky-300">'Tripoli, Libya'</span>,</p>
-                <p class="pl-4 text-slate-300">stack: [<span class="text-blue-400">'React'</span>, <span class="text-blue-400">'Next.js'</span>, <span class="text-blue-400">'TypeScript'</span>],</p>
-                <p class="pl-4 text-slate-300">coffeeFuel: <span class="text-amber-300">'100% Ready ☕'</span></p>
-                <p>};</p>
-              </div>
-
-              <div class="flex flex-wrap gap-3">
-                <button data-screen-nav="contact" class="flex-1 btn-primary text-xs sm:text-sm">
-                  Hire Me / Discuss a Project
-                </button>
-                <a href="https://github.com/farajnaser" target="_blank" class="btn-secondary text-xs sm:text-sm font-mono-code">
-                  GitHub ↗
-                </a>
-              </div>
-            </div>
-
-            <!-- Playful Fun Facts Card -->
-            <div class="pro-card p-6 border-sky-500/30">
-              <div class="flex items-center justify-between mb-3">
-                <span class="font-display font-bold text-sm text-sky-400">
-                  🎲 Behind the Code (Fun Facts)
-                </span>
-                <button id="next-fun-fact-btn" class="px-3 py-1 rounded-lg bg-blue-600 hover:bg-sky-500 text-white text-xs font-bold transition-colors cursor-pointer">
-                  Next Fact ↻
-                </button>
-              </div>
-              <p id="fun-fact-display" class="text-sm text-slate-700 dark:text-blue-100 leading-relaxed p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/20">
-                "I believe a great website should load in under a second—or before the first sip of espresso cools down! ☕⚡"
-              </p>
-            </div>
-          </div>
-
-          <!-- Right Career & Academic Journey -->
-          <div class="lg:col-span-7">
-            <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-2">
-              02 // EXPERIENCE &amp; EDUCATION
-            </span>
-            <h3 class="font-display text-2xl sm:text-3xl font-extrabold mb-3">
-              Engineering Reliable Digital Products
-            </h3>
-            <p class="text-slate-600 dark:text-blue-100/80 text-sm sm:text-base mb-6 leading-relaxed">
-              Combining a solid software engineering foundation with practical frontend craftsmanship for modern companies.
-            </p>
-
-            <div class="space-y-4">
-              <div class="pro-card pro-card-interactive p-6">
-                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-                  <h4 class="font-display font-bold text-lg">
-                    Frontend Web Developer &amp; UI Specialist
-                  </h4>
-                  <span class="px-3 py-1 rounded-full bg-blue-600/20 border border-sky-400/40 text-sky-400 font-mono-code text-xs font-bold">
-                    2024 — PRESENT
-                  </span>
-                </div>
-                <p class="text-sm text-slate-600 dark:text-blue-100/85 leading-relaxed mb-3">
-                  Building responsive corporate websites, interactive web applications, and custom dashboards using JavaScript (ES6+), React, Next.js, TypeScript, and Tailwind CSS.
-                </p>
-                <div class="flex flex-wrap gap-2 font-mono-code text-[11px] text-sky-300">
-                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">React &amp; Next.js</span>
-                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">TypeScript</span>
-                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">Tailwind CSS</span>
-                </div>
-              </div>
-
-              <div class="pro-card pro-card-interactive p-6">
-                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-                  <h4 class="font-display font-bold text-lg">
-                    Educational Platforms &amp; Digital Library Systems Lead
-                  </h4>
-                  <span class="px-3 py-1 rounded-full bg-sky-500/20 border border-sky-400/40 text-sky-300 font-mono-code text-xs font-bold">
-                    PRODUCTION SYSTEMS
-                  </span>
-                </div>
-                <p class="text-sm text-slate-600 dark:text-blue-100/85 leading-relaxed mb-3">
-                  Designed and developed the "Ta'allam" Educational Platform and the College Digital Library System with dynamic book cataloging and student search.
-                </p>
-                <div class="flex flex-wrap gap-2 font-mono-code text-[11px] text-sky-300">
-                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">HTML5 &amp; CSS3</span>
-                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">JavaScript</span>
-                  <span class="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50">PHP &amp; Databases</span>
-                </div>
-              </div>
-
-              <div class="pro-card pro-card-interactive p-6">
-                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-                  <h4 class="font-display font-bold text-lg">
-                    College of Electronic Technology — Tripoli, Libya
-                  </h4>
-                  <span class="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/40 text-blue-300 font-mono-code text-xs font-bold">
-                    ACADEMIC FOUNDATION
-                  </span>
-                </div>
-                <p class="text-sm text-slate-600 dark:text-blue-100/85 leading-relaxed">
-                  Comprehensive engineering education in software development, web systems architecture, algorithms, and databases.
-                </p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================================================================== -->
-    <!-- SCREEN 03: COMPANY SERVICES & PROJECT ESTIMATOR (OPENED BY PAD 💼)   -->
-    <!-- ==================================================================== -->
-    <section id="services" class="screen-section">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <div class="max-w-3xl mb-8">
-          <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
-            03 // COMPANY SOLUTIONS &amp; WORKFLOW
-          </span>
-          <h2 class="font-display text-2xl sm:text-3xl font-extrabold mb-2">
-            Tailored Web Engineering for Modern Businesses
-          </h2>
-          <p class="text-slate-600 dark:text-blue-100/80 text-sm sm:text-base">
-            From high-converting company platforms to complex React applications and custom dashboards.
-          </p>
-        </div>
-
-        <!-- 4 Services -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          <div class="pro-card pro-card-interactive p-6 flex flex-col justify-between">
-            <div>
-              <div class="w-11 h-11 rounded-xl bg-blue-600/20 border border-sky-400/40 flex items-center justify-center text-sky-400 font-mono-code font-bold text-sm mb-4">
-                01
-              </div>
-              <h3 class="font-display text-lg font-bold mb-2">Corporate Websites &amp; Web Apps</h3>
-              <p class="text-sm text-slate-600 dark:text-blue-100/80 leading-relaxed mb-4">
-                Fast, scalable applications engineered with React, Next.js, and TypeScript.
-              </p>
-            </div>
-            <div class="pt-3 border-t border-blue-500/20 font-mono-code text-xs text-sky-400 font-bold">
-              React • Next.js • TypeScript
-            </div>
-          </div>
-
-          <div class="pro-card pro-card-interactive p-6 flex flex-col justify-between">
-            <div>
-              <div class="w-11 h-11 rounded-xl bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-sky-300 font-mono-code font-bold text-sm mb-4">
-                02
-              </div>
-              <h3 class="font-display text-lg font-bold mb-2">Interactive UI &amp; Smooth UX</h3>
-              <p class="text-sm text-slate-600 dark:text-blue-100/80 leading-relaxed mb-4">
-                Turning static layouts into lively, intuitive interfaces that engage visitors and boost conversions.
-              </p>
-            </div>
-            <div class="pt-3 border-t border-blue-500/20 font-mono-code text-xs text-sky-400 font-bold">
-              Interactive UI • Motion UX
-            </div>
-          </div>
-
-          <div class="pro-card pro-card-interactive p-6 flex flex-col justify-between">
-            <div>
-              <div class="w-11 h-11 rounded-xl bg-blue-600/20 border border-sky-400/40 flex items-center justify-center text-sky-400 font-mono-code font-bold text-sm mb-4">
-                03
-              </div>
-              <h3 class="font-display text-lg font-bold mb-2">Custom Dashboards &amp; CMS</h3>
-              <p class="text-sm text-slate-600 dark:text-blue-100/80 leading-relaxed mb-4">
-                Admin panels, educational portals, and dynamic cataloging systems tailored to your workflow.
-              </p>
-            </div>
-            <div class="pt-3 border-t border-blue-500/20 font-mono-code text-xs text-sky-400 font-bold">
-              Dashboards • Custom Systems
-            </div>
-          </div>
-
-          <div class="pro-card pro-card-interactive p-6 flex flex-col justify-between">
-            <div>
-              <div class="w-11 h-11 rounded-xl bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-sky-300 font-mono-code font-bold text-sm mb-4">
-                04
-              </div>
-              <h3 class="font-display text-lg font-bold mb-2">Speed Optimization &amp; SEO</h3>
-              <p class="text-sm text-slate-600 dark:text-blue-100/80 leading-relaxed mb-4">
-                Core Web Vitals tuning, clean asset bundling, and flawless mobile responsiveness.
-              </p>
-            </div>
-            <div class="pt-3 border-t border-blue-500/20 font-mono-code text-xs text-sky-400 font-bold">
-              99+ Speed • SEO • Mobile
-            </div>
-          </div>
-        </div>
-
-        <!-- 4-Step Workflow + Project Scope Estimator -->
-        <div class="grid lg:grid-cols-12 gap-8 items-stretch">
-          <div class="lg:col-span-6 space-y-3.5">
-            <h3 class="font-display text-xl sm:text-2xl font-extrabold mb-2">
-              🚀 How I Take Projects From Concept to Launch
-            </h3>
-            <div class="pro-card p-4">
-              <div class="font-mono-code text-xs text-sky-400 font-bold mb-0.5">STEP 01 // PLANNING</div>
-              <h4 class="font-display font-bold text-base">Discovery &amp; Architecture</h4>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-blue-100/80">Understanding your business goals and mapping clear user flows before writing code.</p>
-            </div>
-            <div class="pro-card p-4">
-              <div class="font-mono-code text-xs text-sky-400 font-bold mb-0.5">STEP 02 // DESIGN SYSTEM</div>
-              <h4 class="font-display font-bold text-base">UI/UX &amp; Interactive Prototyping</h4>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-blue-100/80">Crafting responsive layouts, cohesive color tokens, and smooth interactive components.</p>
-            </div>
-            <div class="pro-card p-4">
-              <div class="font-mono-code text-xs text-sky-400 font-bold mb-0.5">STEP 03 // DEVELOPMENT</div>
-              <h4 class="font-display font-bold text-base">Clean Frontend Engineering</h4>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-blue-100/80">Writing modular, well-documented React and TypeScript code built to scale.</p>
-            </div>
-            <div class="pro-card p-4">
-              <div class="font-mono-code text-xs text-sky-400 font-bold mb-0.5">STEP 04 // DELIVERY</div>
-              <h4 class="font-display font-bold text-base">QA Testing, Speed Audit &amp; Launch</h4>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-blue-100/80">Cross-device verification, performance optimization, and production deployment.</p>
-            </div>
-          </div>
-
-          <div class="lg:col-span-6">
-            <div class="pro-card p-6 sm:p-7 h-full flex flex-col justify-between border-sky-400/35">
-              <div>
-                <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
-                  🧮 INTERACTIVE PROJECT ESTIMATOR
-                </span>
-                <h3 class="font-display text-xl sm:text-2xl font-extrabold mb-2">
-                  Estimate Your Project Timeline Instantly
-                </h3>
-                <p class="text-sm text-slate-600 dark:text-blue-100/80 mb-5">
-                  Select the features required for your upcoming project:
-                </p>
-
-                <div class="space-y-3 mb-6">
-                  <label class="flex items-center justify-between p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/25 cursor-pointer hover:border-sky-400 transition-colors">
-                    <div class="flex items-center gap-3">
-                      <input type="checkbox" value="2" checked class="est-check w-4 h-4 accent-blue-600" data-label="Responsive Corporate Website / Web Application" />
-                      <span class="font-medium text-sm">Responsive Corporate Website / Web App</span>
-                    </div>
-                    <span class="font-mono-code text-xs text-sky-400 font-bold">Core</span>
-                  </label>
-
-                  <label class="flex items-center justify-between p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/25 cursor-pointer hover:border-sky-400 transition-colors">
-                    <div class="flex items-center gap-3">
-                      <input type="checkbox" value="2" checked class="est-check w-4 h-4 accent-blue-600" data-label="Custom Interactive UI & Motion Experience" />
-                      <span class="font-medium text-sm">Custom Interactive UI &amp; Smooth Motion</span>
-                    </div>
-                    <span class="font-mono-code text-xs text-sky-400 font-bold">+Interactive</span>
-                  </label>
-
-                  <label class="flex items-center justify-between p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/25 cursor-pointer hover:border-sky-400 transition-colors">
-                    <div class="flex items-center gap-3">
-                      <input type="checkbox" value="2" class="est-check w-4 h-4 accent-blue-600" data-label="Admin Dashboard & Content Management System" />
-                      <span class="font-medium text-sm">Admin Dashboard &amp; Content Management</span>
-                    </div>
-                    <span class="font-mono-code text-xs text-sky-400 font-bold">+CMS</span>
-                  </label>
-
-                  <label class="flex items-center justify-between p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/25 cursor-pointer hover:border-sky-400 transition-colors">
-                    <div class="flex items-center gap-3">
-                      <input type="checkbox" value="1" class="est-check w-4 h-4 accent-blue-600" data-label="Performance Optimization & SEO Structure" />
-                      <span class="font-medium text-sm">Speed Optimization &amp; Technical SEO</span>
-                    </div>
-                    <span class="font-mono-code text-xs text-sky-400 font-bold">+Speed</span>
-                  </label>
-                </div>
-              </div>
-
-              <div class="p-4 rounded-xl bg-blue-600/15 border border-sky-400/35 flex flex-wrap items-center justify-between gap-4">
-                <div>
-                  <span class="font-mono-code text-[10px] text-sky-300 uppercase block">RECOMMENDED STACK &amp; TIMELINE</span>
-                  <span id="est-result-text" class="font-display font-bold text-sm sm:text-base text-sky-400">
-                    React / Next.js • Est. 3–5 Weeks Delivery
-                  </span>
-                </div>
-                <button id="est-apply-btn" class="btn-primary !py-2.5 !px-4 text-xs">
-                  Send This Scope →
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ==================================================================== -->
-    <!-- SCREEN 04: SKILLS & TECH STACK (OPENED BY KEYBOARD ⌨️)               -->
-    <!-- ==================================================================== -->
-    <section id="skills" class="screen-section">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <div class="max-w-3xl mb-8">
-          <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
-            04 // TECHNICAL STACK
-          </span>
-          <h2 class="font-display text-2xl sm:text-3xl font-extrabold mb-2">
-            Core Technologies &amp; Engineering Proficiency
-          </h2>
-          <p class="text-slate-600 dark:text-blue-100/80 text-sm sm:text-base">
-            Click any technology module below (or press keys <code class="px-2 py-0.5 rounded bg-blue-600/20 text-sky-400 font-mono-code text-xs">1 - 8</code> on your keyboard) to inspect how I use it in production:
-          </p>
-        </div>
-
-        <!-- Skill Inspector Banner -->
-        <div class="pro-card p-6 sm:p-7 mb-8 border-sky-400/40">
-          <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div class="flex items-center gap-4">
-              <div id="hud-skill-badge" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-sky-500 text-white font-mono-code font-bold text-lg flex items-center justify-center shrink-0">
-                JS
-              </div>
-              <div>
-                <div class="flex items-center gap-2.5">
-                  <span id="hud-skill-category" class="font-mono-code text-xs text-sky-400 uppercase tracking-wider font-bold">01 // CORE LANGUAGE</span>
-                  <span id="hud-skill-metric" class="px-2.5 py-0.5 rounded-full bg-blue-600/25 text-sky-300 font-mono-code text-xs font-bold">96% Proficiency</span>
-                </div>
-                <h3 id="hud-skill-title" class="font-display text-xl sm:text-2xl font-extrabold mt-1">
-                  JavaScript (ES6+)
-                </h3>
-                <p id="hud-skill-desc" class="text-sm text-slate-600 dark:text-blue-100/85 mt-1 max-w-2xl">
-                  Building interactive application logic, asynchronous API integrations, and clean modular architecture.
-                </p>
-              </div>
-            </div>
-
-            <div class="w-full md:w-52 shrink-0">
-              <div class="flex justify-between font-mono-code text-xs text-sky-300 mb-1.5">
-                <span>Production Readiness</span>
-                <span id="hud-skill-pct" class="text-sky-400 font-bold">96%</span>
-              </div>
-              <div class="w-full h-2.5 rounded-full bg-blue-950 overflow-hidden border border-blue-800/60">
-                <div id="hud-skill-bar" class="h-full rounded-full bg-gradient-to-r from-blue-600 to-sky-400 transition-all duration-300" style="width: 96%"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 8 Skill Modules Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="tech-cubes-grid"></div>
-      </div>
-    </section>
-
-    <!-- ==================================================================== -->
-    <!-- SCREEN 05: BREAK ROOM, BUG SMASHER & TERMINAL (OPENED BY ARCADE 🕹️)  -->
-    <!-- ==================================================================== -->
-    <section id="arcade" class="screen-section">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <div class="max-w-3xl mb-8">
-          <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
-            05 // DEVELOPER BREAK ROOM &amp; LAB
-          </span>
-          <h2 class="font-display text-2xl sm:text-3xl font-extrabold mb-2">
-            Take a Quick Break: Smash Bugs or Test the Console!
-          </h2>
-          <p class="text-slate-600 dark:text-blue-100/80 text-sm sm:text-base">
-            Even the cleanest codebases need a fun break. Smash the bugs before deployment or run quick commands in the terminal.
-          </p>
-        </div>
-
-        <div class="grid lg:grid-cols-12 gap-8 items-stretch">
-
-          <!-- Bug Smasher Mini-Game -->
-          <div class="lg:col-span-6">
-            <div class="pro-card overflow-hidden h-full flex flex-col justify-between border-sky-400/35">
-              <div class="bg-slate-950 border-b border-blue-900/60 px-5 py-3.5 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <span>🕹️</span>
-                  <h3 class="font-display font-bold text-sm sm:text-base text-white">Production Bug Smasher</h3>
-                </div>
-                <div class="flex items-center gap-3 font-mono-code text-xs">
-                  <span class="text-sky-400">SCORE: <strong id="bug-score">0</strong></span>
-                  <span class="text-amber-300">BEST: <strong id="bug-high-score">0</strong></span>
-                  <span class="text-rose-400">TIME: <strong id="bug-timer">20s</strong></span>
-                </div>
-              </div>
-
-              <div id="bug-arena" class="bug-arena flex-1 min-h-[300px] bg-slate-950 flex items-center justify-center relative select-none">
-                <div id="bug-start-overlay" class="text-center p-6 bg-slate-900/95 border border-blue-500/40 rounded-2xl max-w-xs z-10">
-                  <div class="text-3xl mb-2">🐛🔨</div>
-                  <h4 class="font-display font-bold text-base text-white mb-1">Keep the Codebase Clean!</h4>
-                  <p class="text-xs text-blue-200/80 mb-4">
-                    Click the bugs as fast as you can in 20 seconds before the client demo starts!
-                  </p>
-                  <button id="start-bug-game-btn" class="btn-primary !py-2.5 !px-6 text-xs">
-                    Start Game 🚀
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Interactive Developer Terminal -->
-          <div class="lg:col-span-6">
-            <div class="pro-card overflow-hidden h-full flex flex-col justify-between border-blue-500/35">
-              <div class="bg-slate-950 border-b border-blue-900/60 px-5 py-3.5 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <span class="w-3 h-3 rounded-full bg-rose-500"></span>
-                  <span class="w-3 h-3 rounded-full bg-amber-400"></span>
-                  <span class="w-3 h-3 rounded-full bg-sky-400"></span>
-                  <span class="ml-2 font-mono-code text-xs text-sky-300">faraj_console.sh</span>
-                </div>
-                <span class="font-mono-code text-[11px] text-blue-400">Interactive Shell</span>
-              </div>
-
-              <div class="p-5 font-mono-code text-xs sm:text-sm bg-slate-950 flex-1 flex flex-col justify-between min-h-[300px]">
-                <div id="terminal-output" class="space-y-2 max-h-[200px] overflow-y-auto pr-2">
-                  <p class="text-sky-400 font-bold">Faraj Alrmah — Developer Console v4.0</p>
-                  <p class="text-slate-400">Click any command chip below or type a command:</p>
-                </div>
-
-                <div class="mt-4 pt-3 border-t border-blue-900/50">
-                  <div class="flex flex-wrap gap-1.5 mb-3">
-                    <button data-cmd="whoami" class="term-chip px-2.5 py-1 rounded-lg bg-blue-950/80 border border-blue-700/60 hover:border-sky-400 text-xs text-sky-200 cursor-pointer">whoami</button>
-                    <button data-cmd="stack" class="term-chip px-2.5 py-1 rounded-lg bg-blue-950/80 border border-blue-700/60 hover:border-sky-400 text-xs text-sky-200 cursor-pointer">stack</button>
-                    <button data-cmd="coffee" class="term-chip px-2.5 py-1 rounded-lg bg-blue-950/80 border border-blue-700/60 hover:border-sky-400 text-xs text-sky-200 cursor-pointer">coffee</button>
-                    <button data-cmd="joke" class="term-chip px-2.5 py-1 rounded-lg bg-blue-950/80 border border-blue-700/60 hover:border-sky-400 text-xs text-sky-200 cursor-pointer">joke</button>
-                    <button data-cmd="contact" class="term-chip px-2.5 py-1 rounded-lg bg-blue-950/80 border border-blue-700/60 hover:border-sky-400 text-xs text-sky-200 cursor-pointer">contact</button>
-                    <button data-cmd="clear" class="term-chip px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-xs text-slate-400 cursor-pointer">clear</button>
-                  </div>
-                  <form id="terminal-form" class="flex items-center gap-2 bg-slate-900 px-3.5 py-2 rounded-xl border border-blue-800/60">
-                    <span class="text-sky-400 font-bold">faraj@desk:~$</span>
-                    <input type="text" id="terminal-input" placeholder="Type whoami, stack, coffee, joke..." class="bg-transparent text-white focus:outline-none w-full text-xs" autocomplete="off" />
-                    <button type="submit" class="px-3 py-1 rounded-lg bg-blue-600 text-white font-bold text-xs cursor-pointer">Run</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================================================================== -->
-    <!-- SCREEN 06: DIRECT CONTACT & INQUIRY FORM (OPENED BY PHONE 📱)         -->
-    <!-- ==================================================================== -->
-    <section id="contact" class="screen-section">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-12 gap-10 items-start">
-
-          <div class="lg:col-span-5">
-            <span class="font-mono-code text-xs font-bold uppercase tracking-widest text-sky-400 block mb-1.5">
-              06 // DIRECT CONTACT
-            </span>
-            <h2 class="font-display text-2xl sm:text-3xl font-extrabold mb-3">
-              Let's Build Your Next Project Together
-            </h2>
-            <p class="text-slate-600 dark:text-blue-100/80 text-sm sm:text-base mb-6 leading-relaxed">
-              Available for frontend engineering roles, company web projects, and consulting. Reach out directly via email, phone, or the inquiry form.
-            </p>
-
-            <div class="space-y-3.5">
-              <a href="mailto:farajelrmahmoo@gmail.com" class="pro-card pro-card-interactive p-4 flex items-center gap-4 block">
-                <div class="w-11 h-11 rounded-xl bg-blue-600/20 border border-sky-400/40 flex items-center justify-center text-sky-400 text-lg shrink-0">
-                  ✉️
-                </div>
-                <div class="overflow-hidden">
-                  <div class="font-mono-code text-xs text-sky-400 uppercase">Email</div>
-                  <div class="font-display font-bold text-sm sm:text-base truncate">farajelrmahmoo@gmail.com</div>
-                </div>
-              </a>
-
-              <a href="tel:+218922613675" class="pro-card pro-card-interactive p-4 flex items-center gap-4 block">
-                <div class="w-11 h-11 rounded-xl bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-sky-300 text-lg shrink-0">
-                  📞
-                </div>
-                <div>
-                  <div class="font-mono-code text-xs text-sky-400 uppercase">Phone / WhatsApp</div>
-                  <div class="font-display font-bold text-base">+218 922613675</div>
-                </div>
-              </a>
-
-              <div class="pro-card p-4 flex items-center gap-4">
-                <div class="w-11 h-11 rounded-xl bg-blue-600/20 border border-sky-400/40 flex items-center justify-center text-sky-400 text-lg shrink-0">
-                  📍
-                </div>
-                <div>
-                  <div class="font-mono-code text-xs text-sky-400 uppercase">Location</div>
-                  <div class="font-display font-bold text-base">Tripoli, Libya • Remote Worldwide</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-6 flex items-center gap-3">
-              <a href="https://github.com/farajnaser" target="_blank" class="btn-secondary text-xs font-mono-code">
-                GitHub ↗
-              </a>
-              <a href="https://linkedin.com/in/farajalrmah" target="_blank" class="btn-secondary text-xs font-mono-code">
-                LinkedIn ↗
-              </a>
-            </div>
-          </div>
-
-          <div class="lg:col-span-7">
-            <div class="pro-card p-6 sm:p-8 border-blue-500/30">
-              <h3 class="font-display text-xl sm:text-2xl font-extrabold mb-2">
-                Send a Project Inquiry
-              </h3>
-              <p class="text-xs text-slate-500 dark:text-blue-200/70 mb-4">
-                Pick a topic below or write your message directly:
-              </p>
-
-              <div class="flex flex-wrap gap-2 mb-5">
-                <button type="button" data-topic="Company Website / Web Application" class="topic-chip btn-secondary !py-1.5 !px-3 text-xs">
-                  💼 Web Application
-                </button>
-                <button type="button" data-topic="Interactive UI/UX Redesign" class="topic-chip btn-secondary !py-1.5 !px-3 text-xs">
-                  ✨ Interactive UI/UX
-                </button>
-                <button type="button" data-topic="Frontend Developer Role" class="topic-chip btn-secondary !py-1.5 !px-3 text-xs">
-                  🤝 Job Opportunity
-                </button>
-                <button type="button" data-topic="Technical Consulting" class="topic-chip btn-secondary !py-1.5 !px-3 text-xs">
-                  💡 Consulting
-                </button>
-              </div>
-
-              <form id="contact-form" class="space-y-4">
-                <div class="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">First Name</label>
-                    <input type="text" id="first_name" name="first_name" required class="pro-input" />
-                  </div>
-                  <div>
-                    <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">Last Name / Company</label>
-                    <input type="text" id="last_name" name="last_name" required class="pro-input" />
-                  </div>
-                </div>
-                <div class="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">Email Address</label>
-                    <input type="email" id="user_email" name="user_email" required placeholder="name@company.com" class="pro-input" />
-                  </div>
-                  <div>
-                    <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">Phone Number</label>
-                    <input type="tel" id="user_phone" name="user_phone" required placeholder="+218 ..." class="pro-input" />
-                  </div>
-                </div>
-                <div>
-                  <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">Subject</label>
-                  <input type="text" id="subject" name="subject" required placeholder="Project Inquiry" class="pro-input" />
-                </div>
-                <div>
-                  <label class="block text-xs font-bold text-slate-500 dark:text-blue-200/80 mb-1">Message</label>
-                  <textarea id="message_text" name="message_text" rows="4" required placeholder="Tell me about your project goals and timeline..." class="pro-input"></textarea>
-                </div>
-
-                <div id="form-status" class="hidden text-sm font-medium p-4 rounded-xl"></div>
-
-                <div class="grid sm:grid-cols-2 gap-3">
-                  <button type="submit" id="submit-btn" class="w-full btn-primary !py-3 text-sm">
-                    <span id="btn-text">Send Message Now 🚀</span>
-                  </button>
-                  <button type="button" id="whatsapp-send-btn" class="w-full btn-secondary !py-3 text-sm !border-sky-400/50 !text-sky-400">
-                    <span>💬 Send via WhatsApp</span>
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Clean Footer -->
-    <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 border-t border-blue-500/20 mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-600 to-sky-500 text-white font-mono-code font-bold text-xs flex items-center justify-center">
-          &lt;/&gt;
-        </div>
-        <span class="font-mono-code text-xs text-slate-500 dark:text-blue-200/70">© 2026 Faraj Alrmah. All rights reserved.</span>
-      </div>
-      <button id="footer-back-desk-btn" class="btn-primary !py-2 !px-4 text-xs">
-        ← Back to Interactive Desk
-      </button>
-    </footer>
-
-  </div>
+  </footer>
 
   <!-- ==================== IN-SITE STUDIO CMS MODAL ==================== -->
   <div id="studio-modal" class="fixed inset-0 z-50 hidden studio-backdrop bg-black/75 flex items-center justify-center p-4 overflow-y-auto">
@@ -1084,6 +529,8 @@
     </div>
 
   </div>
+
+  
 
   <script type="module" src="./main.js"></script>
 </body>
