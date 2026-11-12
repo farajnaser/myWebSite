@@ -137,11 +137,11 @@ function getResponsiveCameraView(stationKey = 'overview') {
   const look = base.look.clone();
 
   if (isMobile) {
-    // On mobile, #scene is full-screen with a compact hero card at the bottom; frame the 3D desk in the upper area
-    const portraitFactor = Math.min(1.85, Math.max(1.0, 1.1 / Math.max(aspect, 0.48)));
+    // On mobile, #scene is full-screen with a compact hero card at the bottom; frame the full 3D desk in the upper area
+    const portraitFactor = Math.min(2.1, Math.max(1.05, 1.15 / Math.max(aspect, 0.45)));
     if (stationKey === 'overview') {
-      pos.set(0, 4.4 * (0.9 + portraitFactor * 0.18), 8.8 * (0.9 + portraitFactor * 0.25));
-      look.set(0, 0.2, 0);
+      pos.set(0, 4.8 * (0.95 + portraitFactor * 0.22), 11.2 * (0.95 + portraitFactor * 0.26));
+      look.set(0, -0.35, 0);
     } else {
       // Shift look target downward so the focused object sits cleanly in the top 38svh above the window sheet
       pos.set(base.look.x, base.pos.y + 0.25, base.pos.z + (portraitFactor - 0.7) * 1.25);

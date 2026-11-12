@@ -27231,10 +27231,10 @@ function getResponsiveCameraView(stationKey = "overview") {
   const pos = base.pos.clone();
   const look = base.look.clone();
   if (isMobile) {
-    const portraitFactor = Math.min(1.85, Math.max(1, 1.1 / Math.max(aspect2, 0.48)));
+    const portraitFactor = Math.min(2.1, Math.max(1.05, 1.15 / Math.max(aspect2, 0.45)));
     if (stationKey === "overview") {
-      pos.set(0, 4.4 * (0.9 + portraitFactor * 0.18), 8.8 * (0.9 + portraitFactor * 0.25));
-      look.set(0, 0.2, 0);
+      pos.set(0, 4.8 * (0.95 + portraitFactor * 0.22), 11.2 * (0.95 + portraitFactor * 0.26));
+      look.set(0, -0.35, 0);
     } else {
       pos.set(base.look.x, base.pos.y + 0.25, base.pos.z + (portraitFactor - 0.7) * 1.25);
       look.set(base.look.x, base.look.y - 0.85, base.look.z);
