@@ -110,7 +110,8 @@ const deskCanvas = document.getElementById('desk-canvas');
 const hoverTooltip = document.getElementById('desk-hover-tooltip');
 
 let scene, camera, renderer, studioRoot, rendererOpaque = false;
-let ambientLight, keyLight, lampSpotLight, lampBulbMat, rgbStripMat;
+let ambientLight, keyLight, blueBackGlow, skyFillLight, lampSpotLight, lampBulbMat, rgbStripMat;
+let floorMat, floorRingMat, deskTopMat, metalMat, deskMatMat, bezelMat, kbCaseMat;
 let isLampOn = true;
 let activeStation = 'overview';
 
@@ -319,6 +320,10 @@ function initDesk3D() {
 
   if (!renderer) {
     console.error('WebGL init failed across all fallbacks');
+    const fallbackNote = document.createElement('div');
+    fallbackNote.style.cssText = 'position:absolute;inset:0;display:grid;place-items:center;padding:2rem;text-align:center;color:var(--muted);font-size:14px;pointer-events:none;';
+    fallbackNote.textContent = '3D Desk preview requires WebGL enabled in this browser.';
+    sceneEl.appendChild(fallbackNote);
     return;
   }
 
@@ -346,11 +351,11 @@ function initDesk3D() {
   keyLight.shadow.mapSize.height = 1024;
   scene.add(keyLight);
 
-  const blueBackGlow = new THREE.PointLight(0x2563eb, 3.8, 14);
+  blueBackGlow = new THREE.PointLight(0x2563eb, 3.8, 14);
   blueBackGlow.position.set(0, 2.3, -2.1);
   scene.add(blueBackGlow);
 
-  const skyFillLight = new THREE.PointLight(0x0ea5e9, 2.6, 13);
+  skyFillLight = new THREE.PointLight(0x0ea5e9, 2.6, 13);
   skyFillLight.position.set(3.5, 2.5, 1.5);
   scene.add(skyFillLight);
 
@@ -365,26 +370,29 @@ function initDesk3D() {
   scene.add(studioRoot);
 
   // Studio Platform
+  floorMat = new THREE.MeshStandardMaterial({ color: 0x061229, roughness: 0.65, metalness: 0.25 });
   const floorMesh = new THREE.Mesh(
     new THREE.CylinderGeometry(5.5, 5.8, 0.22, 48),
-    new THREE.MeshStandardMaterial({ color: 0x061229, roughness: 0.65, metalness: 0.25 })
+    floorMat
   );
   floorMesh.position.y = -0.9;
   floorMesh.receiveShadow = true;
   studioRoot.add(floorMesh);
 
+  floorRingMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, side: THREE.DoubleSide });
   const floorRing = new THREE.Mesh(
     new THREE.RingGeometry(5.35, 5.48, 48),
-    new THREE.MeshBasicMaterial({ color: 0x38bdf8, side: THREE.DoubleSide })
+    floorRingMat
   );
   floorRing.rotation.x = -Math.PI / 2;
   floorRing.position.y = -0.78;
   studioRoot.add(floorRing);
 
   // Desk Surface
+  deskTopMat = new THREE.MeshStandardMaterial({ color: 0x0f2142, roughness: 0.35, metalness: 0.28 });
   const deskTop = new THREE.Mesh(
     new THREE.BoxGeometry(6.8, 0.2, 3.1),
-    new THREE.MeshStandardMaterial({ color: 0x0f2142, roughness: 0.35, metalness: 0.28 })
+    deskTopMat
   );
   deskTop.position.set(0, 0.75, 0);
   deskTop.castShadow = true;
@@ -398,7 +406,7 @@ function initDesk3D() {
   studioRoot.add(rgbBar);
 
   // Desk Legs
-  const metalMat = new THREE.MeshStandardMaterial({ color: 0x1e3a8a, metalness: 0.75, roughness: 0.28 });
+  metalMat = new THREE.MeshStandardMaterial({ color: 0x1e3a8a, metalness: 0.75, roughness: 0.28 });
   [[-3.1, -0.05, -1.25], [3.1, -0.05, -1.25], [-3.1, -0.05, 1.25], [3.1, -0.05, 1.25]].forEach(([x, y, z]) => {
     const leg = new THREE.Mesh(new THREE.BoxGeometry(0.16, 1.55, 0.16), metalMat);
     leg.position.set(x, y, z);
@@ -406,9 +414,10 @@ function initDesk3D() {
   });
 
   // Desk Mat
+  deskMatMat = new THREE.MeshStandardMaterial({ color: 0x07142b, roughness: 0.85 });
   const deskMatMesh = new THREE.Mesh(
     new THREE.BoxGeometry(3.4, 0.02, 1.28),
-    new THREE.MeshStandardMaterial({ color: 0x07142b, roughness: 0.85 })
+    deskMatMat
   );
   deskMatMesh.position.set(0, 0.86, 0.58);
   studioRoot.add(deskMatMesh);
@@ -419,7 +428,7 @@ function initDesk3D() {
   shelf.position.set(0, 0.92, -0.78);
   monitorsGroup.add(shelf);
 
-  const bezelMat = new THREE.MeshStandardMaterial({ color: 0x050c1a, roughness: 0.3, metalness: 0.6 });
+  bezelMat = new THREE.MeshStandardMaterial({ color: 0x050c1a, roughness: 0.3, metalness: 0.6 });
   const mainMonitor = new THREE.Mesh(new THREE.BoxGeometry(2.05, 1.2, 0.08), bezelMat);
   mainMonitor.position.set(0.35, 1.78, -0.75);
   mainMonitor.castShadow = true;
@@ -453,9 +462,10 @@ function initDesk3D() {
 
   // 2. MECHANICAL KEYBOARD & MOUSE ('keyboard' -> #skills)
   const kbGroup = new THREE.Group();
+  kbCaseMat = new THREE.MeshStandardMaterial({ color: 0x1e3a8a, metalness: 0.6, roughness: 0.3 });
   const kbCase = new THREE.Mesh(
     new THREE.BoxGeometry(1.3, 0.08, 0.48),
-    new THREE.MeshStandardMaterial({ color: 0x1e3a8a, metalness: 0.6, roughness: 0.3 })
+    kbCaseMat
   );
   kbCase.position.set(0.15, 0.9, 0.62);
   kbCase.rotation.x = 0.07;
@@ -740,7 +750,12 @@ function initDesk3D() {
       sp.material.opacity = (1 - cycle) * 0.45;
     });
 
-    renderer.render(scene, camera);
+    try {
+      renderer.render(scene, camera);
+    } catch (_) {
+      renderer.shadowMap.enabled = false;
+      try { renderer.render(scene, camera); } catch (__) {}
+    }
   }
   animate();
 }
@@ -2005,8 +2020,31 @@ function applyTheme(theme) {
     themeToggleBtn.textContent = isLight ? '🌙' : '☀️';
     themeToggleBtn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
   }
-  if (ambientLight) ambientLight.intensity = isLight ? 1.75 : 0.95;
-  if (keyLight) keyLight.intensity = isLight ? 2.35 : 1.8;
+  if (ambientLight) {
+    ambientLight.color.setHex(isLight ? 0xffffff : 0xdbeafe);
+    ambientLight.intensity = isLight ? 1.55 : 0.95;
+  }
+  if (keyLight) keyLight.intensity = isLight ? 2.15 : 1.8;
+  if (blueBackGlow) blueBackGlow.intensity = isLight ? 0.55 : 3.8;
+  if (skyFillLight) skyFillLight.intensity = isLight ? 0.85 : 2.6;
+
+  // Transform 3D desk materials between Daylight Studio (oak + aluminum) and Midnight Studio (navy + neon)
+  if (floorMat) floorMat.color.setHex(isLight ? 0xdbeafe : 0x061229);
+  if (floorRingMat) floorRingMat.color.setHex(isLight ? 0x0284c7 : 0x38bdf8);
+  if (deskTopMat) {
+    deskTopMat.color.setHex(isLight ? 0xe5d3b3 : 0x0f2142);
+    deskTopMat.roughness = isLight ? 0.55 : 0.35;
+    deskTopMat.metalness = isLight ? 0.08 : 0.28;
+  }
+  if (metalMat) {
+    metalMat.color.setHex(isLight ? 0xcbd5e1 : 0x1e3a8a);
+    metalMat.metalness = isLight ? 0.55 : 0.75;
+  }
+  if (deskMatMat) deskMatMat.color.setHex(isLight ? 0x94a3b8 : 0x07142b);
+  if (bezelMat) bezelMat.color.setHex(isLight ? 0x1e293b : 0x050c1a);
+  if (kbCaseMat) kbCaseMat.color.setHex(isLight ? 0xe2e8f0 : 0x1e3a8a);
+  if (rgbStripMat) rgbStripMat.color.setHex(isLight ? 0x0284c7 : 0x38bdf8);
+
   if (rendererOpaque && scene) {
     scene.background = new THREE.Color(isLight ? 0xe2e8f0 : 0x071430);
   }
