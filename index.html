@@ -36,18 +36,18 @@
 
   <!-- ==================== CLEAN SAPPHIRE TOP NAVIGATION BAR ==================== -->
   <header class="fixed top-0 left-0 right-0 z-50 pro-navbar">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between gap-4">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 h-full flex items-center justify-between gap-2 sm:gap-4">
 
       <!-- Brand Identity -->
-      <button id="brand-desk-btn" class="flex items-center gap-3 text-left cursor-pointer">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-sky-500 text-white font-mono-code font-bold text-xs flex items-center justify-center shadow-md border border-sky-300/40">
+      <button id="brand-desk-btn" class="flex items-center gap-2 sm:gap-3 text-left cursor-pointer shrink-0">
+        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-blue-600 to-sky-500 text-white font-mono-code font-bold text-xs flex items-center justify-center shadow-md border border-sky-300/40">
           &lt;/&gt;
         </div>
         <div>
-          <span class="font-display font-extrabold text-base tracking-tight block leading-none">
+          <span class="font-display font-extrabold text-sm sm:text-base tracking-tight block leading-none">
             Faraj <span class="text-sky-400">Alrmah</span>
           </span>
-          <span class="font-mono-code text-[10px] text-sky-400/80 block mt-0.5">
+          <span class="font-mono-code text-[10px] text-sky-400/80 hidden sm:block mt-0.5">
             Frontend Web Developer
           </span>
         </div>
@@ -65,17 +65,18 @@
       </nav>
 
       <!-- Essential Action Controls Only -->
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-1.5 sm:gap-2">
         <button id="top-back-desk-btn" class="hidden nav-mode-btn">
           <span>←</span>
-          <span>Back to Desk</span>
+          <span class="hidden sm:inline">Back to Desk</span>
+          <span class="sm:hidden">Desk</span>
         </button>
 
         <button id="toggle-full-site-btn" class="nav-mode-btn">
           <span id="full-site-btn-label">Full Website</span>
         </button>
 
-        <button id="open-studio-btn" class="nav-cms-btn" title="Add or Edit Projects (Ctrl+Shift+A)">
+        <button id="open-studio-btn" class="hidden md:inline-flex nav-cms-btn" title="Add or Edit Projects (Ctrl+Shift+A)">
           <span>+ Manage Work</span>
           <span id="studio-status-dot" class="w-2 h-2 rounded-full bg-sky-400"></span>
         </button>
@@ -84,7 +85,7 @@
           <span id="theme-icon">☀️</span>
         </button>
 
-        <button id="mobile-menu-btn" class="lg:hidden nav-tool-btn !p-2">
+        <button id="mobile-menu-btn" class="lg:hidden nav-tool-btn !p-2" aria-label="Open Menu">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
@@ -93,15 +94,18 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden lg:hidden border-t border-blue-800/60 bg-slate-950/95 px-6 py-4">
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-blue-800/60 bg-slate-950/98 px-4 py-3.5 shadow-2xl">
       <div class="grid grid-cols-2 gap-2">
-        <button data-screen-nav="desk" class="nav-screen-btn justify-center">Desk</button>
-        <button data-screen-nav="projects" class="nav-screen-btn justify-center">Projects</button>
-        <button data-screen-nav="about" class="nav-screen-btn justify-center">About</button>
-        <button data-screen-nav="services" class="nav-screen-btn justify-center">Services</button>
-        <button data-screen-nav="skills" class="nav-screen-btn justify-center">Skills</button>
-        <button data-screen-nav="arcade" class="nav-screen-btn justify-center">Break Room</button>
-        <button data-screen-nav="contact" class="nav-screen-btn justify-center col-span-2">Contact</button>
+        <button data-screen-nav="desk" class="nav-screen-btn justify-center">🖥️ 3D Desk</button>
+        <button data-screen-nav="projects" class="nav-screen-btn justify-center">📁 Projects</button>
+        <button data-screen-nav="about" class="nav-screen-btn justify-center">👤 About</button>
+        <button data-screen-nav="services" class="nav-screen-btn justify-center">💼 Services</button>
+        <button data-screen-nav="skills" class="nav-screen-btn justify-center">⌨️ Skills</button>
+        <button data-screen-nav="arcade" class="nav-screen-btn justify-center">🕹️ Break Room</button>
+        <button data-screen-nav="contact" class="nav-screen-btn justify-center col-span-2">📱 Direct Contact</button>
+        <button id="mobile-open-studio-btn" class="nav-cms-btn justify-center col-span-2 !py-2.5 mt-1">
+          <span>🔐 + Manage Work / Studio CMS</span>
+        </button>
       </div>
     </div>
   </header>
@@ -113,16 +117,19 @@
 
     <!-- Clean Non-Overlapping Top Strip (Sits ABOVE the Desk Canvas, Never Covers Models) -->
     <div class="desk-header-strip">
-      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
-        <div class="flex items-center gap-3 text-white">
-          <span class="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
-          <span class="font-display font-bold">Faraj Alrmah's Interactive Desk</span>
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
+        <div class="flex items-center gap-2 sm:gap-3 text-white">
+          <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-sky-400 animate-pulse shrink-0"></span>
+          <span class="font-display font-bold text-xs sm:text-sm">Faraj's Interactive Desk</span>
           <span class="hidden md:inline text-blue-200/80">
             — Click any item on the desk (Monitors, Keyboard, ID Frame, Client Pad, Arcade, Phone, or Coffee) to open its screen.
           </span>
+          <span class="md:hidden text-[11px] text-sky-300/90">
+            — Tap any 3D object or swipe to look around
+          </span>
         </div>
 
-        <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-3">
           <span id="energy-status-badge" class="font-mono-code text-xs text-sky-300">
             ☕ Coffee Today: 3 Cups (Focus 100%)
           </span>
@@ -131,7 +138,7 @@
     </div>
 
     <!-- Playful Blue Toast Notification (When clicking Coffee or Lamp on the Desk) -->
-    <div id="desk-toast" class="hidden fixed top-20 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-700 to-sky-600 text-white font-bold text-xs sm:text-sm shadow-2xl border border-sky-300 flex items-center gap-2">
+    <div id="desk-toast" class="hidden fixed top-16 sm:top-20 left-1/2 -translate-x-1/2 z-50 w-[92vw] max-w-md px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-700 to-sky-600 text-white font-bold text-xs sm:text-sm shadow-2xl border border-sky-300 flex items-center justify-center gap-2 text-center">
       <span id="desk-toast-icon">☕</span>
       <span id="desk-toast-text">Fresh espresso poured! Coding velocity boosted by 200%!</span>
     </div>
@@ -142,6 +149,20 @@
       <canvas id="desk-canvas"></canvas>
     </div>
 
+    <!-- Mobile & Tablet Quick-Tap Station Bar (Sits cleanly below 3D canvas on touch devices) -->
+    <div class="desk-mobile-dock lg:hidden">
+      <div class="flex items-center gap-2 min-w-max mx-auto px-1">
+        <button type="button" data-desk-station="monitors" class="desk-quick-pill">🖥️ Projects</button>
+        <button type="button" data-desk-station="portrait" class="desk-quick-pill">👤 About</button>
+        <button type="button" data-desk-station="notebook" class="desk-quick-pill">💼 Services</button>
+        <button type="button" data-desk-station="keyboard" class="desk-quick-pill">⌨️ Skills</button>
+        <button type="button" data-desk-station="arcade" class="desk-quick-pill">🕹️ Break Room</button>
+        <button type="button" data-desk-station="phone" class="desk-quick-pill">📱 Contact</button>
+        <button type="button" data-desk-station="coffee" class="desk-quick-pill">☕ Coffee</button>
+        <button type="button" data-desk-station="lamp" class="desk-quick-pill">💡 Lamp</button>
+      </div>
+    </div>
+
   </main>
 
   <!-- ====================================================================== -->
@@ -149,25 +170,25 @@
   <!-- ====================================================================== -->
   <div id="screens-container" class="hidden-overlay">
 
-    <!-- Clean Screen Control Bar (Only Back to Desk + Screen Title + Full Website Toggle) -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-      <div class="pro-card p-4 border-blue-500/35 flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center gap-3">
-          <button id="screen-back-desk-btn" class="nav-mode-btn !py-2 !px-4 text-xs sm:text-sm">
+    <!-- Clean Screen Control Bar (Sticky on mobile for instant 1-tap return to Desk) -->
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 mb-4 sm:mb-6 sticky top-0 z-30">
+      <div class="pro-card p-3 sm:p-4 border-blue-500/35 flex flex-wrap items-center justify-between gap-2 sm:gap-3 backdrop-blur-md">
+        <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+          <button id="screen-back-desk-btn" class="nav-mode-btn !py-1.5 sm:!py-2 !px-3 sm:!px-4 text-xs sm:text-sm shrink-0">
             <span>←</span>
             <span>Back to Desk</span>
           </button>
           <div class="h-5 w-px bg-blue-500/30 hidden sm:block"></div>
-          <div class="flex items-center gap-2">
-            <span id="active-screen-icon" class="text-lg">🖥️</span>
-            <span id="active-screen-title" class="font-display font-extrabold text-sm sm:text-base text-blue-600 dark:text-sky-400">
+          <div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <span id="active-screen-icon" class="text-base sm:text-lg shrink-0">🖥️</span>
+            <span id="active-screen-title" class="font-display font-extrabold text-xs sm:text-base text-blue-600 dark:text-sky-400 truncate">
               Featured Projects &amp; Case Studies
             </span>
           </div>
         </div>
 
-        <button id="screen-show-all-btn" class="btn-secondary !py-2 !px-3.5 text-xs font-bold !border-sky-500/40 !text-sky-400">
-          View Full Website
+        <button id="screen-show-all-btn" class="btn-secondary !py-1.5 sm:!py-2 !px-2.5 sm:!px-3.5 text-[11px] sm:text-xs font-bold !border-sky-500/40 !text-sky-400 shrink-0">
+          Full Website
         </button>
       </div>
     </div>

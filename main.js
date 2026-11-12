@@ -126,10 +126,35 @@ const cameraViews = {
   coffee:   { pos: new THREE.Vector3(1.5, 1.8, 2.35), look: new THREE.Vector3(1.45, 1.05, 0.62) }
 };
 
-const currentCamPos = new THREE.Vector3().copy(cameraViews.overview.pos);
-const currentCamLook = new THREE.Vector3().copy(cameraViews.overview.look);
-const targetCamPos = new THREE.Vector3().copy(cameraViews.overview.pos);
-const targetCamLook = new THREE.Vector3().copy(cameraViews.overview.look);
+function getResponsiveCameraView(stationKey = 'overview') {
+  const base = cameraViews[stationKey] || cameraViews.overview;
+  const w = deskCanvasWrap ? deskCanvasWrap.clientWidth : window.innerWidth;
+  const h = deskCanvasWrap ? Math.max(1, deskCanvasWrap.clientHeight) : window.innerHeight;
+  const aspect = w / h;
+
+  const pos = base.pos.clone();
+  const look = base.look.clone();
+
+  // Portrait & narrow mobile screens: pull camera back so the entire 3D desk fits cleanly
+  if (aspect < 1.15) {
+    const portraitFactor = Math.min(2.05, Math.max(1.0, 1.15 / Math.max(aspect, 0.48)));
+    if (stationKey === 'overview') {
+      pos.z = base.pos.z * (0.92 + portraitFactor * 0.42);
+      pos.y = base.pos.y * (0.95 + portraitFactor * 0.22);
+      look.y = 0.78;
+    } else {
+      pos.z = base.pos.z + (portraitFactor - 1.0) * 1.45;
+      pos.y = base.pos.y + (portraitFactor - 1.0) * 0.35;
+    }
+  }
+  return { pos, look };
+}
+
+const initialView = getResponsiveCameraView('overview');
+const currentCamPos = new THREE.Vector3().copy(initialView.pos);
+const currentCamLook = new THREE.Vector3().copy(initialView.look);
+const targetCamPos = new THREE.Vector3().copy(initialView.pos);
+const targetCamLook = new THREE.Vector3().copy(initialView.look);
 
 const stationConfig = {
   monitors: {
@@ -221,18 +246,46 @@ function registerStationGroup(group, key) {
       clickableMeshes.push(child);
     }
   });
+
+  // Add an invisible expanded touch hitbox so mobile finger taps register effortlessly
+  const box = new THREE.Box3().setFromObject(group);
+  if (!box.isEmpty()) {
+    const size = new THREE.Vector3();
+    const center = new THREE.Vector3();
+    box.getSize(size);
+    box.getCenter(center);
+    group.worldToLocal(center);
+
+    const hitGeo = new THREE.BoxGeometry(
+      Math.max(0.78, size.x + 0.28),
+      Math.max(0.68, size.y + 0.28),
+      Math.max(0.78, size.z + 0.28)
+    );
+    const hitMat = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false });
+    const hitMesh = new THREE.Mesh(hitGeo, hitMat);
+    hitMesh.position.copy(center);
+    hitMesh.userData.station = key;
+    group.add(hitMesh);
+    clickableMeshes.push(hitMesh);
+  }
 }
 
 function initDesk3D() {
   if (!deskCanvas || !deskCanvasWrap) return;
 
   scene = new THREE.Scene();
+  const initialAspect = deskCanvasWrap.clientWidth / Math.max(1, deskCanvasWrap.clientHeight);
   camera = new THREE.PerspectiveCamera(
-    39,
-    deskCanvasWrap.clientWidth / deskCanvasWrap.clientHeight,
+    initialAspect < 0.85 ? 48 : 39,
+    initialAspect,
     0.1,
     100
   );
+  const startView = getResponsiveCameraView('overview');
+  currentCamPos.copy(startView.pos);
+  currentCamLook.copy(startView.look);
+  targetCamPos.copy(startView.pos);
+  targetCamLook.copy(startView.look);
   camera.position.copy(currentCamPos);
   camera.lookAt(currentCamLook);
 
@@ -542,18 +595,21 @@ function initDesk3D() {
   studioRoot.add(lampGroup);
   registerStationGroup(lampGroup, 'lamp');
 
-  // --- RAYCASTING + SINGLE CURSOR TOOLTIP + DRAG ROTATION ---
+  // --- RAYCASTING + SINGLE CURSOR TOOLTIP + DRAG ROTATION & MOBILE TOUCH PAN ---
   const raycaster = new THREE.Raycaster();
   const pointer = new THREE.Vector2();
   let isDragging = false;
   let dragDistance = 0;
   let prevX = 0;
+  let prevY = 0;
   let targetRotY = 0;
+  let targetPanX = 0;
 
   deskCanvas.addEventListener('pointerdown', (e) => {
     isDragging = true;
     dragDistance = 0;
     prevX = e.clientX;
+    prevY = e.clientY;
   });
 
   deskCanvas.addEventListener('pointermove', (e) => {
@@ -565,12 +621,19 @@ function initDesk3D() {
 
     if (isDragging && activeStation === 'overview') {
       const dx = e.clientX - prevX;
-      dragDistance += Math.abs(dx);
-      targetRotY = Math.max(-0.55, Math.min(0.55, targetRotY + dx * 0.0045));
+      const dy = e.clientY - prevY;
+      dragDistance += Math.hypot(dx, dy);
+      targetRotY = Math.max(-0.55, Math.min(0.55, targetRotY + dx * 0.005));
+      if (rect.width < 768) {
+        targetPanX = Math.max(-1.25, Math.min(1.25, targetPanX - dx * 0.006));
+      }
       prevX = e.clientX;
+      prevY = e.clientY;
       hoverTooltip?.classList.remove('visible');
       return;
     }
+
+    if (e.pointerType === 'touch') return;
 
     raycaster.setFromCamera(pointer, camera);
     const hits = raycaster.intersectObjects(clickableMeshes, false);
@@ -597,7 +660,8 @@ function initDesk3D() {
   window.addEventListener('pointerup', (e) => {
     if (!isDragging) return;
     isDragging = false;
-    if (dragDistance > 6) return;
+    const maxTapMove = e.pointerType === 'touch' ? 16 : 7;
+    if (dragDistance > maxTapMove) return;
 
     const rect = deskCanvas.getBoundingClientRect();
     if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) return;
@@ -613,6 +677,7 @@ function initDesk3D() {
   });
 
   window.addEventListener('resize', resizeDeskRenderer);
+  window.addEventListener('orientationchange', () => setTimeout(resizeDeskRenderer, 120));
 
   const clock = new THREE.Clock();
   function animate() {
@@ -621,8 +686,10 @@ function initDesk3D() {
 
     if (activeStation !== 'overview') {
       targetRotY = 0;
+      targetPanX = 0;
     }
     studioRoot.rotation.y += (targetRotY - studioRoot.rotation.y) * 0.08;
+    studioRoot.position.x += (-targetPanX - studioRoot.position.x) * 0.08;
 
     currentCamPos.lerp(targetCamPos, 0.085);
     currentCamLook.lerp(targetCamLook, 0.095);
@@ -642,9 +709,16 @@ function initDesk3D() {
 
 function resizeDeskRenderer() {
   if (!deskCanvasWrap || !renderer || !camera) return;
-  camera.aspect = deskCanvasWrap.clientWidth / deskCanvasWrap.clientHeight;
+  const w = Math.max(1, deskCanvasWrap.clientWidth);
+  const h = Math.max(1, deskCanvasWrap.clientHeight);
+  camera.aspect = w / h;
+  camera.fov = camera.aspect < 0.85 ? 48 : 39;
   camera.updateProjectionMatrix();
-  renderer.setSize(deskCanvasWrap.clientWidth, deskCanvasWrap.clientHeight);
+  renderer.setSize(w, h);
+
+  const view = getResponsiveCameraView(activeStation);
+  targetCamPos.copy(view.pos);
+  targetCamLook.copy(view.look);
 }
 
 // ============================================================================
@@ -727,7 +801,7 @@ function openDedicatedScreen(screenId, withCameraZoomDelay = false) {
 
   playSound('zoom');
   activeStation = meta.station;
-  const view = cameraViews[activeStation] || cameraViews.overview;
+  const view = getResponsiveCameraView(activeStation);
   targetCamPos.copy(view.pos);
   targetCamLook.copy(view.look);
 
@@ -763,13 +837,15 @@ function openDedicatedScreen(screenId, withCameraZoomDelay = false) {
 function returnToDeskView() {
   playSound('click');
   activeStation = 'overview';
-  targetCamPos.copy(cameraViews.overview.pos);
-  targetCamLook.copy(cameraViews.overview.look);
+  const view = getResponsiveCameraView('overview');
+  targetCamPos.copy(view.pos);
+  targetCamLook.copy(view.look);
 
   document.body.classList.remove('full-website-mode');
   document.body.classList.add('desk-controller-mode');
   screensContainer?.classList.add('hidden-overlay');
   topBackDeskBtn?.classList.add('hidden');
+  document.getElementById('mobile-menu')?.classList.add('hidden');
 
   document.querySelectorAll('[data-screen-nav]').forEach((btn) => {
     btn.classList.toggle('active', btn.getAttribute('data-screen-nav') === 'desk');
@@ -785,13 +861,15 @@ function returnToDeskView() {
 function enterFullWebsiteMode() {
   playSound('zoom');
   activeStation = 'overview';
-  targetCamPos.copy(cameraViews.overview.pos);
-  targetCamLook.copy(cameraViews.overview.look);
+  const view = getResponsiveCameraView('overview');
+  targetCamPos.copy(view.pos);
+  targetCamLook.copy(view.look);
 
   document.body.classList.remove('desk-controller-mode');
   document.body.classList.add('full-website-mode');
   screensContainer?.classList.remove('hidden-overlay');
   topBackDeskBtn?.classList.remove('hidden');
+  document.getElementById('mobile-menu')?.classList.add('hidden');
 
   if (activeScreenIcon) activeScreenIcon.textContent = '🌐';
   if (activeScreenTitle) activeScreenTitle.textContent = 'Full Website View (All Sections)';
@@ -809,6 +887,13 @@ document.querySelectorAll('[data-screen-nav]').forEach((btn) => {
   btn.addEventListener('click', () => {
     const target = btn.getAttribute('data-screen-nav') || 'desk';
     openDedicatedScreen(target, false);
+  });
+});
+
+document.querySelectorAll('[data-desk-station]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const st = btn.getAttribute('data-desk-station');
+    if (st) handleDeskStationClick(st);
   });
 });
 
@@ -1826,6 +1911,10 @@ window.moveProject = async (idx, dir) => {
 };
 
 document.getElementById('open-studio-btn')?.addEventListener('click', () => openStudioModal());
+document.getElementById('mobile-open-studio-btn')?.addEventListener('click', () => {
+  document.getElementById('mobile-menu')?.classList.add('hidden');
+  openStudioModal();
+});
 document.getElementById('projects-add-btn')?.addEventListener('click', () => openStudioModal());
 document.getElementById('banner-new-project-btn')?.addEventListener('click', () => showProjectEditor(null));
 document.getElementById('close-pin-modal')?.addEventListener('click', closeStudioModal);
