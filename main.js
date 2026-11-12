@@ -142,8 +142,9 @@ function getResponsiveCameraView(stationKey = 'overview') {
       pos.set(0, 4.4 * (0.9 + portraitFactor * 0.18), 8.8 * (0.9 + portraitFactor * 0.25));
       look.set(0, 0.2, 0);
     } else {
-      pos.set(base.look.x, base.pos.y + 0.15, base.pos.z + (portraitFactor - 0.85) * 1.2);
-      look.copy(base.look);
+      // Shift look target downward so the focused object sits cleanly in the top 38svh above the window sheet
+      pos.set(base.look.x, base.pos.y + 0.25, base.pos.z + (portraitFactor - 0.7) * 1.25);
+      look.set(base.look.x, base.look.y - 0.85, base.look.z);
     }
   } else {
     // On desktop, hero is on the left (overview -> desk on right); chapters are on the right (desk on left)
@@ -305,7 +306,7 @@ function initDesk3D() {
     powerPreference: 'high-performance'
   });
   renderer.setSize(sceneEl.clientWidth, sceneEl.clientHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -640,6 +641,10 @@ function initDesk3D() {
 
     if (e.pointerType === 'touch') return;
 
+    const now = performance.now();
+    if (now - (deskCanvas._lastHoverCheck || 0) < 28) return;
+    deskCanvas._lastHoverCheck = now;
+
     raycaster.setFromCamera(pointer, camera);
     const hits = raycaster.intersectObjects(clickableMeshes, false);
     if (hits.length > 0) {
@@ -694,8 +699,8 @@ function initDesk3D() {
     }
     studioRoot.rotation.y += (targetRotY - studioRoot.rotation.y) * 0.075;
 
-    currentCamPos.lerp(targetCamPos, 0.065);
-    currentCamLook.lerp(targetCamLook, 0.075);
+    currentCamPos.lerp(targetCamPos, 0.085);
+    currentCamLook.lerp(targetCamLook, 0.095);
     camera.position.copy(currentCamPos);
     camera.lookAt(currentCamLook);
 

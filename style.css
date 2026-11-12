@@ -115,9 +115,7 @@ a { color: inherit; }
 }
 
 .site-nav.scrolled {
-  background: rgba(5, 11, 24, 0.82);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(5, 11, 24, 0.94);
   border-bottom-color: var(--line);
 }
 
@@ -312,16 +310,15 @@ a { color: inherit; }
 .panel {
   pointer-events: auto;
   width: min(620px, 50vw);
-  background: var(--panel);
+  background: rgba(9, 17, 36, 0.95);
   border: 1px solid var(--line);
   border-radius: 22px;
   padding: clamp(1.35rem, 2.5vw, 2.25rem);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.75);
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transform: translateY(20px);
+  will-change: opacity, transform;
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .mobile-win-bar,
@@ -1183,16 +1180,17 @@ select.pro-input option { background: var(--panel-solid); }
   body.mobile-window-open .mobile-win-bar {
     display: flex;
     position: fixed;
-    top: var(--nav-h);
+    top: 38svh;
     left: 0;
     right: 0;
-    height: 48px;
+    height: 46px;
     z-index: 45;
-    background: rgba(5, 11, 24, 0.96);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: #081226;
+    border-top: 1px solid var(--line-strong);
     border-bottom: 1px solid var(--line);
-    padding: 0 0.85rem;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -14px 36px -10px rgba(0, 0, 0, 0.85);
+    padding: 0 0.9rem;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
@@ -1217,15 +1215,15 @@ select.pro-input option { background: var(--panel-solid); }
   body.mobile-window-open .chapter.mobile-active {
     display: block;
     position: fixed;
-    inset: calc(var(--nav-h) + 48px) 0 0 0;
+    inset: calc(38svh + 46px) 0 0 0;
     z-index: 40;
     min-height: 0;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     background: var(--ink);
-    padding: 0.85rem 0.75rem 2.5rem;
+    padding: 0.75rem 0.75rem 2.25rem;
     pointer-events: auto;
-    animation: mobileWinIn 0.25s ease;
+    animation: mobileWinIn 0.22s ease;
   }
 
   @keyframes mobileWinIn {
