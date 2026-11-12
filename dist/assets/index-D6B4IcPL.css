@@ -478,8 +478,9 @@ a { color: inherit; }
   display: none;
 }
 
-body.desktop-window-open .chapter--hero {
-  display: none;
+body.desktop-window-open .chapter--hero,
+body.desktop-window-open #desk-2d-fallback {
+  display: none !important;
 }
 
 body.desktop-window-open .chapter.desktop-active {

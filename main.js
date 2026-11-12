@@ -303,9 +303,9 @@ function initDesk3D() {
   camera.lookAt(currentCamLook);
 
   const rendererConfigs = [
-    { canvas: deskCanvas, antialias: true, alpha: true, powerPreference: 'high-performance' },
-    { canvas: deskCanvas, antialias: true, alpha: true },
-    { canvas: deskCanvas, antialias: false, alpha: false }
+    { canvas: deskCanvas, antialias: true, alpha: true, powerPreference: 'high-performance', failIfMajorPerformanceCaveat: false },
+    { canvas: deskCanvas, antialias: true, alpha: true, failIfMajorPerformanceCaveat: false },
+    { canvas: deskCanvas, antialias: false, alpha: false, failIfMajorPerformanceCaveat: false }
   ];
 
   for (let i = 0; i < rendererConfigs.length; i++) {
@@ -319,11 +319,27 @@ function initDesk3D() {
   }
 
   if (!renderer) {
-    console.error('WebGL init failed across all fallbacks');
-    const fallbackNote = document.createElement('div');
-    fallbackNote.style.cssText = 'position:absolute;inset:0;display:grid;place-items:center;padding:2rem;text-align:center;color:var(--muted);font-size:14px;pointer-events:none;';
-    fallbackNote.textContent = '3D Desk preview requires WebGL enabled in this browser.';
-    sceneEl.appendChild(fallbackNote);
+    console.warn('WebGL unavailable; rendering 2D interactive desk fallback.');
+    const fallbackWrap = document.createElement('div');
+    fallbackWrap.id = 'desk-2d-fallback';
+    fallbackWrap.style.cssText = 'position:fixed;inset:var(--nav-h) 0 0 0;display:flex;justify-content:flex-end;align-items:center;padding:2rem clamp(1rem,4vw,4rem);pointer-events:none;z-index:5;';
+    fallbackWrap.innerHTML = `
+      <div class="panel" style="opacity:1;transform:none;width:min(480px,42vw);pointer-events:auto;">
+        <div class="chapter-tag"><span class="num">2D</span><span class="sep"></span>Interactive Desk</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem;">
+          <button type="button" data-fallback-st="monitors" class="btn-secondary" style="justify-content:flex-start;">🖥️ Work · Monitors</button>
+          <button type="button" data-fallback-st="portrait" class="btn-secondary" style="justify-content:flex-start;">👤 About · Portrait</button>
+          <button type="button" data-fallback-st="notebook" class="btn-secondary" style="justify-content:flex-start;">💼 Services · Pad</button>
+          <button type="button" data-fallback-st="keyboard" class="btn-secondary" style="justify-content:flex-start;">⌨️ Skills · Keyboard</button>
+          <button type="button" data-fallback-st="arcade" class="btn-secondary" style="justify-content:flex-start;">🕹️ Lab · Arcade</button>
+          <button type="button" data-fallback-st="phone" class="btn-secondary" style="justify-content:flex-start;">📱 Contact · Phone</button>
+        </div>
+        <p style="margin:0;font-size:12px;color:var(--dim);">3D view is off because WebGL is disabled in this browser.</p>
+      </div>`;
+    sceneEl.appendChild(fallbackWrap);
+    fallbackWrap.querySelectorAll('[data-fallback-st]').forEach((btn) => {
+      btn.addEventListener('click', () => handleDeskStationClick(btn.getAttribute('data-fallback-st')));
+    });
     return;
   }
 
