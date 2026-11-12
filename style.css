@@ -903,6 +903,7 @@ select.pro-input option { background: var(--panel-solid); }
   width: 84px; height: 84px;
   border-radius: 18px;
   object-fit: cover;
+  object-position: center top;
   border: 1px solid var(--line-strong);
 }
 

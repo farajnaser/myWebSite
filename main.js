@@ -355,7 +355,7 @@ function initDesk3D() {
   });
 
   renderer.setSize(initW, initH);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -544,7 +544,19 @@ function initDesk3D() {
   portraitGroup.add(frameBoard);
 
   new THREE.TextureLoader().load('./images/farajimage.png', (tex) => {
-    const imgMesh = new THREE.Mesh(new THREE.PlaneGeometry(0.66, 0.8), new THREE.MeshBasicMaterial({ map: tex }));
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.generateMipmaps = false;
+    tex.minFilter = THREE.LinearFilter;
+    tex.magFilter = THREE.LinearFilter;
+    if (renderer) tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    tex.needsUpdate = true;
+    const imgAspect = tex.image && tex.image.height ? tex.image.width / tex.image.height : 0.69;
+    const h = 0.82;
+    const w = Math.min(0.68, h * imgAspect);
+    const imgMesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(w, h),
+      new THREE.MeshBasicMaterial({ map: tex, toneMapped: false })
+    );
     imgMesh.position.set(0, 0.48, 0.035);
     portraitGroup.add(imgMesh);
   });

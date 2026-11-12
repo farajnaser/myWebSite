@@ -27431,7 +27431,7 @@ function initDesk3D() {
     e.preventDefault();
   });
   renderer.setSize(initW, initH);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = PCFSoftShadowMap;
   ambientLight = new AmbientLight(14412542, 0.95);
@@ -27581,7 +27581,19 @@ function initDesk3D() {
   frameBoard.position.y = 0.48;
   portraitGroup.add(frameBoard);
   new TextureLoader().load("./images/farajimage.png", (tex) => {
-    const imgMesh = new Mesh(new PlaneGeometry(0.66, 0.8), new MeshBasicMaterial({ map: tex }));
+    tex.colorSpace = SRGBColorSpace;
+    tex.generateMipmaps = false;
+    tex.minFilter = LinearFilter;
+    tex.magFilter = LinearFilter;
+    if (renderer) tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    tex.needsUpdate = true;
+    const imgAspect = tex.image && tex.image.height ? tex.image.width / tex.image.height : 0.69;
+    const h = 0.82;
+    const w = Math.min(0.68, h * imgAspect);
+    const imgMesh = new Mesh(
+      new PlaneGeometry(w, h),
+      new MeshBasicMaterial({ map: tex, toneMapped: false })
+    );
     imgMesh.position.set(0, 0.48, 0.035);
     portraitGroup.add(imgMesh);
   });

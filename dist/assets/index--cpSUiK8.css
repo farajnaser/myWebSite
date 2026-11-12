@@ -941,6 +941,8 @@ select.pro-input option { background: var(--panel-solid); }
   border-radius: 18px;
   -o-object-fit: cover;
      object-fit: cover;
+  -o-object-position: center top;
+     object-position: center top;
   border: 1px solid var(--line-strong);
 }
 
