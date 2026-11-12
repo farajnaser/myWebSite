@@ -136,15 +136,13 @@ function getResponsiveCameraView(stationKey = 'overview') {
   const look = base.look.clone();
 
   if (isMobile) {
-    // On mobile, panel sits in the lower half (~44svh+), so frame the 3D object in the upper half
-    const portraitFactor = Math.min(1.9, Math.max(1.0, 1.1 / Math.max(aspect, 0.48)));
+    // On mobile, #scene is a sticky top strip (34svh), so center the 3D desk/object cleanly in it
     if (stationKey === 'overview') {
-      pos.set(0, 4.6 * (0.9 + portraitFactor * 0.2), 9.4 * (0.85 + portraitFactor * 0.25));
-      look.set(0, 0.25, 0);
+      pos.set(0, 4.35, 8.7);
+      look.set(0, 0.9, 0);
     } else {
-      pos.z = base.pos.z + (portraitFactor - 1.0) * 1.45;
-      pos.y = base.pos.y + 0.25;
-      look.y = base.look.y - 0.55;
+      pos.set(base.look.x, base.pos.y + 0.12, base.pos.z + 0.75);
+      look.copy(base.look);
     }
   } else {
     // On desktop, hero is on the left (overview -> desk on right); chapters are on the right (desk on left)
@@ -778,6 +776,26 @@ function setActiveChapter(chapterEl) {
   railLinks.forEach((a) => a.classList.toggle('active', a.getAttribute('data-rail') === id));
 }
 
+function updateActiveChapterFromScroll() {
+  const isMobile = window.innerWidth <= 900;
+  const mid = isMobile ? window.innerHeight * 0.62 : window.innerHeight * 0.45;
+  const minBottom = isMobile ? window.innerHeight * 0.36 : 80;
+  let best = null;
+  let bestDist = Infinity;
+
+  chapters.forEach((ch) => {
+    const r = ch.getBoundingClientRect();
+    if (r.bottom < minBottom || r.top > window.innerHeight - 60) return;
+    const anchor = isMobile ? Math.max(r.top, minBottom) + 60 : r.top + Math.min(r.height, window.innerHeight) * 0.4;
+    const dist = Math.abs(anchor - mid);
+    if (dist < bestDist) {
+      bestDist = dist;
+      best = ch;
+    }
+  });
+  if (best) setActiveChapter(best);
+}
+
 const chapterObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -785,29 +803,23 @@ const chapterObserver = new IntersectionObserver(
         entry.target.classList.add('in-view');
       }
     });
-
-    // Pick the chapter closest to the middle of the viewport
-    let best = null;
-    let bestDist = Infinity;
-    const mid = window.innerHeight * 0.45;
-    chapters.forEach((ch) => {
-      const r = ch.getBoundingClientRect();
-      if (r.bottom < 80 || r.top > window.innerHeight - 80) return;
-      const dist = Math.abs(r.top + Math.min(r.height, window.innerHeight) * 0.4 - mid);
-      if (dist < bestDist) {
-        bestDist = dist;
-        best = ch;
-      }
-    });
-    if (best) setActiveChapter(best);
+    updateActiveChapterFromScroll();
   },
-  { threshold: [0.15, 0.35, 0.6] }
+  { threshold: [0.1, 0.3, 0.55] }
 );
 
 chapters.forEach((ch) => chapterObserver.observe(ch));
 
+let scrollRafPending = false;
 window.addEventListener('scroll', () => {
   siteNav?.classList.toggle('scrolled', window.scrollY > 24);
+  if (!scrollRafPending) {
+    scrollRafPending = true;
+    requestAnimationFrame(() => {
+      updateActiveChapterFromScroll();
+      scrollRafPending = false;
+    });
+  }
 }, { passive: true });
 
 // Mobile Menu
