@@ -27214,7 +27214,7 @@ let floorMat, floorRingMat, deskTopMat, metalMat, deskMatMat, bezelMat, kbCaseMa
 let isLampOn = true;
 let activeStation = "overview";
 const cameraViews = {
-  overview: { pos: new Vector3(-0.6, 4.1, 8.2), look: new Vector3(-1.35, 0.95, 0) },
+  overview: { pos: new Vector3(-0.9, 4.15, 8.6), look: new Vector3(-1.95, 0.9, 0) },
   monitors: { pos: new Vector3(0.35, 2.25, 3.35), look: new Vector3(0.1, 1.65, -0.75) },
   portrait: { pos: new Vector3(-2.1, 2.05, 2.95), look: new Vector3(-2.35, 1.32, -0.42) },
   notebook: { pos: new Vector3(-1.55, 2.15, 2.55), look: new Vector3(-1.8, 0.92, 0.62) },
