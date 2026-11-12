@@ -24,20 +24,21 @@
 html.light {
   --ink: #f1f5f9;
   --ink-2: #e2e8f0;
-  --panel: rgba(255, 255, 255, 0.96);
+  --panel: #ffffff;
   --panel-solid: #ffffff;
-  --line: rgba(15, 23, 42, 0.11);
-  --line-strong: rgba(15, 23, 42, 0.22);
+  --line: rgba(15, 23, 42, 0.1);
+  --line-strong: rgba(15, 23, 42, 0.18);
   --text: #0f172a;
   --muted: #475569;
   --dim: #64748b;
   --blue: #2563eb;
   --blue-deep: #1d4ed8;
   --sky: #0284c7;
+  --warm: #b45309;
 }
 
 html.light #scene {
-  background: radial-gradient(ellipse 70% 60% at 50% 45%, #dbeafe 0%, #eff6ff 55%, #f8fafc 100%);
+  background: radial-gradient(ellipse 75% 65% at 55% 42%, #cbd5e1 0%, #e2e8f0 52%, #f1f5f9 100%);
 }
 
 html.light #scene::after {
@@ -46,33 +47,111 @@ html.light #scene::after {
 
 html.light .site-nav,
 html.light .site-nav.scrolled {
-  background: rgba(248, 250, 252, 0.92);
+  background: rgba(241, 245, 249, 0.92);
+  border-bottom-color: rgba(15, 23, 42, 0.08);
 }
 
-html.light .panel,
-html.light .hero {
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 20px 50px -20px rgba(15, 23, 42, 0.16);
+html.light .nav-link { color: #475569; }
+html.light .nav-link:hover,
+html.light .nav-link.active {
+  color: #0f172a;
+  background: rgba(15, 23, 42, 0.06);
+}
+
+html.light .nav-cta {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+}
+
+html.light .panel {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(15, 23, 42, 0.1);
+  box-shadow: 0 24px 60px -24px rgba(15, 23, 42, 0.18);
+}
+
+html.light .hero-kicker {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(15, 23, 42, 0.14);
+  color: #334155;
+}
+
+html.light .btn-secondary {
+  background: rgba(255, 255, 255, 0.88);
+  color: #0f172a;
+  border-color: rgba(15, 23, 42, 0.18);
+}
+
+html.light .btn-secondary:hover {
+  background: #ffffff;
+  border-color: var(--blue);
 }
 
 html.light #mobile-menu,
 html.light body.mobile-window-open .mobile-win-bar {
-  background: rgba(255, 255, 255, 0.97);
+  background: rgba(255, 255, 255, 0.98);
 }
 
-html.light .mobile-desk-pills button,
 html.light .work-item,
 html.light .estimator,
-html.light .skill-inspector,
-html.light .pro-input,
-html.light .bug-arena,
-html.light #desk-hover-tooltip {
-  background: rgba(248, 250, 252, 0.96);
-  color: var(--text);
+html.light .skill-inspector {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.1);
 }
 
-html.light .hero-kicker {
-  background: rgba(255, 255, 255, 0.8);
+html.light .pro-input,
+html.light .bug-arena,
+html.light .filter-btn,
+html.light .skill-module-btn,
+html.light .est-option,
+html.light .mobile-desk-pills button {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: rgba(15, 23, 42, 0.14);
+}
+
+html.light .filter-btn.is-active,
+html.light .skill-module-btn.is-active,
+html.light .est-option.is-active {
+  background: var(--blue-deep);
+  color: #ffffff;
+  border-color: var(--blue-deep);
+}
+
+html.light .tags li {
+  background: rgba(15, 23, 42, 0.06);
+  color: #334155;
+}
+
+html.light .sticky-note {
+  background: #fef9c3;
+  border-color: #eab308;
+}
+
+html.light .sticky-note .label,
+html.light .sticky-note button {
+  color: #854d0e;
+}
+
+html.light #desk-hover-tooltip {
+  background: rgba(255, 255, 255, 0.96);
+  color: #0f172a;
+  border-color: rgba(15, 23, 42, 0.14);
+  box-shadow: 0 10px 25px -8px rgba(15, 23, 42, 0.18);
+}
+
+html.light #desk-toast {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+html.light .text-sky-400,
+html.light .text-sky-300 {
+  color: #0369a1 !important;
+}
+
+html.light .text-slate-200 {
+  color: #1e293b !important;
 }
 
 .theme-btn {

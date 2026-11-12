@@ -109,7 +109,7 @@ const sceneEl = document.getElementById('scene');
 const deskCanvas = document.getElementById('desk-canvas');
 const hoverTooltip = document.getElementById('desk-hover-tooltip');
 
-let scene, camera, renderer, studioRoot;
+let scene, camera, renderer, studioRoot, rendererOpaque = false;
 let ambientLight, keyLight, lampSpotLight, lampBulbMat, rgbStripMat;
 let isLampOn = true;
 let activeStation = 'overview';
@@ -301,25 +301,35 @@ function initDesk3D() {
   camera.position.copy(currentCamPos);
   camera.lookAt(currentCamLook);
 
-  try {
-    renderer = new THREE.WebGLRenderer({
-      canvas: deskCanvas,
-      antialias: true,
-      alpha: true,
-      powerPreference: 'high-performance'
-    });
-  } catch (_) {
+  const rendererConfigs = [
+    { canvas: deskCanvas, antialias: true, alpha: true, powerPreference: 'high-performance' },
+    { canvas: deskCanvas, antialias: true, alpha: true },
+    { canvas: deskCanvas, antialias: false, alpha: false }
+  ];
+
+  for (let i = 0; i < rendererConfigs.length; i++) {
     try {
-      renderer = new THREE.WebGLRenderer({
-        canvas: deskCanvas,
-        antialias: false,
-        alpha: true
-      });
-    } catch (err) {
-      console.error('WebGL init failed:', err);
-      return;
+      renderer = new THREE.WebGLRenderer(rendererConfigs[i]);
+      rendererOpaque = !rendererConfigs[i].alpha;
+      break;
+    } catch (_) {
+      renderer = null;
     }
   }
+
+  if (!renderer) {
+    console.error('WebGL init failed across all fallbacks');
+    return;
+  }
+
+  if (rendererOpaque) {
+    scene.background = new THREE.Color(document.documentElement.classList.contains('light') ? 0xe2e8f0 : 0x071430);
+  }
+
+  deskCanvas.addEventListener('webglcontextlost', (e) => {
+    e.preventDefault();
+  });
+
   renderer.setSize(initW, initH);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   renderer.shadowMap.enabled = true;
@@ -1995,8 +2005,11 @@ function applyTheme(theme) {
     themeToggleBtn.textContent = isLight ? '🌙' : '☀️';
     themeToggleBtn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
   }
-  if (ambientLight) ambientLight.intensity = isLight ? 1.45 : 0.95;
-  if (keyLight) keyLight.intensity = isLight ? 2.25 : 1.8;
+  if (ambientLight) ambientLight.intensity = isLight ? 1.75 : 0.95;
+  if (keyLight) keyLight.intensity = isLight ? 2.35 : 1.8;
+  if (rendererOpaque && scene) {
+    scene.background = new THREE.Color(isLight ? 0xe2e8f0 : 0x071430);
+  }
   try { localStorage.setItem('faraj_theme', isLight ? 'light' : 'dark'); } catch (_) {}
 }
 
