@@ -284,7 +284,9 @@ function initDesk3D() {
   if (!deskCanvas || !sceneEl) return;
 
   scene = new THREE.Scene();
-  const initialAspect = sceneEl.clientWidth / Math.max(1, sceneEl.clientHeight);
+  const initW = Math.max(1, sceneEl.clientWidth || window.innerWidth);
+  const initH = Math.max(1, sceneEl.clientHeight || window.innerHeight);
+  const initialAspect = initW / initH;
   camera = new THREE.PerspectiveCamera(
     initialAspect < 0.85 ? 47 : 39,
     initialAspect,
@@ -299,14 +301,27 @@ function initDesk3D() {
   camera.position.copy(currentCamPos);
   camera.lookAt(currentCamLook);
 
-  renderer = new THREE.WebGLRenderer({
-    canvas: deskCanvas,
-    antialias: true,
-    alpha: true,
-    powerPreference: 'high-performance'
-  });
-  renderer.setSize(sceneEl.clientWidth, sceneEl.clientHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+  try {
+    renderer = new THREE.WebGLRenderer({
+      canvas: deskCanvas,
+      antialias: true,
+      alpha: true,
+      powerPreference: 'high-performance'
+    });
+  } catch (_) {
+    try {
+      renderer = new THREE.WebGLRenderer({
+        canvas: deskCanvas,
+        antialias: false,
+        alpha: true
+      });
+    } catch (err) {
+      console.error('WebGL init failed:', err);
+      return;
+    }
+  }
+  renderer.setSize(initW, initH);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -688,6 +703,10 @@ function initDesk3D() {
 
   window.addEventListener('resize', resizeDeskRenderer);
   window.addEventListener('orientationchange', () => setTimeout(resizeDeskRenderer, 120));
+  if (typeof ResizeObserver !== 'undefined') {
+    const ro = new ResizeObserver(() => resizeDeskRenderer());
+    ro.observe(sceneEl);
+  }
 
   const clock = new THREE.Clock();
   function animate() {
@@ -758,12 +777,25 @@ const sectionTitles = {
   contact: '06 · Contact'
 };
 
+function closeDesktopWindow() {
+  document.body.classList.remove('desktop-window-open');
+  chapters.forEach((ch) => {
+    ch.classList.remove('desktop-active');
+    if (ch.id === 'top') ch.classList.add('in-view');
+  });
+  activeStation = 'overview';
+  const view = getResponsiveCameraView('overview');
+  targetCamPos.copy(view.pos);
+  targetCamLook.copy(view.look);
+  if (sceneEl) sceneEl.style.setProperty('--shade', '0');
+  navLinks.forEach((a) => a.classList.toggle('active', a.getAttribute('data-nav') === 'top'));
+  railLinks.forEach((a) => a.classList.toggle('active', a.getAttribute('data-rail') === 'top'));
+}
+
 function openSection(sectionId, withZoomDelay = false) {
   if (!sectionId || sectionId === 'top') {
     closeMobileWindow();
-    if (window.innerWidth > 900) {
-      document.getElementById('top')?.scrollIntoView({ behavior: 'smooth' });
-    }
+    closeDesktopWindow();
     return;
   }
 
@@ -794,7 +826,15 @@ function openSection(sectionId, withZoomDelay = false) {
     }
   } else {
     playSound('zoom');
-    targetEl.scrollIntoView({ behavior: 'smooth' });
+    setActiveChapter(targetEl);
+    chapters.forEach((ch) => {
+      const isTarget = ch.id === sectionId;
+      ch.classList.toggle('desktop-active', isTarget);
+      if (isTarget) ch.classList.add('in-view');
+    });
+    document.body.classList.add('desktop-window-open');
+    const panelEl = targetEl.querySelector('.panel');
+    if (panelEl) panelEl.scrollTop = 0;
   }
 }
 
@@ -825,11 +865,16 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
   link.addEventListener('click', (e) => {
     const id = link.getAttribute('href')?.slice(1);
     if (!id) return;
-    if (window.innerWidth <= 900) {
-      e.preventDefault();
-      openSection(id, false);
-    }
+    e.preventDefault();
+    openSection(id, false);
   });
+});
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeMobileWindow();
+    closeDesktopWindow();
+  }
 });
 
 function handleDeskStationClick(stationKey) {
@@ -868,50 +913,10 @@ function setActiveChapter(chapterEl) {
   railLinks.forEach((a) => a.classList.toggle('active', a.getAttribute('data-rail') === id));
 }
 
-function updateActiveChapterFromScroll() {
-  if (window.innerWidth <= 900) return;
-  const mid = window.innerHeight * 0.45;
-  let best = null;
-  let bestDist = Infinity;
-
-  chapters.forEach((ch) => {
-    const r = ch.getBoundingClientRect();
-    if (r.bottom < 80 || r.top > window.innerHeight - 60) return;
-    const anchor = r.top + Math.min(r.height, window.innerHeight) * 0.4;
-    const dist = Math.abs(anchor - mid);
-    if (dist < bestDist) {
-      bestDist = dist;
-      best = ch;
-    }
-  });
-  if (best) setActiveChapter(best);
+// Click-only navigation: no scroll-based section switching
+if (window.innerWidth > 900) {
+  setActiveChapter(document.getElementById('top'));
 }
-
-const chapterObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-      }
-    });
-    updateActiveChapterFromScroll();
-  },
-  { threshold: [0.1, 0.3, 0.55] }
-);
-
-chapters.forEach((ch) => chapterObserver.observe(ch));
-
-let scrollRafPending = false;
-window.addEventListener('scroll', () => {
-  siteNav?.classList.toggle('scrolled', window.scrollY > 24);
-  if (!scrollRafPending) {
-    scrollRafPending = true;
-    requestAnimationFrame(() => {
-      updateActiveChapterFromScroll();
-      scrollRafPending = false;
-    });
-  }
-}, { passive: true });
 
 // Mobile Menu
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');

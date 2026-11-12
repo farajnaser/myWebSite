@@ -33,11 +33,12 @@ html {
 
 body {
   margin: 0;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100svh;
   background: var(--ink);
   color: var(--text);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 ::selection { background: var(--blue-deep); color: #fff; }
@@ -62,7 +63,7 @@ a { color: inherit; }
   display: block;
   width: 100%;
   height: 100%;
-  touch-action: pan-y;
+  touch-action: none;
 }
 
 #desk-canvas.hovering-object { cursor: pointer; }
@@ -304,12 +305,37 @@ a { color: inherit; }
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  padding: calc(var(--nav-h) + 3rem) clamp(1rem, 4vw, 4rem) 6rem;
+  padding: calc(var(--nav-h) + 1.75rem) clamp(1rem, 4vw, 4rem) 2rem;
+}
+
+.chapter:not(.chapter--hero) {
+  display: none;
+}
+
+body.desktop-window-open .chapter--hero {
+  display: none;
+}
+
+body.desktop-window-open .chapter.desktop-active {
+  display: flex;
+  position: fixed;
+  inset: var(--nav-h) 0 0 0;
+  z-index: 15;
+  min-height: 0;
+  pointer-events: none;
+  animation: desktopWinIn 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@keyframes desktopWinIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
 }
 
 .panel {
   pointer-events: auto;
   width: min(620px, 50vw);
+  max-height: calc(100vh - var(--nav-h) - 3.5rem);
+  overflow-y: auto;
   background: rgba(9, 17, 36, 0.95);
   border: 1px solid var(--line);
   border-radius: 22px;
@@ -318,7 +344,11 @@ a { color: inherit; }
   opacity: 0;
   transform: translateY(20px);
   will-change: opacity, transform;
-  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.site-footer {
+  display: none;
 }
 
 .mobile-win-bar,
@@ -1233,6 +1263,8 @@ select.pro-input option { background: var(--panel-solid); }
 
   body.mobile-window-open .chapter.mobile-active .panel {
     width: 100%;
+    max-height: none;
+    overflow-y: visible;
     border-radius: 16px;
     padding: 1.15rem 1rem;
     background: var(--panel-solid);
